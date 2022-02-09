@@ -1,0 +1,74 @@
+
+
+-- DROP TABLE [ArtApp].[Artwork]
+CREATE TABLE [ArtApp].[Artwork] (
+    ID INT IDENTITY(1,1) PRIMARY KEY,
+    FileName NVARCHAR(150),
+    YearCreated INT,
+    Title NVARCHAR(150) NOT NULL,
+    Description NVARCHAR(300),
+    Likes INT,
+    ArtistID INT NOT NULL FOREIGN KEY REFERENCES [ArtApp].[Artist](ID),
+    MediumID INT FOREIGN KEY REFERENCES [ArtApp].[ArtType](ID),
+);
+
+-- DROP TABLE [ArtApp].[Artist]
+CREATE TABLE [ArtApp].[Artist] (
+    ID INT IDENTITY(1,1) PRIMARY KEY,
+    Born NVARCHAR(50),
+    Died NVARCHAR(50),
+    BornLocation NVARCHAR(100),
+    Bio NVARCHAR (500),
+    PictureUrl NVARCHAR(150)
+);
+
+-- DROP TABLE [ArtApp].[User]
+CREATE TABLE [ArtApp].[User] (
+    ID INT IDENTITY(1,1) PRIMARY KEY,
+    EMAIL NVARCHAR(50) UNIQUE NOT NULL,
+    Name NVARCHAR(50),
+    FromLocation NVARCHAR(100)
+);
+
+-- DROP TABLE [ArtApp].[Location]
+CREATE TABLE [ArtApp].[Location] (
+    ID INT IDENTITY(1,1) PRIMARY KEY,
+    LocationName NVARCHAR(150) NOT NULL,
+    Description NVARCHAR(250),
+    LocationURL NVARCHAR(150),
+    TypeID INT FOREIGN KEY REFERENCES [ArtApp].[LocationType](ID)
+);
+
+-- DROP TABLE [ArtApp].[LocationType]
+CREATE TABLE [ArtApp].[LocationType] (
+    ID INT IDENTITY(1,1) PRIMARY KEY,
+    Name NVARCHAR(150)
+);
+
+-- DROP TABLE [ArtApp].[Likes]
+CREATE TABLE [ArtApp].[Likes] (
+    UserID INT NOT NULL FOREIGN KEY REFERENCES [ArtApp].[User](ID),
+    ArtID INT NOT NULL FOREIGN KEY REFERENCES [ArtApp].[Artwork](ID)
+);
+
+
+
+-- DROP TABLE [ArtApp].[ArtType]
+CREATE TABLE [ArtApp].[ArtType] (
+    ID INT IDENTITY(1,1) PRIMARY KEY,
+    Name NVARCHAR(150),
+    Description NVARCHAR(300)
+);
+
+/*
+-- DROP TABLE [ArtApp].[ArtStyle]
+CREATE TABLE [ArtApp].[ArtStyle] (
+    
+);
+
+-- DROP TABLE [ArtApp].[ArtistStyles]
+CREATE TABLE [ArtApp].[ArtistStyles] (
+    
+);
+
+*/
