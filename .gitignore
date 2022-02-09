@@ -3,6 +3,7 @@ bin/
 obj/
 .vs/
 appsettings.development.json
+.vscode/
 
 # globs
 Makefile.in
