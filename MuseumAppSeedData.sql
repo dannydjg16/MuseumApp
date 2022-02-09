@@ -17,5 +17,5 @@ insert into [ArtApp].[Location] (LocationName, Description, LocationUrl, TypeID)
 insert into [ArtApp].[LocationType] (Name) values ('Museum');
 
 -- Populate Likes
-insert into [ArtApp].[Likes] () values ();
+insert into [ArtApp].[Likes] (UserID, ArtID) values (1,2);
 
