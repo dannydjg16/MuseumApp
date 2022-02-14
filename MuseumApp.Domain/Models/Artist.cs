@@ -6,5 +6,7 @@ namespace MuseumApp.Domain.Models
         public Artist()
         {
         }
+
+
     }
 }
