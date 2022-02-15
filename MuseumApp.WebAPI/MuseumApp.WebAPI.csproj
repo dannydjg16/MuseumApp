@@ -9,6 +9,8 @@
     <None Remove="Microsoft.EntityFrameworkCore" />
     <None Remove="Microsoft.EntityFrameworkCore.SqlServer" />
     <None Remove="Controllers\" />
+    <None Remove="Models\" />
+    <None Remove="Mappers\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MuseumApp.DB\MuseumApp.DB.csproj">
@@ -25,5 +27,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
+    <Folder Include="Models\" />
+    <Folder Include="Mappers\" />
   </ItemGroup>
 </Project>
