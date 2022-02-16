@@ -29,7 +29,7 @@ namespace MuseumApp.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ArtApplicationContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("ArtApp")));
+                options.UseSqlServer(Configuration.GetConnectionString("ArtApplication")));
 
             services.AddControllers();
         }
