@@ -10,6 +10,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using MuseumApp.WebAPI.Models;
+using MuseumApp.DB;
 
 namespace MuseumApp.WebAPI
 {
@@ -25,6 +28,8 @@ namespace MuseumApp.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<ArtApplicationContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("ArtApp")));
 
             services.AddControllers();
         }
