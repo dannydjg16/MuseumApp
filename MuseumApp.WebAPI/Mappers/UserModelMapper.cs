@@ -1,4 +1,5 @@
 ﻿using System;
+using MuseumApp.Domain.Models;
 using MuseumApp.WebAPI.Models;
 
 namespace MuseumApp.WebAPI.Mappers

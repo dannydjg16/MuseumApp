@@ -23,14 +23,14 @@ namespace MuseumApp.WebAPI.Controllers
             _userRepository = userRepository;
         }
 
-        // GET: api/values
+        // GET: api/users
         [HttpGet]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/values/5
+        // GET api/users/5
         [HttpGet("{id}")]
         public async Task<ActionResult<UserModel>> GetAsync(int id)
         {
@@ -42,7 +42,7 @@ namespace MuseumApp.WebAPI.Controllers
             return NotFound();
         }
 
-        // POST api/values
+        // POST api/users
         [HttpPost]
         public async Task<IActionResult> Post(UserModel user)
         {
@@ -54,17 +54,30 @@ namespace MuseumApp.WebAPI.Controllers
             return BadRequest();
         }
 
-        // PUT api/values/5
+        // PUT api/users/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Put(int id, UserModel user)
         {
+            if (_userRepository.GetUserByID(user.ID) is User)
+            {
+                var updated = await Task.FromResult(_userRepository.EditAccount(Mappers.UserModelMapper.Map(user)));
+                if(updated)
+                {
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+            return NotFound();
         }
 
-        // DELETE api/values/5
+        // DELETE api/users/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            if(_userRepository.GetUserByID(id) is Domain.Models.User)
+            if(_userRepository.GetUserByID(id) is User)
             {
                 // deleted returns true if the deletion is successful
                 var deleted = await Task.FromResult(_userRepository.DeleteAccount(id));

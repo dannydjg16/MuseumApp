@@ -43,7 +43,18 @@ namespace MuseumApp.DB.Repositories
 
         public bool EditAccount(Domain.Models.User user)
         {
-            throw new NotImplementedException();
+            var dbUser = _context.Users.FirstOrDefault(u => u.Id == user.ID);
+
+            if (dbUser == null)
+            {
+                return false;
+            }
+
+            dbUser.Name = user.Name;
+            dbUser.Email = user.Email;
+            dbUser.FromLocation = user.FromLocation;
+            _context.SaveChanges();
+            return true;
         }
 
         public Domain.Models.User GetUserByEmail(string email)
