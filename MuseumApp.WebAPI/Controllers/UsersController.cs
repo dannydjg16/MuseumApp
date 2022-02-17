@@ -43,8 +43,14 @@ namespace MuseumApp.WebAPI.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post(UserModel user)
         {
+            var created = await Task.FromResult(_userRepository.CreateAccount(Mappers.UserModelMapper.Map(user)));
+            if(created)
+            {
+                return CreatedAtAction(nameof(Get), new { id = user.ID}, user);
+            }
+            return BadRequest();
         }
 
         // PUT api/values/5
