@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MuseumApp.Domain.Interfaces;
+using MuseumApp.Domain.Models;
 using MuseumApp.WebAPI.Models;
 using Microsoft.AspNetCore.Http;
 
@@ -61,8 +62,22 @@ namespace MuseumApp.WebAPI.Controllers
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+            if(_userRepository.GetUserByID(id) is Domain.Models.User)
+            {
+                // deleted returns true if the deletion is successful
+                var deleted = await Task.FromResult(_userRepository.DeleteAccount(id));
+                if (deleted)
+                {
+                    return NoContent();
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+            return NotFound();
         }
     }
 }
