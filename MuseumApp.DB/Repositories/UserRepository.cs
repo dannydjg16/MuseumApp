@@ -16,7 +16,16 @@ namespace MuseumApp.DB.Repositories
 
         public bool CreateAccount(Domain.Models.User user)
         {
-            throw new NotImplementedException();
+            var dbUser = _context.Users.FirstOrDefault(u => u.Id == user.ID);
+
+            if(dbUser != null)
+            {
+                return false;
+            }
+
+            _context.Users.Add(Mappers.UserMapper.Map(user));
+            _context.SaveChanges();
+            return true;
         }
 
         public bool DeleteAccount(int userID)
