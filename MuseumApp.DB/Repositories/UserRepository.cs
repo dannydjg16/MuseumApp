@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using MuseumApp.Domain.Interfaces;
 
 namespace MuseumApp.DB.Repositories
@@ -30,7 +31,14 @@ namespace MuseumApp.DB.Repositories
 
         public bool DeleteAccount(int userID)
         {
-            throw new NotImplementedException();
+            var dbUser = _context.Users.FirstOrDefault(u => u.Id == userID);
+            if (dbUser == null)
+            {
+                return false;
+            }
+            _context.Users.Remove(dbUser);
+            _context.SaveChanges();
+            return true;
         }
 
         public bool EditAccount(Domain.Models.User user)
