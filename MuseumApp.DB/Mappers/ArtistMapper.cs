@@ -1,7 +1,7 @@
 ﻿using System;
 namespace MuseumApp.DB.Mappers
 {
-    public class ArtistMapper
+    public static class ArtistMapper
     {
         public static Domain.Models.Artist Map(Artist entity)
         {
