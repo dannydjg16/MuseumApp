@@ -37,6 +37,7 @@ namespace MuseumApp.WebAPI
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MuseumApp.WebAPI", Version = "v1" });
             });
             services.AddScoped<IUserInterface, UserRepository>();
+            services.AddScoped<IArtistInterface, ArtistRepository>();
             services.AddControllers(options =>
             {
                 // make asp.net core forget about text/plain so swagger ui uses json as the default
