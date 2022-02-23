@@ -3,8 +3,18 @@ namespace MuseumApp.Domain.Models
 {
     public class Artwork
     {
-        public Artwork()
-        {
-        }
+        public int Id { get; set; }
+        public string FileName { get; set; }
+        public int? YearCreated { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public int? Likes { get; set; }
+        public int ArtistId { get; set; }
+        public int? MediumId { get; set; }
+        public int? LocationNow { get; set; }
+
+        public Artist Artist { get; set; }
+        public Location LocationNowNavigation { get; set; }
+        public ArtType Medium { get; set; }
     }
 }
