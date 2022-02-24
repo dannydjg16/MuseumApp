@@ -7,10 +7,10 @@ namespace MuseumApp.Domain.Interfaces
     public interface IArtworkInterface
     {
         public Artwork GetArtworkByID(int id);
-        public IEnumerable<Artwork> GetAllArtworks();
+        public IEnumerable<Artwork> GetAllArtworks(string title = null);
         public bool UpdateArtwork(Artwork artwork);
-        public bool AddArtwork();
-        public bool DeleteArtwork();
+        public bool AddArtwork(Artwork artwork);
+        public bool DeleteArtwork(int id);
         // Add methods for getting artwork by Type/Artist/etc.
     }
 }

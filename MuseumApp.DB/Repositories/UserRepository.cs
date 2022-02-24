@@ -15,6 +15,7 @@ namespace MuseumApp.DB.Repositories
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
+        // Create Account
         public bool CreateAccount(Domain.Models.User user)
         {
             var dbUser = _context.Users.FirstOrDefault(u => u.Id == user.ID);
@@ -29,6 +30,7 @@ namespace MuseumApp.DB.Repositories
             return true;
         }
 
+        // Delete Account
         public bool DeleteAccount(int userID)
         {
             var dbUser = _context.Users.FirstOrDefault(u => u.Id == userID);
@@ -41,6 +43,7 @@ namespace MuseumApp.DB.Repositories
             return true;
         }
 
+        // Edit Account
         public bool EditAccount(Domain.Models.User user)
         {
             var dbUser = _context.Users.FirstOrDefault(u => u.Id == user.ID);
@@ -57,11 +60,13 @@ namespace MuseumApp.DB.Repositories
             return true;
         }
 
+        // Get User By Email - can implement later
         public Domain.Models.User GetUserByEmail(string email)
         {
             throw new NotImplementedException();
         }
 
+        // Get Users By ID
         public Domain.Models.User GetUserByID(int id)
         {
             var dbUser = _context.Users.FirstOrDefault(u => u.Id == id);
@@ -80,9 +85,28 @@ namespace MuseumApp.DB.Repositories
             return user;
         }
 
+        // Get all users/search by users name
         public IEnumerable<Domain.Models.User> GetUsers(string name = null)
         {
-            throw new NotImplementedException();
+            List<User> dbUsers = new List<User>();
+
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                dbUsers = _context.Users.Where(u => u.Name.Contains(name)).ToList();
+            }
+            else
+            {
+                dbUsers = _context.Users.ToList();
+            }
+
+            if (!dbUsers.Any())
+            {
+                return new List<Domain.Models.User>();
+            }
+
+            List<Domain.Models.User> users = dbUsers.Select(u => Mappers.UserMapper.Map(u)).ToList();
+
+            return users; 
         }
     }
 }

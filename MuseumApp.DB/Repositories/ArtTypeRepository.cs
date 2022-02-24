@@ -14,6 +14,7 @@ namespace MuseumApp.DB.Repositories
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
+        // Add ArtType
         public bool AddArtType(Domain.Models.ArtType artType)
         {
             var dbArtType = _context.ArtTypes.FirstOrDefault(at => at.Name == artType.Name);
@@ -24,12 +25,30 @@ namespace MuseumApp.DB.Repositories
                 return false;
             }
 
+            _context.ArtTypes.Add(Mappers.ArtTypeMapper.Map(artType));
+            _context.SaveChanges();
+
             return true;
         }
 
+        // Get all ArtTypes
         public IEnumerable<Domain.Models.ArtType> GetArtTypes()
         {
-            throw new NotImplementedException();
+            List<ArtType> dbArtTypes = _context.ArtTypes.ToList();
+
+            if (!dbArtTypes.Any())
+            {
+                return new List<Domain.Models.ArtType>();
+            }
+
+            List<Domain.Models.ArtType> artTypes = dbArtTypes.Select(at => new Domain.Models.ArtType
+            {
+                Id = at.Id,
+                Name = at.Name,
+                Description = at.Description
+            }).ToList();
+
+            return artTypes;
         }
     }
 }

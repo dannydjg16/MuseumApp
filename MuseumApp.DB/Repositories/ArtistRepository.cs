@@ -15,6 +15,7 @@ namespace MuseumApp.DB.Repositories
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
+        // Create Artist
         public bool CreateArtist(Domain.Models.Artist artist)
         {
             var dbArtist = _context.Artists.FirstOrDefault(a => a.Id == artist.ID);
@@ -30,6 +31,7 @@ namespace MuseumApp.DB.Repositories
             return true;
         }
 
+        // Delete Artist
         public bool DeleteArtist(int artistID)
         {
             var dbArtist = _context.Artists.FirstOrDefault(a => a.Id == artistID);
@@ -45,8 +47,7 @@ namespace MuseumApp.DB.Repositories
             return true;
         }
 
-        // Not really planning on using this so often. Maybe will change when I add more of a likes feature.
-        //  Maybe could just have a add like func or a number of different ways to do it.
+        // Edit Artist
         public bool EditArtist(Domain.Models.Artist artist)
         {
             var dbArtist = _context.Artists.FirstOrDefault(a => a.Id == artist.ID);
@@ -64,6 +65,7 @@ namespace MuseumApp.DB.Repositories
 
         }
 
+        // Get Artist by ID
         public Domain.Models.Artist GetArtistByID(int id)
         {
             var dbArtist = _context.Artists.FirstOrDefault(a => a.Id == id);
@@ -87,6 +89,7 @@ namespace MuseumApp.DB.Repositories
             return ArtistMapper.Map(dbArtist);
         }
 
+        // Get all Artists/ Search by artist name
         public IEnumerable<Domain.Models.Artist> GetArtists(string artistName = null)
         {
             List<Artist> dbArtists = new List<Artist>();
