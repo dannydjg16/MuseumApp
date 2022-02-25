@@ -49,20 +49,44 @@ namespace MuseumApp.WebAPI.Controllers
 
         // POST api/artists
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post(ArtistModel artistModel)
         {
+            var success = await Task.FromResult(_artistRepository.CreateArtist(Mappers.ArtistModelMapper.Map(artistModel)));
+
+            if (success == true)
+            {
+                return Ok();
+            }
+
+            return NotFound();
         }
 
         // PUT api/artists/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Put(int artistId, [FromBody] ArtistModel artistModel)
         {
+            var pass = await Task.FromResult(_artistRepository.EditArtist(Mappers.ArtistModelMapper.Map(artistModel)));
+
+            if (pass == true)
+            {
+                return NoContent();
+            }
+
+            return BadRequest();
         }
 
         // DELETE api/artists/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+            var pass = await Task.FromResult(_artistRepository.DeleteArtist(id));
+
+            if (pass == true)
+            {
+                return NoContent();
+            }
+
+            return NotFound();
         }
     }
 }
