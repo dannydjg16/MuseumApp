@@ -26,8 +26,6 @@ namespace MuseumApp.WebAPI.Controllers
         {
             var domain_locations = await Task.FromResult(_locationRepository.GetLocations(locationName));
 
-            IEnumerable<LocationModel> artworks = domain_locations.Select(Mappers.LocationModelMapper.Map);
-
             if (domain_locations.Select(Mappers.LocationModelMapper.Map) is IEnumerable<LocationModel> locationModels)
             {
                 return Ok(locationModels);
