@@ -7,6 +7,11 @@ namespace MuseumApp.DB
 {
     public partial class Artwork
     {
+        public Artwork()
+        {
+            LikesNavigation = new HashSet<Like>();
+        }
+
         public int Id { get; set; }
         public string FileName { get; set; }
         public int? YearCreated { get; set; }
@@ -20,5 +25,6 @@ namespace MuseumApp.DB
         public virtual Artist Artist { get; set; }
         public virtual Location LocationNowNavigation { get; set; }
         public virtual ArtType Medium { get; set; }
+        public virtual ICollection<Like> LikesNavigation { get; set; }
     }
 }

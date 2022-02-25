@@ -98,22 +98,23 @@ namespace MuseumApp.DB
 
             modelBuilder.Entity<Like>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => new { e.UserId, e.ArtId })
+                    .HasName("PK_UserIDArtID");
 
                 entity.ToTable("Likes", "ArtApp");
 
-                entity.Property(e => e.ArtId).HasColumnName("ArtID");
-
                 entity.Property(e => e.UserId).HasColumnName("UserID");
 
+                entity.Property(e => e.ArtId).HasColumnName("ArtID");
+
                 entity.HasOne(d => d.Art)
-                    .WithMany()
+                    .WithMany(p => p.LikesNavigation)
                     .HasForeignKey(d => d.ArtId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Likes__ArtID__114A936A");
 
                 entity.HasOne(d => d.User)
-                    .WithMany()
+                    .WithMany(p => p.Likes)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Likes__UserID__10566F31");
