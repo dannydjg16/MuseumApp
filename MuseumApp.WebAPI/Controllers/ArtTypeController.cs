@@ -20,7 +20,7 @@ namespace MuseumApp.WebAPI.Controllers
             _artTypeRespository = artTypeRepository;
         }
 
-        // GET: api/values
+        // GET: api/arttype
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ArtTypeModel>>> Get()
         {
@@ -34,7 +34,7 @@ namespace MuseumApp.WebAPI.Controllers
             return NotFound();
         }
 
-        // POST api/values
+        // POST api/arttype
         [HttpPost]
         public async Task<IActionResult> Post(ArtTypeModel artTypeModel) 
         {
