@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Linq;
 namespace MuseumApp.DB.Mappers
 {
     public static class ArtistMapper
@@ -13,7 +13,8 @@ namespace MuseumApp.DB.Mappers
                 Biography = entity.Bio,
                 PictureURL = entity.PictureUrl,
                 Born = entity.Born,
-                Died = entity.Died
+                Died = entity.Died,
+                Artworks = entity.Artworks.Select(ArtworkMapper.Map)
             };
         }
 

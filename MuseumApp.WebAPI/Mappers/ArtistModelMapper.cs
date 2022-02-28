@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using MuseumApp.WebAPI.Models;
 
 namespace MuseumApp.WebAPI.Mappers
@@ -15,7 +16,8 @@ namespace MuseumApp.WebAPI.Mappers
                 Died = artist.Died,
                 BornLocation = artist.BornLocation,
                 Name = artist.Name,
-                PictureURL = artist.PictureURL
+                PictureURL = artist.PictureURL,
+                Artworks = artist.Artworks.Select(ArtworkModelMapper.Map)
             };
         }
 

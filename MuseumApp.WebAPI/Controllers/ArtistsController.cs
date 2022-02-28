@@ -14,10 +14,12 @@ namespace MuseumApp.WebAPI.Controllers
     public class ArtistsController : ControllerBase
     {
         private readonly IArtistInterface _artistRepository;
+        private readonly IArtworkInterface _artworkRepository;
 
-        public ArtistsController(IArtistInterface artistRepository)
+        public ArtistsController(IArtistInterface artistRepository, IArtworkInterface artworkRepository)
         {
             _artistRepository = artistRepository;
+            _artworkRepository = artworkRepository;
         }
 
         // GET: api/artists
@@ -38,6 +40,7 @@ namespace MuseumApp.WebAPI.Controllers
         public async Task<ActionResult<UserModel>> Get(int id)
         {
             var appArtist = await Task.FromResult(_artistRepository.GetArtistByID(id));
+            appArtist.Artworks = _artworkRepository.GetArtworksByArtist(id);
 
             if(Mappers.ArtistModelMapper.Map(appArtist) is ArtistModel artist)
             {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using MuseumApp.Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace MuseumApp.DB.Repositories
 {
@@ -71,6 +72,26 @@ namespace MuseumApp.DB.Repositories
 
             return artworks;
         }
+
+        // Get Artworks by Artist
+        public IEnumerable<Domain.Models.Artwork> GetArtworksByArtist(int artistId)
+        {
+            List<Artwork> dbArtworks = new List<Artwork>();
+
+            try
+            {
+                dbArtworks = _context.Artworks.Where(ar => ar.ArtistId == artistId).ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Exception: " + e);
+            }
+
+            var domainArtworks = dbArtworks.Select(Mappers.ArtworkMapper.Map);
+
+            return domainArtworks; 
+        }
+
 
         // Get artwork by ID
         public Domain.Models.Artwork GetArtworkByID(int id)
