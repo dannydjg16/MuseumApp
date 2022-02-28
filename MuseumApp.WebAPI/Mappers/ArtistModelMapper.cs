@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using MuseumApp.WebAPI.Models;
 
@@ -16,9 +17,40 @@ namespace MuseumApp.WebAPI.Mappers
                 Died = artist.Died,
                 BornLocation = artist.BornLocation,
                 Name = artist.Name,
-                PictureURL = artist.PictureURL,
-                Artworks = artist.Artworks.Select(ArtworkModelMapper.Map)
+                PictureURL = artist.PictureURL
             };
+        }
+
+
+        public static ArtistModel MapWithArtworks(Domain.Models.Artist artist)
+        {
+            if (artist.Artworks == null)
+            {
+                return new ArtistModel
+                {
+                    ID = artist.ID,
+                    Biography = artist.Biography,
+                    Born = artist.Born,
+                    Died = artist.Died,
+                    BornLocation = artist.BornLocation,
+                    Name = artist.Name,
+                    PictureURL = artist.PictureURL,
+                    Artworks = new List<ArtworkModel>()
+                };
+            } else
+            {
+                return new ArtistModel
+                {
+                    ID = artist.ID,
+                    Biography = artist.Biography,
+                    Born = artist.Born,
+                    Died = artist.Died,
+                    BornLocation = artist.BornLocation,
+                    Name = artist.Name,
+                    PictureURL = artist.PictureURL,
+                    Artworks = artist.Artworks.Select(ArtworkModelMapper.Map)
+                };
+            }
         }
 
         public static Domain.Models.Artist Map(ArtistModel model)

@@ -42,7 +42,7 @@ namespace MuseumApp.WebAPI.Controllers
             var appArtist = await Task.FromResult(_artistRepository.GetArtistByID(id));
             appArtist.Artworks = _artworkRepository.GetArtworksByArtist(id);
 
-            if(Mappers.ArtistModelMapper.Map(appArtist) is ArtistModel artist)
+            if(Mappers.ArtistModelMapper.MapWithArtworks(appArtist) is ArtistModel artist)
             {
                 return Ok(artist);
             }
