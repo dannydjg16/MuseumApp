@@ -25,9 +25,15 @@ namespace MuseumApp.WebAPI.Controllers
 
         // GET: api/users
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<ActionResult<IEnumerable<UserModel>>> Get([FromQuery] string name = null)
         {
-            return new string[] { "value1", "value2" };
+            var domainUsers = await Task.FromResult(_userRepository.GetUsers(name));
+
+            if (domainUsers.Select(Mappers.UserModelMapper.Map) is IEnumerable<UserModel> userModels)
+            {
+                return Ok(userModels);
+            }
+            return NotFound();
         }
 
         // GET api/users/5
