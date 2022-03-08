@@ -41,6 +41,21 @@ namespace MuseumApp.WebAPI.Controllers
         public async Task<ActionResult<UserModel>> GetAsync(int id)
         {
             var d_user = await Task.FromResult(_userRepository.GetUserByID(id));
+
+            if (Mappers.UserModelMapper.Map(d_user) is UserModel user)
+            {
+                return Ok(user);
+            }
+            return NotFound();
+        }
+
+
+        // GET api/users/email/5
+        [HttpGet("email/{email}")]
+        public async Task<ActionResult<UserModel>> GetByEmailAsync(string email)
+        {
+            var d_user = await Task.FromResult(_userRepository.GetUserByEmail(email));
+
             if (Mappers.UserModelMapper.Map(d_user) is UserModel user)
             {
                 return Ok(user);
@@ -53,6 +68,7 @@ namespace MuseumApp.WebAPI.Controllers
         public async Task<IActionResult> Post(UserModel user)
         {
             var created = await Task.FromResult(_userRepository.CreateAccount(Mappers.UserModelMapper.Map(user)));
+
             if(created)
             {
                 return CreatedAtAction(nameof(Get), new { id = user.ID}, user);
@@ -67,6 +83,7 @@ namespace MuseumApp.WebAPI.Controllers
             if (_userRepository.GetUserByID(user.ID) is User)
             {
                 var updated = await Task.FromResult(_userRepository.EditAccount(Mappers.UserModelMapper.Map(user)));
+
                 if(updated)
                 {
                     return Ok();
@@ -87,6 +104,7 @@ namespace MuseumApp.WebAPI.Controllers
             {
                 // deleted returns true if the deletion is successful
                 var deleted = await Task.FromResult(_userRepository.DeleteAccount(id));
+
                 if (deleted)
                 {
                     return NoContent();
