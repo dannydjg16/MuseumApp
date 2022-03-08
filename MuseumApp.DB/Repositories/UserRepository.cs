@@ -63,7 +63,24 @@ namespace MuseumApp.DB.Repositories
         // Get User By Email - can implement later
         public Domain.Models.User GetUserByEmail(string email)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var dbUser = _context.Users.FirstOrDefault(u => u.Email == email);
+
+                if (dbUser == null)
+                {
+                    return null;
+                }
+
+                Domain.Models.User user = Mappers.UserMapper.Map(dbUser);
+
+                return user;
+            }
+            catch(Exception e)
+            {
+                Console.Write("Exception: " + e);
+            }
+            return null;
         }
 
         // Get Users By ID
