@@ -22,10 +22,10 @@ namespace MuseumApp.DB.Repositories
 
             // Get the artwork by title, If the artist matches, do not add it.
             //    Possibly could change this, people could have their own versions.
-            if (dbArtwork.ArtistId == artwork.ArtistId)
-            {
-                return false;
-            }
+            //if (dbArtwork.ArtistId == artwork.ArtistId)
+            //{
+            //    return false;
+            //}
 
             _context.Artworks.Add(Mappers.ArtworkMapper.Map(artwork));
             _context.SaveChanges();

@@ -55,6 +55,19 @@ namespace MuseumApp.WebAPI
                 options.ReturnHttpNotAcceptable = true;
             });
 
+
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:4200")
+                            .AllowAnyMethod() // allow PUT & DELETE not just GET & POST
+                            .AllowAnyHeader()
+                            .AllowCredentials();
+                    });
+            });
+
             services.AddDbContext<ArtApplicationContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("ArtApplication")));
 
