@@ -11,6 +11,7 @@ CREATE TABLE [ArtApp].[Artwork] (
     LocationNow INT FOREIGN KEY REFERENCES [ArtApp].[Location](ID)
 );
 
+Select * from [ArtApp].[Artwork]
 --------------------------------------------------------------------------------------
 
 
@@ -25,6 +26,7 @@ CREATE TABLE [ArtApp].[Artist] (
     PictureUrl NVARCHAR(250)
 );
 
+Select * from [ArtApp].[Artist]
 --------------------------------------------------------------------------------------
 
 
@@ -36,6 +38,7 @@ CREATE TABLE [ArtApp].[User] (
     FromLocation NVARCHAR(100)
 );
 
+Select * from [ArtApp].[User]
 --------------------------------------------------------------------------------------
 
 
@@ -48,6 +51,7 @@ CREATE TABLE [ArtApp].[Location] (
     TypeID INT FOREIGN KEY REFERENCES [ArtApp].[LocationType](ID)
 );
 
+Select * from [ArtApp].[Location]
 --------------------------------------------------------------------------------------
 
 
@@ -57,6 +61,7 @@ CREATE TABLE [ArtApp].[LocationType] (
     Name NVARCHAR(150)
 );
 
+Select * from [ArtApp].[LocationType]
 --------------------------------------------------------------------------------------
 
 
@@ -65,6 +70,8 @@ CREATE TABLE [ArtApp].[Likes] (
     UserID INT NOT NULL FOREIGN KEY REFERENCES [ArtApp].[User](ID),
     ArtID INT NOT NULL FOREIGN KEY REFERENCES [ArtApp].[Artwork](ID)
 );
+
+Select * from [ArtApp].[Likes]
 
 -- <<<<<<<<>>>>>>>>>> Add Composite Primary Key <<<<<<<<>>>>>>>>>>  --
 -- ALTER TABLE [ArtApp].[Likes] DROP CONSTRAINT PK_UserIDArtID
@@ -81,3 +88,5 @@ CREATE TABLE [ArtApp].[ArtType] (
     Name NVARCHAR(150),
     Description NVARCHAR(300)
 );
+
+Select * from [ArtApp].[ArtType]
