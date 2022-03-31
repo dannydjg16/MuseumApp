@@ -12,6 +12,6 @@ namespace MuseumApp.Domain.Models
         public string PictureURL { get; set; }
         public string Born { get; set; }
         public string Died { get; set; }
-        public IEnumerable<Artwork> Artworks { get; set; }
+        //public IEnumerable<Artwork> Artworks { get; set; }
     }
 }

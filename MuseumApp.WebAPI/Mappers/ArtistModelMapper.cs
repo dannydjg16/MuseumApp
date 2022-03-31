@@ -24,7 +24,7 @@ namespace MuseumApp.WebAPI.Mappers
 
         public static ArtistModel MapWithArtworks(Domain.Models.Artist artist)
         {
-            if (artist.Artworks == null)
+            if (artist == null)
             {
                 return new ArtistModel
                 {
@@ -35,7 +35,7 @@ namespace MuseumApp.WebAPI.Mappers
                     BornLocation = artist.BornLocation,
                     Name = artist.Name,
                     PictureURL = artist.PictureURL,
-                    Artworks = new List<ArtworkModel>()
+                    //Artworks = new List<ArtworkModel>()
                 };
             } else
             {
@@ -48,7 +48,7 @@ namespace MuseumApp.WebAPI.Mappers
                     BornLocation = artist.BornLocation,
                     Name = artist.Name,
                     PictureURL = artist.PictureURL,
-                    Artworks = artist.Artworks.Select(ArtworkModelMapper.Map)
+                   // Artworks = artist.Artworks.Select(ArtworkModelMapper.Map)
                 };
             }
         }

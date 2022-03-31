@@ -40,7 +40,7 @@ namespace MuseumApp.WebAPI.Controllers
         public async Task<ActionResult<UserModel>> Get(int id)
         {
             var appArtist = await Task.FromResult(_artistRepository.GetArtistByID(id));
-            appArtist.Artworks = _artworkRepository.GetArtworksByArtist(id);
+            //appArtist.Artworks = _artworkRepository.GetArtworksByArtist(id);
 
             if(Mappers.ArtistModelMapper.MapWithArtworks(appArtist) is ArtistModel artist)
             {
@@ -52,7 +52,7 @@ namespace MuseumApp.WebAPI.Controllers
 
         // POST api/artists
         [HttpPost]
-        public async Task<IActionResult> Post(ArtistModel artistModel)
+        public async Task<IActionResult> Post([FromBody] ArtistModel artistModel)
         {
             var success = await Task.FromResult(_artistRepository.CreateArtist(Mappers.ArtistModelMapper.Map(artistModel)));
 

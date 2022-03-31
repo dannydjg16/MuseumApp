@@ -20,7 +20,7 @@ namespace MuseumApp.DB.Repositories
         {
             var dbArtist = _context.Artists.FirstOrDefault(a => a.Id == artist.ID);
 
-            if (dbArtist == null)
+            if (dbArtist != null)
             {
                 return false;
             }

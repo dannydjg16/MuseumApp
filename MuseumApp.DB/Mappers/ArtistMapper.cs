@@ -14,7 +14,7 @@ namespace MuseumApp.DB.Mappers
                 PictureURL = entity.PictureUrl,
                 Born = entity.Born,
                 Died = entity.Died,
-                Artworks = entity.Artworks.Select(ArtworkMapper.Map)
+                //Artworks = entity.Artworks.Select(ArtworkMapper.Map)
             };
         }
 
