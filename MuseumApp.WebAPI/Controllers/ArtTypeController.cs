@@ -36,7 +36,7 @@ namespace MuseumApp.WebAPI.Controllers
 
         // POST api/arttype
         [HttpPost]
-        public async Task<IActionResult> Post(ArtTypeModel artTypeModel) 
+        public async Task<IActionResult> Post([FromBody] ArtTypeModel artTypeModel) 
         {
             var complete = await Task.FromResult(_artTypeRespository.AddArtType(Mappers.ArtTypeModelMapper.Map(artTypeModel)));
 

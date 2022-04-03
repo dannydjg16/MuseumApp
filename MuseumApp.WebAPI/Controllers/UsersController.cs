@@ -65,7 +65,7 @@ namespace MuseumApp.WebAPI.Controllers
 
         // POST api/users
         [HttpPost]
-        public async Task<IActionResult> Post(UserModel user)
+        public async Task<IActionResult> Post([FromBody] UserModel user)
         {
             var created = await Task.FromResult(_userRepository.CreateAccount(Mappers.UserModelMapper.Map(user)));
 
@@ -78,7 +78,7 @@ namespace MuseumApp.WebAPI.Controllers
 
         // PUT api/users/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, UserModel user)
+        public async Task<IActionResult> Put(int id, [FromBody] UserModel user)
         {
             if (_userRepository.GetUserByID(user.ID) is User)
             {
