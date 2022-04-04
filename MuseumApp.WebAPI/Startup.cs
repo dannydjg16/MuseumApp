@@ -62,7 +62,8 @@ namespace MuseumApp.WebAPI
                     builder =>
                     {
                         builder.WithOrigins("http://localhost:4200",
-                                            "https://dgart.azurewebsites.net")
+                                            "https://dgart.azurewebsites.net",
+                                            "https://grantartapplication.azurewebsites.net")
                             .AllowAnyMethod() // allow PUT & DELETE not just GET & POST
                             .AllowAnyHeader()
                             .AllowCredentials();
