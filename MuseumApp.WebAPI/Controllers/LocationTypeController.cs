@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MuseumApp.Domain.Interfaces;
 using MuseumApp.WebAPI.Models;
@@ -22,6 +23,7 @@ namespace MuseumApp.WebAPI.Controllers
 
         // GET: api/locationtype
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<LocationTypeModel>>> Get()
         {
             var domainLTs = await Task.FromResult(_locationTypeRepository.GetLocationTypes());
@@ -36,6 +38,7 @@ namespace MuseumApp.WebAPI.Controllers
 
         // POST api/locationtype
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Post([FromBody] LocationTypeModel locationTypeModel)
         {
             var domainLT = Mappers.LocationTypeModelMapper.Map(locationTypeModel);
