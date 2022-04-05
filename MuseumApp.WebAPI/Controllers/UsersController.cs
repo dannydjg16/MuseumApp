@@ -7,6 +7,7 @@ using MuseumApp.Domain.Interfaces;
 using MuseumApp.Domain.Models;
 using MuseumApp.WebAPI.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -25,6 +26,7 @@ namespace MuseumApp.WebAPI.Controllers
 
         // GET: api/users
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<UserModel>>> Get([FromQuery] string name = null)
         {
             var domainUsers = await Task.FromResult(_userRepository.GetUsers(name));
@@ -38,6 +40,7 @@ namespace MuseumApp.WebAPI.Controllers
 
         // GET api/users/5
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<UserModel>> GetAsync(int id)
         {
             var d_user = await Task.FromResult(_userRepository.GetUserByID(id));
@@ -52,6 +55,7 @@ namespace MuseumApp.WebAPI.Controllers
 
         // GET api/users/email/5
         [HttpGet("email/{email}")]
+        [Authorize]
         public async Task<ActionResult<UserModel>> GetByEmailAsync(string email)
         {
             var d_user = await Task.FromResult(_userRepository.GetUserByEmail(email));
@@ -65,6 +69,7 @@ namespace MuseumApp.WebAPI.Controllers
 
         // POST api/users
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Post([FromBody] UserModel user)
         {
             var created = await Task.FromResult(_userRepository.CreateAccount(Mappers.UserModelMapper.Map(user)));
@@ -78,6 +83,7 @@ namespace MuseumApp.WebAPI.Controllers
 
         // PUT api/users/5
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<IActionResult> Put(int id, [FromBody] UserModel user)
         {
             if (_userRepository.GetUserByID(user.ID) is User)
@@ -98,6 +104,7 @@ namespace MuseumApp.WebAPI.Controllers
 
         // DELETE api/users/5
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             if(_userRepository.GetUserByID(id) is User)
