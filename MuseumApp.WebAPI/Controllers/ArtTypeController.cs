@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MuseumApp.Domain.Interfaces;
 using MuseumApp.WebAPI.Models;
@@ -22,6 +23,7 @@ namespace MuseumApp.WebAPI.Controllers
 
         // GET: api/arttype
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<ArtTypeModel>>> Get()
         {
             var artTypes = await Task.FromResult(_artTypeRespository.GetArtTypes());
@@ -36,6 +38,7 @@ namespace MuseumApp.WebAPI.Controllers
 
         // POST api/arttype
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Post([FromBody] ArtTypeModel artTypeModel) 
         {
             var complete = await Task.FromResult(_artTypeRespository.AddArtType(Mappers.ArtTypeModelMapper.Map(artTypeModel)));
