@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Formatters;
 using MuseumApp.Domain.Interfaces;
 using MuseumApp.DB.Repositories;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace MuseumApp.WebAPI
 {
@@ -65,11 +66,12 @@ namespace MuseumApp.WebAPI
             services.AddDbContext<ArtApplicationContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("ArtApplication")));
 
-            //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
-            //{
-            //    options.Authority = "https://dev-7824301.okta.com/oauth2/default";
-            //    options.Audience = "api://default";
-            //});
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            {
+                options.Authority = "https://dev-7824301.okta.com/oauth2/default";
+                options.Audience = "api://default";
+            });
 
             services.AddControllers();
         }
@@ -88,6 +90,7 @@ namespace MuseumApp.WebAPI
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
