@@ -90,6 +90,8 @@ namespace MuseumApp.WebAPI
 
             app.UseRouting();
 
+            app.UseCors();
+
             app.UseAuthentication();
             app.UseAuthorization();
 
