@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MuseumApp.Domain.Interfaces;
 using MuseumApp.WebAPI.Models;
@@ -22,6 +23,7 @@ namespace MuseumApp.WebAPI.Controllers
 
         // GET: api/artwork
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<ArtworkModel>>> Get([FromQuery] string title = null)
         {
             var domain_artworks = await Task.FromResult(_artworkRepository.GetAllArtworks(title));
@@ -38,6 +40,7 @@ namespace MuseumApp.WebAPI.Controllers
 
         // GET api/artwork/5
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<ArtworkModel>> Get([FromRoute]int id)
         {
             var domainArtwork = await Task.FromResult(_artworkRepository.GetArtworkByID(id));
@@ -55,6 +58,7 @@ namespace MuseumApp.WebAPI.Controllers
 
         // POST api/artwork
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Post([FromBody]ArtworkModel artworkModel)
         {
             var created = await Task.FromResult(_artworkRepository.AddArtwork(Mappers.ArtworkModelMapper.Map(artworkModel)));
@@ -69,6 +73,7 @@ namespace MuseumApp.WebAPI.Controllers
 
         // PUT api/artwork/5
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<IActionResult> Put(int artworkId, [FromBody] ArtworkModel artworkModel)
         {
             var edited = await Task.FromResult(_artworkRepository.UpdateArtwork(Mappers.ArtworkModelMapper.Map(artworkModel)));
@@ -83,6 +88,7 @@ namespace MuseumApp.WebAPI.Controllers
 
         // DELETE api/artwork/5
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             var deleted = await Task.FromResult(_artworkRepository.DeleteArtwork(id));
