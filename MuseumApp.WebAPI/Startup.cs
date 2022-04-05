@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
-using MuseumApp.WebAPI.Models;
 using MuseumApp.DB;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using MuseumApp.Domain.Interfaces;
@@ -73,6 +65,12 @@ namespace MuseumApp.WebAPI
             services.AddDbContext<ArtApplicationContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("ArtApplication")));
 
+            //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            //{
+            //    options.Authority = "https://dev-7824301.okta.com/oauth2/default";
+            //    options.Audience = "api://default";
+            //});
+
             services.AddControllers();
         }
 
@@ -83,7 +81,7 @@ namespace MuseumApp.WebAPI
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "YourEpic.WebAPI v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ArtApplication.WebAPI v1"));
             }
 
             app.UseHttpsRedirection();
