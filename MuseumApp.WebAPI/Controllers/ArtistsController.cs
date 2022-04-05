@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MuseumApp.Domain.Interfaces;
 using MuseumApp.WebAPI.Models;
@@ -24,6 +25,7 @@ namespace MuseumApp.WebAPI.Controllers
 
         // GET: api/artists
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<ArtistModel>>> Get()
         {
             var appArtists = await Task.FromResult(_artistRepository.GetArtists());
@@ -37,6 +39,7 @@ namespace MuseumApp.WebAPI.Controllers
 
         // GET api/artists/5
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<UserModel>> Get(int id)
         {
             var appArtist = await Task.FromResult(_artistRepository.GetArtistByID(id));
@@ -52,6 +55,7 @@ namespace MuseumApp.WebAPI.Controllers
 
         // POST api/artists
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Post([FromBody] ArtistModel artistModel)
         {
             var success = await Task.FromResult(_artistRepository.CreateArtist(Mappers.ArtistModelMapper.Map(artistModel)));
@@ -66,6 +70,7 @@ namespace MuseumApp.WebAPI.Controllers
 
         // PUT api/artists/5
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<IActionResult> Put(int artistId, [FromBody] ArtistModel artistModel)
         {
             var pass = await Task.FromResult(_artistRepository.EditArtist(Mappers.ArtistModelMapper.Map(artistModel)));
@@ -80,6 +85,7 @@ namespace MuseumApp.WebAPI.Controllers
 
         // DELETE api/artists/5
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             var pass = await Task.FromResult(_artistRepository.DeleteArtist(id));
