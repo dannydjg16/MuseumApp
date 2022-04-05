@@ -21,7 +21,7 @@
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",
-      "applicationUrl": "http://localhost:44399; https://dgart.azurewebsites.net",
+      "applicationUrl": "http://localhost:44399; https://dgart.azurewebsites.net; https://grantartapplication.azurewebsites.net",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
