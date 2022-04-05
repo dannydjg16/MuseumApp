@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MuseumApp.Domain.Interfaces;
 using MuseumApp.WebAPI.Models;
@@ -22,6 +23,7 @@ namespace MuseumApp.WebAPI.Controllers
 
         // GET: api/locations
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<LocationModel>>> Get([FromQuery] string locationName = null)
         {
             var domain_locations = await Task.FromResult(_locationRepository.GetLocations(locationName));
@@ -36,6 +38,7 @@ namespace MuseumApp.WebAPI.Controllers
 
         // GET api/locations/5
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<LocationModel>> Get([FromRoute] int locationId)
         {
             var location = await Task.FromResult(_locationRepository.GetLocationById(locationId));
@@ -50,6 +53,7 @@ namespace MuseumApp.WebAPI.Controllers
 
         // POST api/locations
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Post([FromBody] LocationModel locationModel)
         {
             var domain_location = Mappers.LocationModelMapper.Map(locationModel);
@@ -65,6 +69,7 @@ namespace MuseumApp.WebAPI.Controllers
 
         // PUT api/locations/5
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<IActionResult> Put(int locationId, [FromBody] LocationModel locationModel)
         {
             var edited = await Task.FromResult(_locationRepository.EditLocation(Mappers.LocationModelMapper.Map(locationModel)));
