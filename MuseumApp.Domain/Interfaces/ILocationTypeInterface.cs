@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using MuseumApp.Domain.Models;
 
 namespace MuseumApp.Domain.Interfaces
