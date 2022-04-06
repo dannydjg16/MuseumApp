@@ -1,5 +1,6 @@
 -- Populate User
 insert into [ArtApp].[User] (Email, Name, FromLocation) values ('danielgrant.joseph@gmail.com','Daniel Grant', 'Connecticut, United States');
+insert into [ArtApp].[User] (Email, Name, FromLocation) values ('dannydsafjhha@gmail.com','Doniel Grant', 'Rhode Island, United States');
 
 -- Populate Artist 
 insert into [ArtApp].[Artist] (Name, Born, Died, BornLocation, Bio, PictureUrl) values ('Vincent van Gogh', '1853', '1890', 'Zundert, Netherlands', 'Vincent van Gogh (March 30, 1853 - July 29, 1890), Dutch painter and one of the greatest of the Post-Impressionists. The striking color, emphatic brushwork, and contoured forms of his work powerfully influenced the current of Expressionism in modern art. Van Gogh’s art became astoundingly popular after his death, especially in the late 20th century, when his work sold for record-breaking sums at auctions around the world and was featured in blockbuster touring exhibitions. ', 'https://www.reuters.com/resizer/5g0lht4m_D1RXj1eUgV4AELfZm4=/960x0/filters:quality(80)/cloudfront-us-east-2.images.arcpublishing.com/reuters/L5AGIMF57FIEHG3RIBWDWKHKXA.jpg');
