@@ -132,8 +132,13 @@ namespace MuseumApp.DB.Repositories
             // If Artwork NOT liked by User
             if (dbLike == null)
             {
+                var newLike = new DB.Like
+                {
+                    UserId = userID,
+                    ArtId = artworkID
+                };
                 // Set the like
-                //_context.Likes.Add(Mappers.);
+                _context.Likes.Add(newLike);
 
                 return true;
 
