@@ -123,5 +123,30 @@ namespace MuseumApp.DB.Repositories
 
             return true;
         }
+
+        public bool LikeOrUnlikePost(int userID, int artworkID)
+        {
+            var dbLike = _context.Likes.FirstOrDefault(like => like.ArtId == like.ArtId
+                                                   && like.UserId == userID);
+
+            // If Artwork NOT liked by User
+            if (dbLike == null)
+            {
+                // Set the like
+                //_context.Likes.Add(Mappers.);
+
+                return true;
+
+            } // If Artwork IS liked by User
+            else if (dbLike != null)
+            {
+                // Delete the like
+                _context.Likes.Remove(dbLike);
+
+                return true;
+            }
+
+            return false;
+        }
     }
 }
