@@ -1,5 +1,4 @@
-﻿using System;
-namespace MuseumApp.Domain.Models
+﻿namespace MuseumApp.Domain.Models
 {
     public class Like
     {
