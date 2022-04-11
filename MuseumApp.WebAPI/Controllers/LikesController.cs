@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MuseumApp.Domain.Interfaces;
 using MuseumApp.WebAPI.Models;
@@ -22,6 +23,7 @@ namespace MuseumApp.WebAPI.Controllers
 
         // GET api/likes/5
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<ArtworkModel>>> Get(int id)
         {
             var result = await Task.FromResult(_likesRepository.GetUsersLikes(id));
@@ -35,6 +37,7 @@ namespace MuseumApp.WebAPI.Controllers
 
         // POST api/likes/artID/user/userID
         [HttpPost("{artID}/user/{userID}")]
+        [Authorize]
         public async Task<IActionResult> Post(int artID, int userID)
         {
             var added = await Task.FromResult(_likesRepository.LikeArtwork(userID, artID));
@@ -47,6 +50,7 @@ namespace MuseumApp.WebAPI.Controllers
 
         // DELETE api/likes/5
         [HttpDelete("{artID}/user/{userID}")]
+        [Authorize]
         public async Task<IActionResult> Delete(int artID, int userID)
         {
             var deleted = await Task.FromResult(_likesRepository.UnlikeArtwork(userID, artID));
