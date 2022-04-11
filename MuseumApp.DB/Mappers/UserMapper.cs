@@ -11,7 +11,8 @@ namespace MuseumApp.DB.Mappers
                 ID = entity.Id,
                 Name = entity.Name,
                 Email = entity.Email,
-                FromLocation = entity.FromLocation
+                FromLocation = entity.FromLocation,
+                ProfilePicURL = entity.ProfilePicUrl
             };
         }
 
@@ -22,7 +23,8 @@ namespace MuseumApp.DB.Mappers
                 Id = model.ID,
                 Name = model.Name,
                 Email = model.Email,
-                FromLocation = model.FromLocation
+                FromLocation = model.FromLocation,
+                ProfilePicUrl = model.ProfilePicURL
             };
         }
     }
