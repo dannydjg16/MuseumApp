@@ -39,6 +39,10 @@ CREATE TABLE [ArtApp].[User] (
 );
 
 Select * from [ArtApp].[User]
+
+-- Add Profile Picture URL to User Table
+ALTER TABLE [ArtApp].[User]
+ADD ProfilePicURL NVARCHAR(max)
 --------------------------------------------------------------------------------------
 
 
