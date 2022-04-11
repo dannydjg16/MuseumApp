@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 #nullable disable
@@ -169,6 +170,8 @@ namespace MuseumApp.DB
                 entity.Property(e => e.FromLocation).HasMaxLength(100);
 
                 entity.Property(e => e.Name).HasMaxLength(50);
+
+                entity.Property(e => e.ProfilePicUrl).HasColumnName("ProfilePicURL");
             });
 
             OnModelCreatingPartial(modelBuilder);

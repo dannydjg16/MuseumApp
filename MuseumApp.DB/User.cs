@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 #nullable disable
 
@@ -15,6 +16,7 @@ namespace MuseumApp.DB
         public string Email { get; set; }
         public string Name { get; set; }
         public string FromLocation { get; set; }
+        public string ProfilePicUrl { get; set; }
 
         public virtual ICollection<Like> Likes { get; set; }
     }
