@@ -33,17 +33,28 @@ namespace MuseumApp.WebAPI.Controllers
             return NotFound();
         }
 
-        // POST api/likes
-        [HttpPost]
-        public void Post([FromBody] string value)
+        // POST api/likes/artID/user/userID
+        [HttpPost("{artID}/user/{userID}")]
+        public async Task<IActionResult> Post(int artID, int userID)
         {
-
+            var added = await Task.FromResult(_likesRepository.LikeArtwork(userID, artID));
+            if(added)
+            {
+                return Ok();
+            }
+            return BadRequest();
         }
 
         // DELETE api/likes/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("{artID}/user/{userID}")]
+        public async Task<IActionResult> Delete(int artID, int userID)
         {
+            var deleted = await Task.FromResult(_likesRepository.UnlikeArtwork(userID, artID));
+            if (deleted)
+            {
+                return Ok();
+            }
+            return BadRequest();
         }
     }
 }
