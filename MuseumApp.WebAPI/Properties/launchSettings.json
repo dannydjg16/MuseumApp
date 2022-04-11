@@ -19,7 +19,6 @@
     },
     "MuseumApp.WebAPI": {
       "commandName": "Project",
-      "launchBrowser": true,
       "launchUrl": "swagger",
       "applicationUrl": "http://localhost:44399",
       "environmentVariables": {
