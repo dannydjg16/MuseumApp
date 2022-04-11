@@ -25,17 +25,13 @@ namespace MuseumApp.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "MuseumApp.WebAPI", Version = "v1" });
-            });
-
             services.AddScoped<IUserInterface, UserRepository>();
             services.AddScoped<IArtistInterface, ArtistRepository>();
             services.AddScoped<IArtTypeInterface, ArtTypeRepository>();
             services.AddScoped<IArtworkInterface, ArtworkRepository>();
             services.AddScoped<ILocationInterface, LocationRepository>();
             services.AddScoped<ILocationTypeInterface, LocationTypeRepository>();
+            services.AddScoped<ILikesInterface, LikesRepository>();
 
             services.AddControllers(options =>
             {
@@ -83,8 +79,6 @@ namespace MuseumApp.WebAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ArtApplication.WebAPI v1"));
             }
 
             app.UseHttpsRedirection();
