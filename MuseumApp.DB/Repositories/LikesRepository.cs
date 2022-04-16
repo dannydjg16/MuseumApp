@@ -19,21 +19,8 @@ namespace MuseumApp.DB.Repositories
         // Get Users Likes
         public IEnumerable<Domain.Models.Artwork> GetUsersLikes(int usersID)
         {
-            //return _context.Likes.Include(like => like.Art)
-            //    .Select(Mappers.LikeMapper.Map)
-            //    .Where(like => usersID == like.UserId)
-            //    .ToList();
-
-            //return _context.Artworks.Include(u => u.Likes)
-            //    .Where(aw => )
-            //    .Select(aw => Mappers.ArtworkMapper.Map(aw))
-            //    .Where(like => usersID == like.)
-            //    .ToList();
-
-            //return _context.Artworks.Include(u => u.LikesNavigation.Where(like => usersID == like.UserId))
-            //    .Select(aw => Mappers.ArtworkMapper.Map(aw)).ToList();
-
-            return _context.Artworks.Include(u => u.LikesNavigation)
+            return _context.Artworks
+                .Include(u => u.LikesNavigation)
                 .Where(aw => aw.LikesNavigation.Any(l => l.UserId == usersID))
                 .Select(Mappers.ArtworkMapper.Map);
         }
