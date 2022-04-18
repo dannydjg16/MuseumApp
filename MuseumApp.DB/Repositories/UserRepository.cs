@@ -56,6 +56,7 @@ namespace MuseumApp.DB.Repositories
             dbUser.Name = user.Name;
             dbUser.Email = user.Email;
             dbUser.FromLocation = user.FromLocation;
+            dbUser.ProfilePicUrl = user.ProfilePicURL;
             _context.SaveChanges();
             return true;
         }

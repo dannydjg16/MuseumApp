@@ -84,7 +84,7 @@ namespace MuseumApp.WebAPI.Controllers
         [Authorize]
         public async Task<IActionResult> Put([FromRoute]int id, [FromBody] UserModel user)
         {
-            if (_userRepository.GetUserByID(id) is User)
+            if (_userRepository.GetUserByID(user.ID) is User)
             {
                 var updated = await Task.FromResult(_userRepository.EditAccount(Mappers.UserModelMapper.Map(user)));
 
