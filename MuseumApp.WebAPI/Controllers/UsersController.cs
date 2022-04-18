@@ -82,7 +82,7 @@ namespace MuseumApp.WebAPI.Controllers
         // PUT api/users/5
         [HttpPut("{id}")]
         [Authorize]
-        public async Task<IActionResult> Put(int id, [FromBody] UserModel user)
+        public async Task<IActionResult> Put([FromRoute]int id, [FromBody] UserModel user)
         {
             if (_userRepository.GetUserByID(user.ID) is User)
             {
