@@ -12,6 +12,10 @@ CREATE TABLE [ArtApp].[Artwork] (
 );
 
 Select * from [ArtApp].[Artwork]
+
+-- Add UserID who added Artwork to User Table
+ALTER TABLE [ArtApp].[Artwork]
+ADD ArtWorkAdderID INT
 --------------------------------------------------------------------------------------
 
 
