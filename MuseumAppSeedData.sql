@@ -7,6 +7,10 @@ insert into [ArtApp].[Artist] (Name, Born, Died, BornLocation, Bio, PictureUrl) 
 
 -- Populate Artwork 
 insert into [ArtApp].[Artwork] (FileName, YearCreated, Title, Description, Likes, ArtistID, MediumID, LocationNow) values ('https://www.vangoghgallery.com/img/starry_night_full.jpg',1889,'The Starry Night','Inspired by the view from his window at the Saint-Paul-de-Mausole asylum in Saint-Rémy, in southern France, where the artist spent twelve months in 1889–90 seeking reprieve from his mental illnesses, The Starry Night (made in mid-June) is both an exercise in observation and a clear departure from it. The vision took place at night, yet the painting, among hundreds of artworks van Gogh made that year, was created in several sessions during the day, under entirely different atmospheric conditions. The picturesque village nestled below the hills was based on other views—it could not be seen from his window—and the cypress at left appears much closer than it was. And although certain features of the sky have been reconstructed as observed, the artist altered celestial shapes and added a sense of glow.',1,2,1,1);
+-- Adding AdderID to the present Artworks. 
+UPDATE [ArtApp].[Artwork] SET ArtWorkAdderID = 1 WHERE ID = 2
+UPDATE [ArtApp].[Artwork] SET ArtWorkAdderID = 1 WHERE ID = 7
+UPDATE [ArtApp].[Artwork] SET ArtWorkAdderID = 1 WHERE ID = 8
 
 -- Populate ArtType
 insert into [ArtApp].[ArtType] (Name, Description) values ('Painting', 'The history of painting reaches back in time to artifacts from pre-historic humans, and spans all cultures. It represents a continuous, though periodically disrupted, tradition from Antiquity. Across cultures, and spanning continents and millennia, the history of painting is an ongoing river of creativity, that continues into the 21st century. Until the early 20th century it relied primarily on representational, religious and classical motifs, after which time more purely abstract and conceptual approaches gained favor.');
