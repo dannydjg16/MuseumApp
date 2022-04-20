@@ -21,6 +21,7 @@ namespace MuseumApp.DB
         public int ArtistId { get; set; }
         public int? MediumId { get; set; }
         public int? LocationNow { get; set; }
+        public int? ArtWorkAdderId { get; set; }
 
         public virtual Artist Artist { get; set; }
         public virtual Location LocationNowNavigation { get; set; }

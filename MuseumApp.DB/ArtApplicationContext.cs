@@ -69,6 +69,8 @@ namespace MuseumApp.DB
 
                 entity.Property(e => e.Id).HasColumnName("ID");
 
+                entity.Property(e => e.ArtWorkAdderId).HasColumnName("ArtWorkAdderID");
+
                 entity.Property(e => e.ArtistId).HasColumnName("ArtistID");
 
                 entity.Property(e => e.FileName).IsRequired();
