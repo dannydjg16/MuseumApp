@@ -25,14 +25,33 @@ namespace MuseumApp.DB.Repositories
                 .Select(Mappers.ArtworkMapper.Map);
         }
 
-        // POST New Like
+        // Add New Like
         public bool LikeArtwork(int userID, int artworkID)
         {
+            // Create the Like Model to add to DB
             var newLike = new Like
             {
                 UserId = userID,
                 ArtId = artworkID
             };
+
+            // START process to increment like amount
+            var dbArtwork = _context.Artworks.FirstOrDefault(aw => aw.Id == artworkID);
+
+            if (dbArtwork == null)
+            {
+                return false;
+            }
+
+            if (dbArtwork.Likes == null)
+            {
+                dbArtwork.Likes = 1;
+            }
+            else
+            {
+                dbArtwork.Likes++;
+            }
+            // ^END process to increment like amount
 
             // Set the like
             _context.Likes.Add(newLike);
@@ -41,7 +60,7 @@ namespace MuseumApp.DB.Repositories
             return true;
         }
 
-        // DELETE Old Like
+        // Delete Old Like
         public bool UnlikeArtwork(int userID, int artworkID)
         {
             var dbLike = _context.Likes.FirstOrDefault(like => like.ArtId == like.ArtId
