@@ -15,7 +15,8 @@ namespace MuseumApp.DB.Mappers
                 LocationNow = artwork.LocationNow,
                 MediumId = artwork.MediumId,
                 Title = artwork.Title,
-                YearCreated = artwork.YearCreated
+                YearCreated = artwork.YearCreated,
+                ArtWorkAdderId = artwork.ArtWorkAdderId
             };
         }
 
@@ -31,7 +32,8 @@ namespace MuseumApp.DB.Mappers
                 LocationNow = entity.LocationNow,
                 MediumId = entity.MediumId,
                 Title = entity.Title,
-                YearCreated = entity.YearCreated
+                YearCreated = entity.YearCreated,
+                ArtWorkAdderId = entity.ArtWorkAdderId
             };
         }
     }

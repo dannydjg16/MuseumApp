@@ -12,5 +12,6 @@ namespace MuseumApp.WebAPI.Models
         public int ArtistId { get; set; }
         public int? MediumId { get; set; }
         public int? LocationNow { get; set; }
+        public int? ArtWorkAdderId { get; set; }
     }
 }

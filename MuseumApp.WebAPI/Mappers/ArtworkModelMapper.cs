@@ -17,7 +17,8 @@ namespace MuseumApp.WebAPI.Mappers
                 Likes = artwork.Likes,
                 LocationNow = artwork.LocationNow,
                 MediumId = artwork.MediumId,
-                YearCreated = artwork.YearCreated
+                YearCreated = artwork.YearCreated,
+                ArtWorkAdderId = artwork.ArtWorkAdderId
             };
         }
 
@@ -33,7 +34,8 @@ namespace MuseumApp.WebAPI.Mappers
                 Likes = model.Likes,
                 LocationNow = model.LocationNow,
                 MediumId = model.MediumId,
-                YearCreated = model.YearCreated
+                YearCreated = model.YearCreated,
+                ArtWorkAdderId = model.ArtWorkAdderId
             };
         }
     }
