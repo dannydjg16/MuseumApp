@@ -75,12 +75,11 @@ namespace MuseumApp.DB.Repositories
 
             if (dbLocations.Any())
             {
-                return new List<Domain.Models.Location>();
+                List<Domain.Models.Location> locations = dbLocations.Select(l => Mappers.LocationMapper.Map(l)).ToList();
+                return locations;
             }
 
-            List<Domain.Models.Location> locations = dbLocations.Select(l => Mappers.LocationMapper.Map(l)).ToList();
-
-            return locations;
+            return new List<Domain.Models.Location>();
         }
     }
 }
