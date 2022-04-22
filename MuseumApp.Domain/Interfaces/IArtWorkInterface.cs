@@ -11,6 +11,7 @@ namespace MuseumApp.Domain.Interfaces
         public bool AddArtwork(Artwork artwork);
         public bool DeleteArtwork(int id);
         public IEnumerable<Artwork> GetArtworksByArtist(int artistId);
+        public IEnumerable<Artwork> GetArtworksByAdder(int adderId);
         // Add methods for getting artwork by Type/Artist/etc.
     }
 }
