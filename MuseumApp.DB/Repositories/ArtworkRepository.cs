@@ -92,6 +92,25 @@ namespace MuseumApp.DB.Repositories
             return domainArtworks; 
         }
 
+        // Get Artworks by Adder
+        public IEnumerable<Domain.Models.Artwork> GetArtworksByAdder(int adderId)
+        {
+            List<Artwork> dbArtworks = new List<Artwork>();
+
+            try
+            {
+                dbArtworks = _context.Artworks.Where(ar => ar.ArtWorkAdderId == adderId).ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Exception: " + e);
+            }
+
+            var domainArtworks = dbArtworks.Select(Mappers.ArtworkMapper.Map);
+
+            return domainArtworks;
+        }
+
 
         // Get artwork by ID
         public Domain.Models.Artwork GetArtworkByID(int id)
