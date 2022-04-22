@@ -59,9 +59,9 @@ namespace MuseumApp.WebAPI.Controllers
         // GET api/artwork/adder/5
         [HttpGet("adder/{id}")]
         [Authorize]
-        public async Task<ActionResult<ArtworkModel>> GetArtByAdder([FromRoute] int adderId)
+        public async Task<ActionResult<ArtworkModel>> GetArtByAdder([FromRoute] int id)
         {
-            var domain_artworks = await Task.FromResult(_artworkRepository.GetArtworksByAdder(adderId));
+            var domain_artworks = await Task.FromResult(_artworkRepository.GetArtworksByAdder(id));
 
 
             IEnumerable<ArtworkModel> artworkModels = domain_artworks.Select(Mappers.ArtworkModelMapper.Map);
