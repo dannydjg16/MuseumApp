@@ -35,10 +35,14 @@ namespace MuseumApp.DB.Repositories
                 ArtId = artworkID
             };
 
+            var dbLike = _context.Likes.Select(like => like.ArtId == artworkID
+                                                            && like.UserId == userID);
+
             // START process to increment like amount
             var dbArtwork = _context.Artworks.FirstOrDefault(aw => aw.Id == artworkID);
 
-            if (dbArtwork == null)
+            // If the artwork is not found OR the like IS found, return false
+            if (dbArtwork == null || dbLike is Like)
             {
                 return false;
             }
@@ -65,6 +69,26 @@ namespace MuseumApp.DB.Repositories
         {
             var dbLike = _context.Likes.FirstOrDefault(like => like.ArtId == like.ArtId
                                                             && like.UserId == userID);
+
+            // START process to decrement like amount
+            var dbArtwork = _context.Artworks.FirstOrDefault(aw => aw.Id == artworkID);
+
+            // If the artwork is not found OR the like is not found, return false
+            if (dbArtwork == null || dbLike == null)
+            {
+                return false;
+            }
+            // Should never be called with null likes
+            if (dbArtwork.Likes == null)
+            {
+                dbArtwork.Likes = 0;
+            }
+            else
+            {
+                dbArtwork.Likes = dbArtwork.Likes - 2;
+            }
+            // ^END process to decrement like amount
+
 
             _context.Likes.Remove(dbLike);
             _context.SaveChanges();
