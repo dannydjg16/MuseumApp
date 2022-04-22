@@ -67,7 +67,7 @@ namespace MuseumApp.DB.Repositories
         // Delete Old Like
         public bool UnlikeArtwork(int userID, int artworkID)
         {
-            var dbLike = _context.Likes.FirstOrDefault(like => like.ArtId == like.ArtId
+            var dbLike = _context.Likes.FirstOrDefault(like => like.ArtId == artworkID
                                                             && like.UserId == userID);
 
             // START process to decrement like amount
@@ -85,7 +85,7 @@ namespace MuseumApp.DB.Repositories
             }
             else
             {
-                dbArtwork.Likes = dbArtwork.Likes - 2;
+                dbArtwork.Likes = dbArtwork.Likes - 1;
             }
             // ^END process to decrement like amount
 
