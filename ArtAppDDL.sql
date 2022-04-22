@@ -98,3 +98,13 @@ CREATE TABLE [ArtApp].[ArtType] (
 );
 
 Select * from [ArtApp].[ArtType]
+
+
+-- All Tables Easy Select 
+Select * from [ArtApp].[Artwork]
+Select * from [ArtApp].[Artist]
+Select * from [ArtApp].[User]
+Select * from [ArtApp].[Location]
+Select * from [ArtApp].[LocationType]
+Select * from [ArtApp].[Likes]
+Select * from [ArtApp].[ArtType]
