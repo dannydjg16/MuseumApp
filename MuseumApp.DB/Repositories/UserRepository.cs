@@ -53,10 +53,34 @@ namespace MuseumApp.DB.Repositories
                 return false;
             }
 
-            dbUser.Name = user.Name;
-            dbUser.Email = user.Email;
-            dbUser.FromLocation = user.FromLocation;
-            dbUser.ProfilePicUrl = user.ProfilePicURL;
+            // If dbuser name is NOT null or white space 
+            if (!string.IsNullOrWhiteSpace(user.Name))
+            {
+                // Change the name 
+                dbUser.Name = user.Name;
+            }
+
+            // If dbuser email is NOT null or white space 
+            if (!string.IsNullOrWhiteSpace(user.Email))
+            {
+                // Change the email 
+                dbUser.Email = user.Email;
+            }
+
+            // If dbuser location is NOT null or white space 
+            if (!string.IsNullOrWhiteSpace(user.FromLocation))
+            {
+                // Change the location 
+                dbUser.FromLocation = user.FromLocation;
+            }
+
+            // If dbuser profilepicURL is NOT null or white space 
+            if (!string.IsNullOrWhiteSpace(user.ProfilePicURL))
+            {
+                // Change the name 
+                dbUser.ProfilePicUrl = user.ProfilePicURL;
+            }
+
             _context.SaveChanges();
             return true;
         }
