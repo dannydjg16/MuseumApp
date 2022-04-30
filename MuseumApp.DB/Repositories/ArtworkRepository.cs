@@ -137,7 +137,22 @@ namespace MuseumApp.DB.Repositories
                 return false;
             }
 
-            dbArtwork = Mappers.ArtworkMapper.Map(artwork);
+            // If dbuser title is NOT null or white space 
+            if (!string.IsNullOrWhiteSpace(artwork.Title))
+            {
+                // Change the title 
+                dbArtwork.Title = artwork.Title;
+            }
+
+
+
+
+
+
+            // Title, file url, year created, decription, artistID, mediumID, locationID
+
+
+
             _context.SaveChanges();
 
             return true;
