@@ -55,14 +55,49 @@ namespace MuseumApp.DB.Repositories
             if (dbArtist == null)
             {
                 return false;
-            } else
-            {
-                dbArtist = ArtistMapper.Map(artist);
-
-                return true;
             }
 
+            // If dbartist name is NOT null or white space 
+            if (!string.IsNullOrWhiteSpace(artist.Name))
+            {
+                // Change the name 
+                dbArtist.Name = artist.Name;
+            }
 
+            // If dbartist PictureURL is NOT null or white space 
+            if (!string.IsNullOrWhiteSpace(artist.PictureURL))
+            {
+                // Change the PictureURL 
+                dbArtist.PictureUrl = artist.PictureURL;
+            }
+
+            // If dbartist BornLocation is NOT null or white space 
+            if (!string.IsNullOrWhiteSpace(artist.BornLocation))
+            {
+                // Change the BornLocation 
+                dbArtist.BornLocation = artist.BornLocation;
+            }
+
+            // If dbartist Born is NOT null or white space 
+            if (!string.IsNullOrWhiteSpace(artist.Born))
+            {
+                // Change the Born 
+                dbArtist.Born = artist.Born;
+            }
+
+            // If dbartist Died is NOT null or white space 
+            if (!string.IsNullOrWhiteSpace(artist.Died))
+            {
+                // Change the Died 
+                dbArtist.Died = artist.Died;
+            }
+
+            // If dbartist Bio is NOT null or white space 
+            if (!string.IsNullOrWhiteSpace(artist.Biography))
+            {
+                // Change the Bio 
+                dbArtist.Bio = artist.Biography;
+            }
         }
 
         // Get Artist by ID
