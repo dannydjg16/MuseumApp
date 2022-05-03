@@ -137,6 +137,20 @@ namespace MuseumApp.DB.Repositories
                 return false;
             }
 
+            // If dbuser filename is NOT null or white space 
+            if (!string.IsNullOrWhiteSpace(artwork.FileName))
+            {
+                // Change the filename 
+                dbArtwork.FileName = artwork.FileName;
+            }
+
+            // If dbuser Description is NOT null or white space 
+            if (!string.IsNullOrWhiteSpace(artwork.Description))
+            {
+                // Change the Description 
+                dbArtwork.Description = artwork.Description;
+            }
+
             // If dbuser title is NOT null or white space 
             if (!string.IsNullOrWhiteSpace(artwork.Title))
             {
@@ -144,15 +158,7 @@ namespace MuseumApp.DB.Repositories
                 dbArtwork.Title = artwork.Title;
             }
 
-
-
-
-
-
             // Title, file url, year created, decription, artistID, mediumID, locationID
-
-
-
             _context.SaveChanges();
 
             return true;
