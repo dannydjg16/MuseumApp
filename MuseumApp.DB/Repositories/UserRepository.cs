@@ -60,13 +60,6 @@ namespace MuseumApp.DB.Repositories
                 dbUser.Name = user.Name;
             }
 
-            // If dbuser email is NOT null or white space 
-            if (!string.IsNullOrWhiteSpace(user.Email))
-            {
-                // Change the email 
-                dbUser.Email = user.Email;
-            }
-
             // If dbuser location is NOT null or white space 
             if (!string.IsNullOrWhiteSpace(user.FromLocation))
             {
