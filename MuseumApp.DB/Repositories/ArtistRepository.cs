@@ -98,6 +98,9 @@ namespace MuseumApp.DB.Repositories
                 // Change the Bio 
                 dbArtist.Bio = artist.Biography;
             }
+
+            _context.SaveChanges();
+            return true;
         }
 
         // Get Artist by ID
