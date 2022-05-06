@@ -79,14 +79,14 @@ namespace MuseumApp.DB.Repositories
             }
 
             // If dbartist Born is NOT null or white space 
-            if (!string.IsNullOrWhiteSpace(artist.Born))
+            if (-70000 <= artist.Born && artist.Born <= 2050)
             {
                 // Change the Born 
                 dbArtist.Born = artist.Born;
             }
 
             // If dbartist Died is NOT null or white space 
-            if (!string.IsNullOrWhiteSpace(artist.Died))
+            if (-70000 <= artist.Died && artist.Died <= 2050)
             {
                 // Change the Died 
                 dbArtist.Died = artist.Died;
