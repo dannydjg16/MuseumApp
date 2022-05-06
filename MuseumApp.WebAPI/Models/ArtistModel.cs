@@ -10,8 +10,8 @@ namespace MuseumApp.WebAPI.Models
         public string BornLocation { get; set; }
         public string Biography { get; set; }
         public string PictureURL { get; set; }
-        public int Born { get; set; }
-        public int Died { get; set; }
+        public int? Born { get; set; }
+        public int? Died { get; set; }
         //public IEnumerable<ArtworkModel> Artworks { get; set; }
     }
 }
