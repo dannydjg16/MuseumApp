@@ -31,6 +31,8 @@ CREATE TABLE [ArtApp].[Artist] (
 );
 
 Select * from [ArtApp].[Artist]
+
+-- Change the Born and Died to an INT
 --------------------------------------------------------------------------------------
 
 
