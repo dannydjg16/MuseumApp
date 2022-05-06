@@ -33,6 +33,11 @@ CREATE TABLE [ArtApp].[Artist] (
 Select * from [ArtApp].[Artist]
 
 -- Change the Born and Died to an INT
+ALTER TABLE [ArtApp].[Artist]
+ALTER COLUMN Born INT;
+
+ALTER TABLE [ArtApp].[Artist]
+ALTER COLUMN Died INT;
 --------------------------------------------------------------------------------------
 
 
