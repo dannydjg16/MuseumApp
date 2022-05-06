@@ -14,8 +14,8 @@ namespace MuseumApp.DB
 
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Born { get; set; }
-        public string Died { get; set; }
+        public int? Born { get; set; }
+        public int? Died { get; set; }
         public string BornLocation { get; set; }
         public string Bio { get; set; }
         public string PictureUrl { get; set; }

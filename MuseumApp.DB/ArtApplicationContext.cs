@@ -48,11 +48,7 @@ namespace MuseumApp.DB
 
                 entity.Property(e => e.Bio).HasMaxLength(500);
 
-                entity.Property(e => e.Born).HasMaxLength(50);
-
                 entity.Property(e => e.BornLocation).HasMaxLength(100);
-
-                entity.Property(e => e.Died).HasMaxLength(50);
 
                 entity.Property(e => e.Name)
                     .IsRequired()
