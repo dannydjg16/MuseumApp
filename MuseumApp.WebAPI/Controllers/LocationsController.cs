@@ -69,7 +69,7 @@ namespace MuseumApp.WebAPI.Controllers
         // PUT api/locations/5
         [HttpPut("{id}")]
         [Authorize]
-        public async Task<IActionResult> Put(int locationId, [FromBody] LocationModel locationModel)
+        public async Task<IActionResult> Put([FromBody] LocationModel locationModel)
         {
             var edited = await Task.FromResult(_locationRepository.EditLocation(Mappers.LocationModelMapper.Map(locationModel)));
 
