@@ -92,7 +92,7 @@ namespace MuseumApp.WebAPI.Controllers
         // PUT api/artwork/5
         [HttpPut("{id}")]
         [Authorize]
-        public async Task<IActionResult> Put(int artworkId, [FromBody] ArtworkModel artworkModel)
+        public async Task<IActionResult> Put([FromBody] ArtworkModel artworkModel)
         {
             var edited = await Task.FromResult(_artworkRepository.UpdateArtwork(Mappers.ArtworkModelMapper.Map(artworkModel)));
 
