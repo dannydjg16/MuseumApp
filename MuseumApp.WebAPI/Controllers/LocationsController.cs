@@ -38,9 +38,9 @@ namespace MuseumApp.WebAPI.Controllers
         // GET api/locations/5
         [HttpGet("{id}")]
         [Authorize]
-        public async Task<ActionResult<LocationModel>> Get([FromRoute] int locationId)
+        public async Task<ActionResult<LocationModel>> Get([FromRoute] int id)
         {
-            var location = await Task.FromResult(_locationRepository.GetLocationById(locationId));
+            var location = await Task.FromResult(_locationRepository.GetLocationById(id));
 
             if (Mappers.LocationModelMapper.Map(location) is LocationModel locationModel)
             {
