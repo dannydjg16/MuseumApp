@@ -11,7 +11,7 @@ namespace MuseumApp.WebAPI.Mappers
             {
                 Id = location.Id,
                 LocationName = location.LocationName,
-                LocationUrl = location.LocationName,
+                LocationUrl = location.LocationUrl,
                 Description = location.Description,
                 TypeId = location.TypeId
             };
