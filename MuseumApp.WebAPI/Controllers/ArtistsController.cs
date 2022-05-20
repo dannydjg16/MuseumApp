@@ -70,7 +70,7 @@ namespace MuseumApp.WebAPI.Controllers
         // PUT api/artists/5
         [HttpPut("{id}")]
         [Authorize]
-        public async Task<IActionResult> Put(int artistId, [FromBody] ArtistModel artistModel)
+        public async Task<IActionResult> Put([FromBody] ArtistModel artistModel)
         {
             var pass = await Task.FromResult(_artistRepository.EditArtist(Mappers.ArtistModelMapper.Map(artistModel)));
 
