@@ -44,7 +44,7 @@ namespace MuseumApp.WebAPI.Controllers
 
             if (Mappers.LocationModelMapper.Map(location) is LocationModel locationModel)
             {
-                return Ok();
+                return Ok(locationModel);
             }
 
             return NotFound();
