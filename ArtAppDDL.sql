@@ -38,6 +38,9 @@ ALTER COLUMN Born INT;
 
 ALTER TABLE [ArtApp].[Artist]
 ALTER COLUMN Died INT;
+
+ALTER TABLE [ArtApp].[Artist]
+ALTER COLUMN Bio NVARCHAR(max);
 --------------------------------------------------------------------------------------
 
 
