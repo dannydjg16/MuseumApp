@@ -10,7 +10,7 @@ namespace MuseumApp.Domain.Models
         public string LocationUrl { get; set; }
         public int? TypeId { get; set; }
 
-        //public virtual LocationType Type { get; set; }
-        //public virtual IEnumerable<Artwork> Artworks { get; set; }
+        public virtual LocationType Type { get; set; }
+        public virtual IEnumerable<Artwork> Artworks { get; set; }
     }
 }

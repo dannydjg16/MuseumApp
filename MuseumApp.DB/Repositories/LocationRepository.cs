@@ -40,7 +40,26 @@ namespace MuseumApp.DB.Repositories
                 return false;
             }
 
-            dbLocation.TypeId = location.TypeId;
+            if (!string.IsNullOrWhiteSpace(location.LocationName))
+            {
+                dbLocation.LocationName = location.LocationName;
+            }
+
+            if (!string.IsNullOrWhiteSpace(location.LocationUrl))
+            {
+                dbLocation.LocationUrl = location.LocationUrl;
+            }
+
+            if (!string.IsNullOrWhiteSpace(location.Description))
+            {
+                dbLocation.Description = location.Description;
+            }
+
+            if (location.TypeId != 0)
+            {
+                dbLocation.TypeId = location.TypeId;
+            }
+
             _context.SaveChanges();
 
             return true;
