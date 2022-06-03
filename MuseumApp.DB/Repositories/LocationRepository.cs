@@ -40,7 +40,7 @@ namespace MuseumApp.DB.Repositories
                 return false;
             }
 
-            dbLocation = Mappers.LocationMapper.Map(location);
+            dbLocation.TypeId = location.TypeId;
             _context.SaveChanges();
 
             return true;

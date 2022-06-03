@@ -71,7 +71,14 @@ namespace MuseumApp.WebAPI.Controllers
         [Authorize]
         public async Task<IActionResult> Put([FromBody] LocationModel locationModel)
         {
+
+            var check_location = await Task.FromResult(_locationRepository.GetLocationById(locationModel.Id));
+
+           // if(check_location is )
+
             var edited = await Task.FromResult(_locationRepository.EditLocation(Mappers.LocationModelMapper.Map(locationModel)));
+
+
 
             if (edited)
             {
