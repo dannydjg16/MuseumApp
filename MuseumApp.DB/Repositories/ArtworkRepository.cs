@@ -137,28 +137,47 @@ namespace MuseumApp.DB.Repositories
                 return false;
             }
 
-            // If dbuser filename is NOT null or white space 
-            if (!string.IsNullOrWhiteSpace(artwork.FileName))
-            {
-                // Change the filename 
-                dbArtwork.FileName = artwork.FileName;
-            }
-
-            // If dbuser Description is NOT null or white space 
-            if (!string.IsNullOrWhiteSpace(artwork.Description))
-            {
-                // Change the Description 
-                dbArtwork.Description = artwork.Description;
-            }
-
-            // If dbuser title is NOT null or white space 
+            // If artwork title is NOT null or white space 
             if (!string.IsNullOrWhiteSpace(artwork.Title))
             {
                 // Change the title 
                 dbArtwork.Title = artwork.Title;
             }
 
-            // Title, file url, year created, decription, artistID, mediumID, locationID
+            // If filename filename is NOT null or white space 
+            if (!string.IsNullOrWhiteSpace(artwork.FileName))
+            {
+                // Change the filename 
+                dbArtwork.FileName = artwork.FileName;
+            }
+
+            if (-70000 <= artwork.YearCreated && artwork.YearCreated <= 2050)
+            {
+                dbArtwork.YearCreated = artwork.YearCreated;
+            }
+
+            // If description Description is NOT null or white space 
+            if (!string.IsNullOrWhiteSpace(artwork.Description))
+            {
+                // Change the Description 
+                dbArtwork.Description = artwork.Description;
+            }
+
+            if (artwork.ArtistId != 0)
+            {
+                dbArtwork.ArtistId = artwork.ArtistId;
+            }
+
+            if (artwork.MediumId != 0)
+            {
+                dbArtwork.MediumId = artwork.MediumId;
+            }
+
+            if (artwork.LocationNow != 0)
+            {
+                dbArtwork.LocationNow = artwork.LocationNow;
+            }
+
             _context.SaveChanges();
 
             return true;
