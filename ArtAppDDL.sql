@@ -80,6 +80,8 @@ CREATE TABLE [ArtApp].[LocationType] (
 );
 
 Select * from [ArtApp].[LocationType]
+
+ -- DELETE FROM [ArtApp].[LocationType] WHERE ID=;
 --------------------------------------------------------------------------------------
 
 
@@ -118,3 +120,4 @@ Select * from [ArtApp].[Location]
 Select * from [ArtApp].[LocationType]
 Select * from [ArtApp].[Likes]
 Select * from [ArtApp].[ArtType]
+
