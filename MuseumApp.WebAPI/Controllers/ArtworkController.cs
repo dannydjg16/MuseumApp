@@ -74,10 +74,30 @@ namespace MuseumApp.WebAPI.Controllers
             return NotFound();
         }
 
+
+        // GET api/artwork/artist/5
+        [HttpGet("artist/{id}")]
+        [Authorize]
+        public async Task<ActionResult<ArtworkModel>> GetArtByArtist([FromRoute] int id)
+        {
+            var domain_artworks = await Task.FromResult(_artworkRepository.GetArtworksByArtist(id));
+
+
+            IEnumerable<ArtworkModel> artworkModels = domain_artworks.Select(Mappers.ArtworkModelMapper.Map);
+
+            if (artworkModels.Any())
+            {
+                return Ok(artworkModels);
+            }
+
+            return NotFound();
+        }
+
+
         // POST api/artwork
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Post([FromBody]ArtworkModel artworkModel)
+        public async Task<IActionResult> Post([FromBody] ArtworkModel artworkModel)
         {
             var created = await Task.FromResult(_artworkRepository.AddArtwork(Mappers.ArtworkModelMapper.Map(artworkModel)));
 
@@ -87,6 +107,7 @@ namespace MuseumApp.WebAPI.Controllers
             }
 
             return NotFound();
+
         }
 
         // PUT api/artwork/5
