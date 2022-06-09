@@ -55,7 +55,6 @@ namespace MuseumApp.WebAPI.Controllers
             return NotFound();
         }
 
-
         // GET api/artwork/adder/5
         [HttpGet("adder/{id}")]
         [Authorize]
@@ -74,7 +73,6 @@ namespace MuseumApp.WebAPI.Controllers
             return NotFound();
         }
 
-
         // GET api/artwork/artist/5
         [HttpGet("artist/{id}")]
         [Authorize]
@@ -92,7 +90,6 @@ namespace MuseumApp.WebAPI.Controllers
 
             return NotFound();
         }
-
 
         // POST api/artwork
         [HttpPost]
