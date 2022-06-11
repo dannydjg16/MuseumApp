@@ -44,6 +44,12 @@ ALTER COLUMN Bio NVARCHAR(max);
 
 ALTER TABLE [ArtApp].[Artist]
 ADD ArtistAdderID INT
+
+-- ALTER TABLE [ArtApp].[Artist] DROP CONSTRAINT FK_ArtistAdderUserID
+ALTER TABLE [ArtApp].[Artist]
+ADD CONSTRAINT FK_ArtistAdderUserID
+FOREIGN KEY (ArtistAdderID) REFERENCES [ArtApp].[User](ID)
+ON DELETE CASCADE;
 --------------------------------------------------------------------------------------
 
 
