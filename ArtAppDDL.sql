@@ -16,6 +16,12 @@ Select * from [ArtApp].[Artwork]
 -- Add UserID who added Artwork to User Table
 ALTER TABLE [ArtApp].[Artwork]
 ADD ArtWorkAdderID INT
+
+-- ALTER TABLE [ArtApp].[Artwork] DROP CONSTRAINT FK_ArtworkAdderUserID
+ALTER TABLE [ArtApp].[Artwork]
+ADD CONSTRAINT FK_ArtWorkAdderUserID
+FOREIGN KEY (ArtWorkAdderID) REFERENCES [ArtApp].[User](ID)
+ON DELETE CASCADE;
 --------------------------------------------------------------------------------------
 
 
