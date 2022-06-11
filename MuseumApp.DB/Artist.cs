@@ -19,6 +19,7 @@ namespace MuseumApp.DB
         public string BornLocation { get; set; }
         public string Bio { get; set; }
         public string PictureUrl { get; set; }
+        public int? ArtistAdderId { get; set; }
 
         public virtual ICollection<Artwork> Artworks { get; set; }
     }

@@ -46,7 +46,7 @@ namespace MuseumApp.DB
 
                 entity.Property(e => e.Id).HasColumnName("ID");
 
-                entity.Property(e => e.Bio).HasMaxLength(500);
+                entity.Property(e => e.ArtistAdderId).HasColumnName("ArtistAdderID");
 
                 entity.Property(e => e.BornLocation).HasMaxLength(100);
 
