@@ -41,6 +41,9 @@ ALTER COLUMN Died INT;
 
 ALTER TABLE [ArtApp].[Artist]
 ALTER COLUMN Bio NVARCHAR(max);
+
+ALTER TABLE [ArtApp].[Artist]
+ADD ArtistAdderID INT
 --------------------------------------------------------------------------------------
 
 
