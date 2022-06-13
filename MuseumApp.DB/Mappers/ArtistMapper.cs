@@ -14,6 +14,7 @@ namespace MuseumApp.DB.Mappers
                 PictureURL = entity.PictureUrl,
                 Born = entity.Born,
                 Died = entity.Died,
+                ArtistAdderId = entity.ArtistAdderId
                 //Artworks = entity.Artworks.Select(ArtworkMapper.Map)
             };
         }
@@ -28,7 +29,8 @@ namespace MuseumApp.DB.Mappers
                 Bio = model.Biography,
                 PictureUrl = model.PictureURL,
                 Born = model.Born,
-                Died = model.Died
+                Died = model.Died,
+                ArtistAdderId = model.ArtistAdderId
             };
         }
     }
