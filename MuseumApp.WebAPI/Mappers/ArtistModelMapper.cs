@@ -17,7 +17,8 @@ namespace MuseumApp.WebAPI.Mappers
                 Died = artist.Died,
                 BornLocation = artist.BornLocation,
                 Name = artist.Name,
-                PictureURL = artist.PictureURL
+                PictureURL = artist.PictureURL,
+                ArtistAdderId = artist.ArtistAdderId
             };
         }
 
@@ -35,6 +36,7 @@ namespace MuseumApp.WebAPI.Mappers
                     BornLocation = artist.BornLocation,
                     Name = artist.Name,
                     PictureURL = artist.PictureURL,
+                    ArtistAdderId = artist.ArtistAdderId
                     //Artworks = new List<ArtworkModel>()
                 };
             } else
@@ -48,7 +50,8 @@ namespace MuseumApp.WebAPI.Mappers
                     BornLocation = artist.BornLocation,
                     Name = artist.Name,
                     PictureURL = artist.PictureURL,
-                   // Artworks = artist.Artworks.Select(ArtworkModelMapper.Map)
+                    ArtistAdderId = artist.ArtistAdderId
+                    // Artworks = artist.Artworks.Select(ArtworkModelMapper.Map)
                 };
             }
         }
@@ -63,7 +66,8 @@ namespace MuseumApp.WebAPI.Mappers
                 Died = model.Died,
                 BornLocation = model.BornLocation,
                 Name = model.Name,
-                PictureURL = model.PictureURL
+                PictureURL = model.PictureURL,
+                ArtistAdderId = model.ArtistAdderId
             };
         }
     }
