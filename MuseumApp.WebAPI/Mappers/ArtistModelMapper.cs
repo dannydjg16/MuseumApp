@@ -11,7 +11,7 @@ namespace MuseumApp.WebAPI.Mappers
         {
             return new ArtistModel
             {
-                ID = artist.ID,
+                Id = artist.Id,
                 Biography = artist.Biography,
                 Born = artist.Born,
                 Died = artist.Died,
@@ -29,7 +29,7 @@ namespace MuseumApp.WebAPI.Mappers
             {
                 return new ArtistModel
                 {
-                    ID = artist.ID,
+                    Id = artist.Id,
                     Biography = artist.Biography,
                     Born = artist.Born,
                     Died = artist.Died,
@@ -43,7 +43,7 @@ namespace MuseumApp.WebAPI.Mappers
             {
                 return new ArtistModel
                 {
-                    ID = artist.ID,
+                    Id = artist.Id,
                     Biography = artist.Biography,
                     Born = artist.Born,
                     Died = artist.Died,
@@ -60,7 +60,7 @@ namespace MuseumApp.WebAPI.Mappers
         {
             return new Domain.Models.Artist
             {
-                ID = model.ID,
+                Id = model.Id,
                 Biography = model.Biography,
                 Born = model.Born,
                 Died = model.Died,

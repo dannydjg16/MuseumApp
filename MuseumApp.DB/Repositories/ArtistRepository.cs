@@ -18,7 +18,7 @@ namespace MuseumApp.DB.Repositories
         // Create Artist
         public bool CreateArtist(Domain.Models.Artist artist)
         {
-            var dbArtist = _context.Artists.FirstOrDefault(a => a.Id == artist.ID);
+            var dbArtist = _context.Artists.FirstOrDefault(a => a.Id == artist.Id);
 
             if (dbArtist != null)
             {
@@ -50,7 +50,7 @@ namespace MuseumApp.DB.Repositories
         // Edit Artist
         public bool EditArtist(Domain.Models.Artist artist)
         {
-            var dbArtist = _context.Artists.FirstOrDefault(a => a.Id == artist.ID);
+            var dbArtist = _context.Artists.FirstOrDefault(a => a.Id == artist.Id);
 
             if (dbArtist == null)
             {
@@ -149,7 +149,7 @@ namespace MuseumApp.DB.Repositories
 
             List<Domain.Models.Artist> domainArtists = dbArtists.Select(a => new Domain.Models.Artist
             {
-                ID = a.Id,
+                Id = a.Id,
                 BornLocation = a.BornLocation,
                 Biography = a.Bio,
                 Name = a.Name,

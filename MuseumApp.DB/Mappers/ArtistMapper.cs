@@ -7,7 +7,7 @@ namespace MuseumApp.DB.Mappers
         {
             return new Domain.Models.Artist
             {
-                ID = entity.Id,
+                Id = entity.Id,
                 Name = entity.Name,
                 BornLocation = entity.BornLocation,
                 Biography = entity.Bio,
@@ -23,7 +23,7 @@ namespace MuseumApp.DB.Mappers
         {
             return new Artist
             {
-                Id = model.ID,
+                Id = model.Id,
                 Name = model.Name,
                 BornLocation = model.BornLocation,
                 Bio = model.Biography,
