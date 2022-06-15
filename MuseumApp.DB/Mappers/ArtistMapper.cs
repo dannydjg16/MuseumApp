@@ -1,5 +1,4 @@
-﻿using System.Linq;
-namespace MuseumApp.DB.Mappers
+﻿namespace MuseumApp.DB.Mappers
 {
     public static class ArtistMapper
     {

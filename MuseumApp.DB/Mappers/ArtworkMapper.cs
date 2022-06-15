@@ -1,5 +1,4 @@
-﻿using System;
-namespace MuseumApp.DB.Mappers
+﻿namespace MuseumApp.DB.Mappers
 {
     public static class ArtworkMapper
     {
