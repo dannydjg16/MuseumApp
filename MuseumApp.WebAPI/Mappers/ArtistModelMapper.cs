@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using MuseumApp.WebAPI.Models;
+﻿using MuseumApp.WebAPI.Models;
 
 namespace MuseumApp.WebAPI.Mappers
 {

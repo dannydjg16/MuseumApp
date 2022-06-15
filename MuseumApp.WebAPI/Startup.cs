@@ -8,7 +8,6 @@ using MuseumApp.DB;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using MuseumApp.Domain.Interfaces;
 using MuseumApp.DB.Repositories;
-using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace MuseumApp.WebAPI
