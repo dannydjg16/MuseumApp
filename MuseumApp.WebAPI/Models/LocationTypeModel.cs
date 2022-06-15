@@ -1,5 +1,4 @@
-﻿using System;
-namespace MuseumApp.WebAPI.Models
+﻿namespace MuseumApp.WebAPI.Models
 {
     public class LocationTypeModel
     {
