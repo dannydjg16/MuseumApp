@@ -1,4 +1,7 @@
-﻿namespace MuseumApp.WebAPI.Models
+﻿using System.Collections.Generic;
+using MuseumApp.Domain.Models;
+
+namespace MuseumApp.WebAPI.Models
 {
     public class UserModel
     {
@@ -7,5 +10,6 @@
         public string Email { get; set; }
         public string FromLocation { get; set; }
         public string ProfilePicURL { get; set; }
+        public virtual ICollection<Like> Likes { get; set; }
     }
 }
