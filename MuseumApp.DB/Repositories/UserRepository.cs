@@ -83,14 +83,15 @@ namespace MuseumApp.DB.Repositories
         {
             try
             {
-                var dbUser = _context.Users.FirstOrDefault(u => u.Email == email);
+                IQueryable<User> fullUsers = _context.Users.Include(user => user.Likes);
 
-                if (dbUser == null)
+
+                if (fullUsers == null)
                 {
                     return null;
                 }
 
-                Domain.Models.User user = Mappers.UserMapper.Map(dbUser);
+                var user = Mappers.UserMapper.Map(fullUsers.First(u => u.Email == email));
 
                 return user;
             }
@@ -104,19 +105,15 @@ namespace MuseumApp.DB.Repositories
         // Get Users By ID
         public Domain.Models.User GetUserByID(int id)
         {
-            var dbUser = _context.Users.FirstOrDefault(u => u.Id == id);
+            IQueryable<User> fullUsers = _context.Users.Include(user => user.Likes);
 
-            if (dbUser == null)
+            if (fullUsers == null)
             {
                 return null;
             }
-            Domain.Models.User user = new Domain.Models.User
-            {
-                ID = dbUser.Id,
-                Name = dbUser.Name,
-                Email = dbUser.Email,
-                FromLocation = dbUser.FromLocation
-            };
+
+            var user = Mappers.UserMapper.Map(fullUsers.First(u => u.Id == id));
+
             return user;
         }
 
