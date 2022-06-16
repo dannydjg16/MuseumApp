@@ -12,7 +12,8 @@ namespace MuseumApp.WebAPI.Mappers
                 Name = user.Name,
                 Email = user.Email,
                 FromLocation = user.FromLocation,
-                ProfilePicURL = user.ProfilePicURL
+                ProfilePicURL = user.ProfilePicURL,
+                Likes = user.Likes
             };
         }
 
@@ -24,7 +25,8 @@ namespace MuseumApp.WebAPI.Mappers
                 Name = model.Name,
                 Email = model.Email,
                 FromLocation = model.FromLocation,
-                ProfilePicURL = model.ProfilePicURL
+                ProfilePicURL = model.ProfilePicURL,
+                Likes = model.Likes
             };
         }
     }

@@ -1,4 +1,6 @@
-﻿namespace MuseumApp.DB.Mappers
+﻿using System.Linq;
+
+namespace MuseumApp.DB.Mappers
 {
     public static class UserMapper
     {
@@ -10,7 +12,8 @@
                 Name = entity.Name,
                 Email = entity.Email,
                 FromLocation = entity.FromLocation,
-                ProfilePicURL = entity.ProfilePicUrl
+                ProfilePicURL = entity.ProfilePicUrl,
+                Likes = entity.Likes.Select(LikeMapper.Map)
             };
         }
 
