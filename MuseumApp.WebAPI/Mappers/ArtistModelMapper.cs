@@ -1,4 +1,5 @@
 ﻿using MuseumApp.WebAPI.Models;
+using System.Linq;
 
 namespace MuseumApp.WebAPI.Mappers
 {
@@ -15,7 +16,8 @@ namespace MuseumApp.WebAPI.Mappers
                 BornLocation = artist.BornLocation,
                 Name = artist.Name,
                 PictureURL = artist.PictureURL,
-                ArtistAdderId = artist.ArtistAdderId
+                ArtistAdderId = artist.ArtistAdderId,
+                Artworks = artist.Artworks.Select(ArtworkModelMapper.Map)
             };
         }
 
@@ -33,8 +35,8 @@ namespace MuseumApp.WebAPI.Mappers
                     BornLocation = artist.BornLocation,
                     Name = artist.Name,
                     PictureURL = artist.PictureURL,
-                    ArtistAdderId = artist.ArtistAdderId
-                    //Artworks = new List<ArtworkModel>()
+                    ArtistAdderId = artist.ArtistAdderId,
+                    Artworks = artist.Artworks.Select(ArtworkModelMapper.Map)
                 };
             } else
             {
@@ -47,8 +49,8 @@ namespace MuseumApp.WebAPI.Mappers
                     BornLocation = artist.BornLocation,
                     Name = artist.Name,
                     PictureURL = artist.PictureURL,
-                    ArtistAdderId = artist.ArtistAdderId
-                    // Artworks = artist.Artworks.Select(ArtworkModelMapper.Map)
+                    ArtistAdderId = artist.ArtistAdderId,
+                    Artworks = artist.Artworks.Select(ArtworkModelMapper.Map)
                 };
             }
         }
