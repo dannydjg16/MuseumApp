@@ -148,19 +148,7 @@ namespace MuseumApp.DB.Repositories
                 return new List<Domain.Models.Artist>();
             }
 
-            //List<Domain.Models.Artist> domainArtistss = dbArtists.Select(a => new Domain.Models.Artist
-            //{
-            //    Id = a.Id,
-            //    BornLocation = a.BornLocation,
-            //    Biography = a.Bio,
-            //    Name = a.Name,
-            //    Born = a.Born,
-            //    Died = a.Died,
-            //    PictureURL = a.PictureUrl
-            //}).ToList();
-
             List<Domain.Models.Artist> domainArtists = dbArtists.Select(a => ArtistMapper.Map(a)).ToList();
-
 
             return domainArtists;
         }
