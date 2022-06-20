@@ -12,6 +12,6 @@ namespace MuseumApp.WebAPI.Models
         public int? Born { get; set; }
         public int? Died { get; set; }
         public int? ArtistAdderId { get; set; }
-        public IEnumerable<ArtworkModel> Artworks { get; set; }
+        public IEnumerable<ArtworkModel>? Artworks { get; set; }
     }
 }

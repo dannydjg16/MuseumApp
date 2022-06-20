@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using MuseumApp.DB.Mappers;
 using MuseumApp.Domain.Interfaces;
 
@@ -138,7 +139,7 @@ namespace MuseumApp.DB.Repositories
                 dbArtists = _context.Artists.Where(a => a.Name.Contains(artistName)).ToList();
             } else
             {
-                dbArtists = _context.Artists.ToList();
+                dbArtists = _context.Artists.Include(artist => artist.Artworks).ToList();
             }
 
             // If there are no artists, go into block
@@ -155,7 +156,8 @@ namespace MuseumApp.DB.Repositories
                 Name = a.Name,
                 Born = a.Born,
                 Died = a.Died,
-                PictureURL = a.PictureUrl
+                PictureURL = a.PictureUrl,
+                Artworks = a.Artworks
             }).ToList();
 
             return domainArtists;
