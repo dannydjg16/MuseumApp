@@ -78,17 +78,22 @@ namespace MuseumApp.WebAPI.Controllers
         [Authorize]
         public async Task<ActionResult<ArtworkModel>> GetArtByArtist([FromRoute] int id)
         {
-            var domain_artworks = await Task.FromResult(_artworkRepository.GetArtworksByArtist(id));
+            try {
+                var domain_artworks = await Task.FromResult(_artworkRepository.GetArtworksByArtist(id));
 
+                IEnumerable<ArtworkModel> artworkModels = domain_artworks.Select(Mappers.ArtworkModelMapper.Map);
 
-            IEnumerable<ArtworkModel> artworkModels = domain_artworks.Select(Mappers.ArtworkModelMapper.Map);
-
-            if (artworkModels.Any())
-            {
-                return Ok(artworkModels);
+                if (artworkModels.Any())
+                {
+                    return Ok(artworkModels);
+                }
+                else
+                {
+                    return NoContent();
+                }
+            } catch {
+                return NotFound();
             }
-
-            return NotFound();
         }
 
         // POST api/artwork
