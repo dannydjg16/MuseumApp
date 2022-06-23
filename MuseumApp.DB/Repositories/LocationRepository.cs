@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using MuseumApp.Domain.Interfaces;
 
 namespace MuseumApp.DB.Repositories
@@ -99,6 +100,25 @@ namespace MuseumApp.DB.Repositories
             }
 
             return new List<Domain.Models.Location>();
+        }
+
+        // Get Artworks in Location
+        public IEnumerable<Domain.Models.Artwork> GetArtworksInLocation(int locationID)
+        {
+            List<Artwork> dbArtworks = new List<Artwork>();
+
+            try
+            {
+                dbArtworks = _context.Artworks.Where(ar => ar.LocationNow == locationID).ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Exception: " + e);
+            }
+
+            var domainArtworks = dbArtworks.Select(Mappers.ArtworkMapper.Map);
+
+            return domainArtworks;
         }
     }
 }
