@@ -30,5 +30,17 @@ namespace MuseumApp.WebAPI.Mappers
                 Artworks = model.Artworks.Select(ArtworkModelMapper.Map)
             };
         }
+
+        public static Domain.Models.Location MapNoArtworks(LocationModel model)
+        {
+            return new Domain.Models.Location
+            {
+                Id = model.Id,
+                LocationName = model.LocationName,
+                LocationUrl = model.LocationUrl,
+                Description = model.Description,
+                TypeId = model.TypeId
+            };
+        }
     }
 }

@@ -55,7 +55,7 @@ namespace MuseumApp.WebAPI.Controllers
         [Authorize]
         public async Task<IActionResult> Post([FromBody] LocationModel locationModel)
         {
-            var domain_location = Mappers.LocationModelMapper.Map(locationModel);
+            var domain_location = Mappers.LocationModelMapper.MapNoArtworks(locationModel);
             var added = await Task.FromResult(_locationRepository.AddLocation(domain_location));
 
             if (added)
