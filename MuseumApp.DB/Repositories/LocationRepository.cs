@@ -69,7 +69,7 @@ namespace MuseumApp.DB.Repositories
         // Get Location By ID
         public Domain.Models.Location GetLocationById(int id)
         {
-            var dbLocation = _context.Locations.FirstOrDefault(l => l.Id == id);
+            var dbLocation = _context.Locations.Include(l => l.Artworks).FirstOrDefault(l => l.Id == id);
 
             if (dbLocation == null)
             {
