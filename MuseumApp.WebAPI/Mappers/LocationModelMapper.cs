@@ -1,4 +1,5 @@
-﻿using MuseumApp.WebAPI.Models;
+﻿using System.Linq;
+using MuseumApp.WebAPI.Models;
 
 namespace MuseumApp.WebAPI.Mappers
 {
@@ -12,7 +13,8 @@ namespace MuseumApp.WebAPI.Mappers
                 LocationName = location.LocationName,
                 LocationUrl = location.LocationUrl,
                 Description = location.Description,
-                TypeId = location.TypeId
+                TypeId = location.TypeId,
+                Artworks = location.Artworks.Select(ArtworkModelMapper.Map)
             };
         }
 
@@ -24,7 +26,8 @@ namespace MuseumApp.WebAPI.Mappers
                 LocationName = model.LocationName,
                 LocationUrl = model.LocationUrl,
                 Description = model.Description,
-                TypeId = model.TypeId
+                TypeId = model.TypeId,
+                Artworks = model.Artworks.Select(ArtworkModelMapper.Map)
             };
         }
     }

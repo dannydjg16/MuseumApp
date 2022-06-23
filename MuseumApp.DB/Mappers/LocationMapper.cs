@@ -1,4 +1,6 @@
-﻿namespace MuseumApp.DB.Mappers
+﻿using System.Linq;
+
+namespace MuseumApp.DB.Mappers
 {
     public static class LocationMapper
     {
@@ -22,7 +24,8 @@
                 LocationName = entity.LocationName,
                 TypeId = entity.TypeId,
                 LocationUrl = entity.LocationUrl,
-                Description = entity.Description
+                Description = entity.Description,
+                Artworks = entity.Artworks.Select(ArtworkMapper.Map)
             };
         }
     }
