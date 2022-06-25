@@ -15,7 +15,8 @@
                 MediumId = artwork.MediumId,
                 Title = artwork.Title,
                 YearCreated = artwork.YearCreated,
-                ArtWorkAdderId = artwork.ArtWorkAdderId
+                ArtWorkAdderId = artwork.ArtWorkAdderId,
+                Artist = ArtistMapper.Map(artwork.Artist)
             };
         }
 
@@ -32,7 +33,8 @@
                 MediumId = entity.MediumId,
                 Title = entity.Title,
                 YearCreated = entity.YearCreated,
-                ArtWorkAdderId = entity.ArtWorkAdderId
+                ArtWorkAdderId = entity.ArtWorkAdderId,
+                Artist = ArtistMapper.Map(entity.Artist)
             };
         }
     }
