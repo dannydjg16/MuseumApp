@@ -12,5 +12,7 @@
         public int? MediumId { get; set; }
         public int? LocationNow { get; set; }
         public int? ArtWorkAdderId { get; set; }
+
+        public virtual ArtistModel Artist { get; set; }
     }
 }
