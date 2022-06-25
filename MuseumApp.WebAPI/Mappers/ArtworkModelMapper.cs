@@ -17,7 +17,8 @@ namespace MuseumApp.WebAPI.Mappers
                 LocationNow = artwork.LocationNow,
                 MediumId = artwork.MediumId,
                 YearCreated = artwork.YearCreated,
-                ArtWorkAdderId = artwork.ArtWorkAdderId
+                ArtWorkAdderId = artwork.ArtWorkAdderId,
+                Artist = ArtistModelMapper.Map(artwork.Artist)
             };
         }
 
@@ -34,7 +35,8 @@ namespace MuseumApp.WebAPI.Mappers
                 LocationNow = model.LocationNow,
                 MediumId = model.MediumId,
                 YearCreated = model.YearCreated,
-                ArtWorkAdderId = model.ArtWorkAdderId
+                ArtWorkAdderId = model.ArtWorkAdderId,
+                Artist = ArtistModelMapper.Map(model.Artist)
             };
         }
     }
