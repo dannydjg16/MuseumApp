@@ -17,8 +17,7 @@ namespace MuseumApp.WebAPI.Mappers
                 LocationNow = artwork.LocationNow,
                 MediumId = artwork.MediumId,
                 YearCreated = artwork.YearCreated,
-                ArtWorkAdderId = artwork.ArtWorkAdderId,
-                Artist = ArtistModelMapper.Map(artwork.Artist)
+                ArtWorkAdderId = artwork.ArtWorkAdderId
             };
         }
 
@@ -35,12 +34,11 @@ namespace MuseumApp.WebAPI.Mappers
                 LocationNow = model.LocationNow,
                 MediumId = model.MediumId,
                 YearCreated = model.YearCreated,
-                ArtWorkAdderId = model.ArtWorkAdderId,
-                Artist = ArtistModelMapper.Map(model.Artist)
+                ArtWorkAdderId = model.ArtWorkAdderId
             };
         }
 
-        public static ArtworkModel MapNoArtist(Domain.Models.Artwork artwork)
+        public static ArtworkModel MapWithArtist(Domain.Models.Artwork artwork)
         {
             return new ArtworkModel
             {
@@ -53,11 +51,12 @@ namespace MuseumApp.WebAPI.Mappers
                 LocationNow = artwork.LocationNow,
                 MediumId = artwork.MediumId,
                 YearCreated = artwork.YearCreated,
-                ArtWorkAdderId = artwork.ArtWorkAdderId
+                ArtWorkAdderId = artwork.ArtWorkAdderId,
+                Artist = ArtistModelMapper.Map(artwork.Artist)
             };
         }
 
-        public static Domain.Models.Artwork MapNoArtist(ArtworkModel model)
+        public static Domain.Models.Artwork MapWithArtist(ArtworkModel model)
         {
             return new Domain.Models.Artwork
             {
@@ -70,7 +69,8 @@ namespace MuseumApp.WebAPI.Mappers
                 LocationNow = model.LocationNow,
                 MediumId = model.MediumId,
                 YearCreated = model.YearCreated,
-                ArtWorkAdderId = model.ArtWorkAdderId
+                ArtWorkAdderId = model.ArtWorkAdderId,
+                Artist = ArtistModelMapper.Map(model.Artist)
             };
         }
     }

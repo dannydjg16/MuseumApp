@@ -15,8 +15,7 @@
                 MediumId = artwork.MediumId,
                 Title = artwork.Title,
                 YearCreated = artwork.YearCreated,
-                ArtWorkAdderId = artwork.ArtWorkAdderId,
-                Artist = ArtistMapper.Map(artwork.Artist)
+                ArtWorkAdderId = artwork.ArtWorkAdderId
             };
         }
 
@@ -33,12 +32,11 @@
                 MediumId = entity.MediumId,
                 Title = entity.Title,
                 YearCreated = entity.YearCreated,
-                ArtWorkAdderId = entity.ArtWorkAdderId,
-                Artist = ArtistMapper.Map(entity.Artist)
+                ArtWorkAdderId = entity.ArtWorkAdderId
             };
         }
 
-        public static Artwork MapNoArtist(Domain.Models.Artwork artwork)
+        public static Artwork MapWithArtist(Domain.Models.Artwork artwork)
         {
             return new Artwork
             {
@@ -51,11 +49,12 @@
                 MediumId = artwork.MediumId,
                 Title = artwork.Title,
                 YearCreated = artwork.YearCreated,
-                ArtWorkAdderId = artwork.ArtWorkAdderId
+                ArtWorkAdderId = artwork.ArtWorkAdderId,
+                Artist = ArtistMapper.Map(artwork.Artist)
             };
         }
 
-        public static Domain.Models.Artwork MapNoArtist(Artwork entity)
+        public static Domain.Models.Artwork MapWithArtist(Artwork entity)
         {
             return new Domain.Models.Artwork
             {
@@ -68,7 +67,8 @@
                 MediumId = entity.MediumId,
                 Title = entity.Title,
                 YearCreated = entity.YearCreated,
-                ArtWorkAdderId = entity.ArtWorkAdderId
+                ArtWorkAdderId = entity.ArtWorkAdderId,
+                Artist = ArtistMapper.Map(entity.Artist)
             };
         }
     }
