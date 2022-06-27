@@ -61,7 +61,7 @@ namespace MuseumApp.DB.Repositories
                 return new List<Domain.Models.Artwork>();
             }
 
-            List<Domain.Models.Artwork> artworks = dbArtworks.Select(aw => Mappers.ArtworkMapper.MapNoArtist(aw)).ToList();
+            List<Domain.Models.Artwork> artworks = dbArtworks.Select(aw => Mappers.ArtworkMapper.Map(aw)).ToList();
 
             return artworks;
         }
