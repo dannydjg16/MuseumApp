@@ -53,7 +53,7 @@ namespace MuseumApp.DB.Repositories
             }
             else
             {
-                dbArtworks = _context.Artworks.ToList();
+                dbArtworks = _context.Artworks.Include(a => a.Artist).ToList();
             }
 
             if (!dbArtworks.Any())
