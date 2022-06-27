@@ -22,7 +22,7 @@ namespace MuseumApp.DB.Repositories
             return _context.Artworks
                 .Include(u => u.LikesNavigation)
                 .Where(aw => aw.LikesNavigation.Any(l => l.UserId == usersID))
-                .Select(Mappers.ArtworkMapper.Map);
+                .Select(Mappers.ArtworkMapper.MapNoArtist);
         }
 
         // Add New Like

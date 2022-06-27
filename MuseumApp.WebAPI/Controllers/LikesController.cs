@@ -27,7 +27,7 @@ namespace MuseumApp.WebAPI.Controllers
         {
             var result = await Task.FromResult(_likesRepository.GetUsersLikes(id));
 
-            if (result.Select(Mappers.ArtworkModelMapper.Map) is IEnumerable<ArtworkModel> artworkModels)
+            if (result.Select(Mappers.ArtworkModelMapper.MapNoArtist) is IEnumerable<ArtworkModel> artworkModels)
             {
                 return Ok(artworkModels);
             }
