@@ -49,7 +49,7 @@ namespace MuseumApp.DB.Repositories
 
             if (!string.IsNullOrWhiteSpace(title))
             {
-                dbArtworks = _context.Artworks.Where(aw => aw.Title.Contains(title)).ToList();
+                dbArtworks = _context.Artworks.Include(a => a.Artist).Where(aw => aw.Title.Contains(title)).ToList();
             }
             else
             {
