@@ -27,7 +27,7 @@ namespace MuseumApp.WebAPI.Controllers
         {
             var domain_artworks = await Task.FromResult(_artworkRepository.GetAllArtworks(title));
 
-            IEnumerable<ArtworkModel> artworkModels = domain_artworks.Select(Mappers.ArtworkModelMapper.Map);
+            IEnumerable<ArtworkModel> artworkModels = domain_artworks.Select(Mappers.ArtworkModelMapper.MapNoArtist);
 
             if (artworkModels.Any())
             {
