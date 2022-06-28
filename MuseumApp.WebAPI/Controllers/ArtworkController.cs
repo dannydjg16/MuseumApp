@@ -55,6 +55,24 @@ namespace MuseumApp.WebAPI.Controllers
             return NotFound();
         }
 
+        // GET api/artwork/5
+        [HttpGet("full/{id}")]
+        [Authorize]
+        public async Task<ActionResult<ArtworkModel>> GetFull([FromRoute] int id)
+        {
+            var domainArtwork = await Task.FromResult(_artworkRepository.GetFullArtworkByID(id));
+
+            if (domainArtwork != null)
+            {
+                if (Mappers.ArtworkModelMapper.MapWithArtist(domainArtwork) is ArtworkModel artworkModel)
+                {
+                    return Ok(artworkModel);
+                }
+            }
+
+            return NotFound();
+        }
+
         // GET api/artwork/adder/5
         [HttpGet("adder/{id}")]
         [Authorize]
