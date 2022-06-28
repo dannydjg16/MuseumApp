@@ -104,7 +104,6 @@ namespace MuseumApp.DB.Repositories
             return domainArtworks;
         }
 
-
         // Get artwork by ID
         public Domain.Models.Artwork GetArtworkByID(int id)
         {
@@ -116,6 +115,21 @@ namespace MuseumApp.DB.Repositories
             }
 
             Domain.Models.Artwork artwork = Mappers.ArtworkMapper.Map(dbArtwork);
+
+            return artwork;
+        }
+
+        // Get Full artwork by ID
+        public Domain.Models.Artwork GetFullArtworkByID(int id)
+        {
+            var dbArtwork = _context.Artworks.Include(aw => aw.Artist).FirstOrDefault(aw => aw.Id == id);
+
+            if (dbArtwork == null)
+            {
+                return null;
+            }
+
+            Domain.Models.Artwork artwork = Mappers.ArtworkMapper.MapWithArtist(dbArtwork);
 
             return artwork;
         }
