@@ -27,6 +27,7 @@ namespace MuseumApp.DB.Repositories
 
             _context.Users.Add(Mappers.UserMapper.Map(user));
             _context.SaveChanges();
+
             return true;
         }
 
@@ -38,8 +39,10 @@ namespace MuseumApp.DB.Repositories
             {
                 return false;
             }
+
             _context.Users.Remove(dbUser);
             _context.SaveChanges();
+
             return true;
         }
 
@@ -75,6 +78,7 @@ namespace MuseumApp.DB.Repositories
             }
 
             _context.SaveChanges();
+
             return true;
         }
 
@@ -99,6 +103,7 @@ namespace MuseumApp.DB.Repositories
             {
                 Console.Write("Exception: " + e);
             }
+
             return null;
         }
 

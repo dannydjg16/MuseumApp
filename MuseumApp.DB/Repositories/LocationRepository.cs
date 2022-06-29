@@ -99,6 +99,7 @@ namespace MuseumApp.DB.Repositories
             if (dbLocations.Any())
             {
                 List<Domain.Models.Location> locations = dbLocations.Select(l => Mappers.LocationMapper.Map(l)).ToList();
+
                 return locations;
             }
 

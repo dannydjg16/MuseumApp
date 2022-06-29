@@ -101,6 +101,7 @@ namespace MuseumApp.DB.Repositories
             }
 
             _context.SaveChanges();
+
             return true;
         }
 
@@ -122,6 +123,7 @@ namespace MuseumApp.DB.Repositories
             catch (Exception e)
             {
                 Console.WriteLine("Not able to convert Databse Artist into Domain Artist", e);
+
                 return null;
             }
 
