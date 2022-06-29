@@ -36,7 +36,7 @@
             };
         }
 
-        public static Artwork MapWithArtist(Domain.Models.Artwork artwork)
+        public static Artwork MapFull(Domain.Models.Artwork artwork)
         {
             return new Artwork
             {
@@ -50,11 +50,12 @@
                 Title = artwork.Title,
                 YearCreated = artwork.YearCreated,
                 ArtWorkAdderId = artwork.ArtWorkAdderId,
-                Artist = ArtistMapper.Map(artwork.Artist)
+                Artist = ArtistMapper.Map(artwork.Artist),
+                LocationNowNavigation = LocationMapper.Map(artwork.Location)
             };
         }
 
-        public static Domain.Models.Artwork MapWithArtist(Artwork entity)
+        public static Domain.Models.Artwork MapFull(Artwork entity)
         {
             return new Domain.Models.Artwork
             {
@@ -68,7 +69,8 @@
                 Title = entity.Title,
                 YearCreated = entity.YearCreated,
                 ArtWorkAdderId = entity.ArtWorkAdderId,
-                Artist = ArtistMapper.Map(entity.Artist)
+                Artist = ArtistMapper.Map(entity.Artist),
+                Location = LocationMapper.Map(entity.LocationNowNavigation)
             };
         }
     }

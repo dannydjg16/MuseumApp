@@ -38,7 +38,7 @@ namespace MuseumApp.WebAPI.Mappers
             };
         }
 
-        public static ArtworkModel MapWithArtist(Domain.Models.Artwork artwork)
+        public static ArtworkModel MapFull(Domain.Models.Artwork artwork)
         {
             return new ArtworkModel
             {
@@ -52,11 +52,12 @@ namespace MuseumApp.WebAPI.Mappers
                 MediumId = artwork.MediumId,
                 YearCreated = artwork.YearCreated,
                 ArtWorkAdderId = artwork.ArtWorkAdderId,
-                Artist = ArtistModelMapper.Map(artwork.Artist)
+                Artist = ArtistModelMapper.Map(artwork.Artist),
+                Location = LocationModelMapper.Map(artwork.Location)
             };
         }
 
-        public static Domain.Models.Artwork MapWithArtist(ArtworkModel model)
+        public static Domain.Models.Artwork MapFull(ArtworkModel model)
         {
             return new Domain.Models.Artwork
             {
@@ -70,7 +71,8 @@ namespace MuseumApp.WebAPI.Mappers
                 MediumId = model.MediumId,
                 YearCreated = model.YearCreated,
                 ArtWorkAdderId = model.ArtWorkAdderId,
-                Artist = ArtistModelMapper.Map(model.Artist)
+                Artist = ArtistModelMapper.Map(model.Artist),
+                Location = LocationModelMapper.Map(model.Location)
             };
         }
     }
