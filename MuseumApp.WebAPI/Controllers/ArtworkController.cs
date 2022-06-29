@@ -64,7 +64,7 @@ namespace MuseumApp.WebAPI.Controllers
 
             if (domainArtwork != null)
             {
-                if (Mappers.ArtworkModelMapper.MapWithArtist(domainArtwork) is ArtworkModel artworkModel)
+                if (Mappers.ArtworkModelMapper.MapFull(domainArtwork) is ArtworkModel artworkModel)
                 {
                     return Ok(artworkModel);
                 }

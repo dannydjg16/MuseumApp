@@ -122,14 +122,17 @@ namespace MuseumApp.DB.Repositories
         // Get Full artwork by ID
         public Domain.Models.Artwork GetFullArtworkByID(int id)
         {
-            var dbArtwork = _context.Artworks.Include(aw => aw.Artist).FirstOrDefault(aw => aw.Id == id);
+            var dbArtwork = _context.Artworks
+                .Include(aw => aw.Artist)
+                .Include(aw => aw.LocationNowNavigation)
+                .FirstOrDefault(aw => aw.Id == id);
 
             if (dbArtwork == null)
             {
                 return null;
             }
 
-            Domain.Models.Artwork artwork = Mappers.ArtworkMapper.MapWithArtist(dbArtwork);
+            Domain.Models.Artwork artwork = Mappers.ArtworkMapper.MapFull(dbArtwork);
 
             return artwork;
         }
