@@ -14,7 +14,7 @@
         public int? ArtWorkAdderId { get; set; }
 
         public Artist Artist { get; set; }
-        public Location LocationNowNavigation { get; set; }
+        public Location Location { get; set; }
         public ArtType Medium { get; set; }
     }
 }

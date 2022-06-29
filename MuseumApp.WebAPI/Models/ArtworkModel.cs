@@ -14,5 +14,6 @@
         public int? ArtWorkAdderId { get; set; }
 
         public virtual ArtistModel Artist { get; set; }
+        public virtual LocationModel Location { get; set; }
     }
 }
