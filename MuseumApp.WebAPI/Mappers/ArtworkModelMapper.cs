@@ -53,7 +53,8 @@ namespace MuseumApp.WebAPI.Mappers
                 YearCreated = artwork.YearCreated,
                 ArtWorkAdderId = artwork.ArtWorkAdderId,
                 Artist = ArtistModelMapper.Map(artwork.Artist),
-                Location = LocationModelMapper.Map(artwork.Location)
+                Location = LocationModelMapper.Map(artwork.Location),
+                Medium = ArtTypeModelMapper.Map(artwork.Medium)
             };
         }
 
@@ -72,7 +73,8 @@ namespace MuseumApp.WebAPI.Mappers
                 YearCreated = model.YearCreated,
                 ArtWorkAdderId = model.ArtWorkAdderId,
                 Artist = ArtistModelMapper.Map(model.Artist),
-                Location = LocationModelMapper.Map(model.Location)
+                Location = LocationModelMapper.Map(model.Location),
+                Medium = ArtTypeModelMapper.Map(model.Medium)
             };
         }
     }

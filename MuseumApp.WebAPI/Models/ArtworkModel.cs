@@ -15,5 +15,6 @@
 
         public virtual ArtistModel Artist { get; set; }
         public virtual LocationModel Location { get; set; }
+        public virtual ArtTypeModel Medium { get; set; }
     }
 }
