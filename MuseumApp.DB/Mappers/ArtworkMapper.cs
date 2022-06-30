@@ -51,7 +51,8 @@
                 YearCreated = artwork.YearCreated,
                 ArtWorkAdderId = artwork.ArtWorkAdderId,
                 Artist = ArtistMapper.Map(artwork.Artist),
-                LocationNowNavigation = LocationMapper.Map(artwork.Location)
+                LocationNowNavigation = LocationMapper.Map(artwork.Location),
+                Medium = ArtTypeMapper.Map(artwork.Medium)
             };
         }
 
@@ -70,7 +71,9 @@
                 YearCreated = entity.YearCreated,
                 ArtWorkAdderId = entity.ArtWorkAdderId,
                 Artist = ArtistMapper.Map(entity.Artist),
-                Location = LocationMapper.Map(entity.LocationNowNavigation)
+                Location = LocationMapper.Map(entity.LocationNowNavigation),
+                Medium = ArtTypeMapper.Map(entity.Medium)
+
             };
         }
     }
