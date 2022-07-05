@@ -82,9 +82,7 @@ namespace MuseumApp.WebAPI.Controllers
             {
                 var domain_artworks = await Task.FromResult(_artworkRepository.GetArtworksByAdder(id));
 
-                IEnumerable<ArtworkModel> artworkModels = domain_artworks.Select(Mappers.ArtworkModelMapper.Map);
-
-                if (artworkModels.Any())
+                if (domain_artworks.Select(Mappers.ArtworkModelMapper.Map) is IEnumerable<ArtworkModel> artworkModels)
                 {
                     return Ok(artworkModels);
                 }
