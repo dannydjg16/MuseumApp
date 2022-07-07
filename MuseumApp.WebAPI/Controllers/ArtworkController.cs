@@ -141,7 +141,7 @@ namespace MuseumApp.WebAPI.Controllers
         [Authorize]
         public async Task<IActionResult> Put([FromBody] ArtworkModel artworkModel)
         {
-            var edited = await Task.FromResult(_artworkRepository.UpdateArtwork(Mappers.ArtworkModelMapper.Map(artworkModel)));
+            var edited = await Task.FromResult(_artworkRepository.UpdateArtwork(Mappers.ArtworkModelMapper.MapFull(artworkModel)));
 
             if (edited)
             {
