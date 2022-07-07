@@ -10,6 +10,7 @@ Technologies
 - ASP.NET Web API
 - SQL Server
 
+See Pictures of the application in the Screenshots folder at the root level.
 
 Please find the corresponding Angular Front End for this application below: 
 [Angular Application](https://github.com/dannydjg16/ArtApplication)
