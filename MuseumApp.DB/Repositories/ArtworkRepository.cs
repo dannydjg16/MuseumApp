@@ -186,7 +186,7 @@ namespace MuseumApp.DB.Repositories
 
             if (artwork.Location is not null)
             {
-                dbArtwork.LocationNow= artwork.Location.Id;
+                dbArtwork.LocationNow = artwork.Location.Id;
             }
 
             _context.SaveChanges();
