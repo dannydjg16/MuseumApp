@@ -184,9 +184,9 @@ namespace MuseumApp.DB.Repositories
                 dbArtwork.MediumId = artwork.MediumId;
             }
 
-            if (artwork.LocationNow != 0)
+            if (artwork.Location is not null)
             {
-                dbArtwork.LocationNow = artwork.LocationNow;
+                dbArtwork.LocationNow= artwork.Location.Id;
             }
 
             _context.SaveChanges();
