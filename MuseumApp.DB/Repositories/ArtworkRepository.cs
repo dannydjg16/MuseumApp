@@ -176,12 +176,12 @@ namespace MuseumApp.DB.Repositories
 
             if (artwork.ArtistId != 0)
             {
-                dbArtwork.ArtistId = artwork.ArtistId;
+                dbArtwork.ArtistId = artwork.Artist.Id;
             }
 
             if (artwork.MediumId != 0)
             {
-                dbArtwork.MediumId = artwork.MediumId;
+                dbArtwork.MediumId = artwork.Medium.Id;
             }
 
             if (artwork.Location is not null)
