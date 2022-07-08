@@ -26,3 +26,6 @@ insert into [ArtApp].[LocationType] (Name) values ('Museum');
 -- Populate Likes
 insert into [ArtApp].[Likes] (UserID, ArtID) values (1,2);
 
+-- Delete Artwork accidentally added
+DELETE FROM [ArtApp].[Artwork] WHERE ID = 19;
+
