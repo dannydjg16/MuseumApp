@@ -25,7 +25,7 @@ namespace MuseumApp.DB.Repositories
                 return false;
             }
 
-            _context.Locations.Add(Mappers.LocationMapper.Map(location));
+            _context.Locations.Add(Mappers.LocationMapper.MapFullNoArtworks(location));
             _context.SaveChanges();
 
             return true;
