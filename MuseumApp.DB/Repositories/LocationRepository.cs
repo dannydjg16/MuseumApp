@@ -25,7 +25,7 @@ namespace MuseumApp.DB.Repositories
                 return false;
             }
 
-            _context.Locations.Add(Mappers.LocationMapper.Map(location));
+            _context.Locations.Add(Mappers.LocationMapper.MapFullNoArtworks(location));
             _context.SaveChanges();
 
             return true;
@@ -56,6 +56,26 @@ namespace MuseumApp.DB.Repositories
                 dbLocation.Description = location.Description;
             }
 
+            if (!string.IsNullOrWhiteSpace(location.Country))
+            {
+                dbLocation.Country = location.Country;
+            }
+
+            if (!string.IsNullOrWhiteSpace(location.StateProvince))
+            {
+                dbLocation.StateProvince = location.StateProvince;
+            }
+
+            if (!string.IsNullOrWhiteSpace(location.City))
+            {
+                dbLocation.City = location.City;
+            }
+
+            if (!string.IsNullOrWhiteSpace(location.StreetAddress))
+            {
+                dbLocation.StreetAddress = location.StreetAddress;
+            }
+
             if (location.TypeId != 0)
             {
                 dbLocation.TypeId = location.TypeId;
@@ -79,7 +99,7 @@ namespace MuseumApp.DB.Repositories
                 return null;
             }
 
-            return Mappers.LocationMapper.Map(dbLocation);
+            return Mappers.LocationMapper.MapFullNoArtworks(dbLocation);
         }
 
         // Search Locations/Get all locations

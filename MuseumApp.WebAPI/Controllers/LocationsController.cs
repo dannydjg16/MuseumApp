@@ -42,7 +42,7 @@ namespace MuseumApp.WebAPI.Controllers
         {
             var location = await Task.FromResult(_locationRepository.GetLocationById(id));
 
-            if (Mappers.LocationModelMapper.Map(location) is LocationModel locationModel)
+            if (Mappers.LocationModelMapper.MapFullNoArtworks(location) is LocationModel locationModel)
             {
                 return Ok(locationModel);
             }
@@ -55,7 +55,7 @@ namespace MuseumApp.WebAPI.Controllers
         [Authorize]
         public async Task<IActionResult> Post([FromBody] LocationModel locationModel)
         {
-            var domain_location = Mappers.LocationModelMapper.MapNoArtworks(locationModel);
+            var domain_location = Mappers.LocationModelMapper.MapFullNoArtworks(locationModel);
             var added = await Task.FromResult(_locationRepository.AddLocation(domain_location));
 
             if (added)
@@ -71,7 +71,7 @@ namespace MuseumApp.WebAPI.Controllers
         [Authorize]
         public async Task<IActionResult> Put([FromBody] LocationModel locationModel)
         {
-            var edited = await Task.FromResult(_locationRepository.EditLocation(Mappers.LocationModelMapper.Map(locationModel)));
+            var edited = await Task.FromResult(_locationRepository.EditLocation(Mappers.LocationModelMapper.MapFullNoArtworks(locationModel)));
 
             if (edited)
             {
