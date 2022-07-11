@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 #nullable disable
 
@@ -16,6 +17,10 @@ namespace MuseumApp.DB
         public string Description { get; set; }
         public string LocationUrl { get; set; }
         public int? TypeId { get; set; }
+        public string Country { get; set; }
+        public string StateProvince { get; set; }
+        public string City { get; set; }
+        public string StreetAddress { get; set; }
 
         public virtual LocationType Type { get; set; }
         public virtual ICollection<Artwork> Artworks { get; set; }
