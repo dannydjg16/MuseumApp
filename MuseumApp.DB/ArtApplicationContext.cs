@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
@@ -55,6 +57,12 @@ namespace MuseumApp.DB
                 entity.Property(e => e.PictureUrl)
                     .IsRequired()
                     .HasMaxLength(250);
+
+                entity.HasOne(d => d.ArtistAdder)
+                    .WithMany(p => p.Artists)
+                    .HasForeignKey(d => d.ArtistAdderId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK_ArtistAdderUserID");
             });
 
             modelBuilder.Entity<Artwork>(entity =>
@@ -74,6 +82,12 @@ namespace MuseumApp.DB
                 entity.Property(e => e.Title)
                     .IsRequired()
                     .HasMaxLength(150);
+
+                entity.HasOne(d => d.ArtWorkAdder)
+                    .WithMany(p => p.Artworks)
+                    .HasForeignKey(d => d.ArtWorkAdderId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK_ArtWorkAdderUserID");
 
                 entity.HasOne(d => d.Artist)
                     .WithMany(p => p.Artworks)
@@ -122,6 +136,10 @@ namespace MuseumApp.DB
 
                 entity.Property(e => e.Id).HasColumnName("ID");
 
+                entity.Property(e => e.City).HasMaxLength(100);
+
+                entity.Property(e => e.Country).HasMaxLength(100);
+
                 entity.Property(e => e.Description).IsRequired();
 
                 entity.Property(e => e.LocationName)
@@ -131,6 +149,10 @@ namespace MuseumApp.DB
                 entity.Property(e => e.LocationUrl)
                     .IsRequired()
                     .HasColumnName("LocationURL");
+
+                entity.Property(e => e.StateProvince).HasMaxLength(100);
+
+                entity.Property(e => e.StreetAddress).HasMaxLength(100);
 
                 entity.Property(e => e.TypeId).HasColumnName("TypeID");
 

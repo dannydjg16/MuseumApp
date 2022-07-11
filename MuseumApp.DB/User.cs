@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 #nullable disable
 
@@ -8,6 +9,8 @@ namespace MuseumApp.DB
     {
         public User()
         {
+            Artists = new HashSet<Artist>();
+            Artworks = new HashSet<Artwork>();
             Likes = new HashSet<Like>();
         }
 
@@ -17,6 +20,8 @@ namespace MuseumApp.DB
         public string FromLocation { get; set; }
         public string ProfilePicUrl { get; set; }
 
+        public virtual ICollection<Artist> Artists { get; set; }
+        public virtual ICollection<Artwork> Artworks { get; set; }
         public virtual ICollection<Like> Likes { get; set; }
     }
 }
