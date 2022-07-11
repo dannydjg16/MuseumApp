@@ -85,6 +85,18 @@ CREATE TABLE [ArtApp].[Location] (
 );
 
 Select * from [ArtApp].[Location]
+
+ALTER TABLE [ArtApp].[Location]
+ADD Country NVARCHAR(100)
+
+ALTER TABLE [ArtApp].[Location]
+ADD StateProvince NVARCHAR(100)
+
+ALTER TABLE [ArtApp].[Location]
+ADD City NVARCHAR(100)
+
+ALTER TABLE [ArtApp].[Location]
+ADD StreetAddress NVARCHAR(100)
 --------------------------------------------------------------------------------------
 
 

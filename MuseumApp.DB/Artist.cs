@@ -1,4 +1,4 @@
-﻿
+﻿using System;
 using System.Collections.Generic;
 
 #nullable disable
@@ -21,6 +21,7 @@ namespace MuseumApp.DB
         public string PictureUrl { get; set; }
         public int? ArtistAdderId { get; set; }
 
+        public virtual User ArtistAdder { get; set; }
         public virtual ICollection<Artwork> Artworks { get; set; }
     }
 }
