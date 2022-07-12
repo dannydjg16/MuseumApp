@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace MuseumApp.Domain.Models
 {
@@ -12,7 +13,11 @@ namespace MuseumApp.Domain.Models
         public int? Born { get; set; }
         public int? Died { get; set; }
         public int? ArtistAdderId { get; set; }
-
         public IEnumerable<Artwork> Artworks { get; set; }
+
+        public Artwork GetArtworkByID(int id)
+        {
+            return Artworks.FirstOrDefault(aw => aw.Id == id);
+        }
     }
 }
