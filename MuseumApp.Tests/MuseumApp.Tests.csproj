@@ -27,4 +27,7 @@
   <ItemGroup>
     <Folder Include="Domain\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MuseumApp.Domain\MuseumApp.Domain.csproj" />
+  </ItemGroup>
 </Project>
