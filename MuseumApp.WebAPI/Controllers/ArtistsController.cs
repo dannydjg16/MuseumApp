@@ -37,7 +37,7 @@ namespace MuseumApp.WebAPI.Controllers
             return NotFound();
         }
 
-        // GET: api/artists
+        // GET: api/artists/abc
         [HttpGet("abc")]
         [Authorize]
         public async Task<ActionResult<IEnumerable<ArtistModel>>> GetABC()
