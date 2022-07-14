@@ -147,7 +147,27 @@ namespace MuseumApp.DB.Repositories
 
         public IEnumerable<Domain.Models.Location> GetLocationsABC(string name = null)
         {
-            throw new NotImplementedException();
+            List<Location> dbLocations = new List<Location>();
+
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                dbLocations = _context.Locations.Where(l => l.LocationName.Contains(name)).ToList();
+            }
+            else
+            {
+                dbLocations = _context.Locations.ToList();
+            }
+
+            if (dbLocations.Any())
+            {
+                List<Domain.Models.Location> locations = dbLocations.Select(l => Mappers.LocationMapper.Map(l)).ToList();
+
+                locations = locations.OrderBy(location => location.LocationName).ToList();
+
+                return locations;
+            }
+
+            return new List<Domain.Models.Location>();
         }
     }
 }
