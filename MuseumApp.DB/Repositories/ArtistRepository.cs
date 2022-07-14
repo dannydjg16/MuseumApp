@@ -154,5 +154,33 @@ namespace MuseumApp.DB.Repositories
 
             return domainArtists;
         }
+
+        // Get all Artists/ Search by artist name
+        public IEnumerable<Domain.Models.Artist> GetArtistsABC(string artistName = null)
+        {
+            List<Artist> dbArtists = new List<Artist>();
+
+            // If the string has writing, go in to block
+            if (!string.IsNullOrWhiteSpace(artistName))
+            {
+                dbArtists = _context.Artists.Where(a => a.Name.Contains(artistName)).ToList();
+            }
+            else
+            {
+                dbArtists = _context.Artists.Include(artist => artist.Artworks).ToList();
+            }
+
+            // If there are no artists, go into block
+            if (dbArtists.Any())
+            {
+                List<Domain.Models.Artist> domainArtists = dbArtists.Select(a => ArtistMapper.Map(a)).ToList();
+
+                domainArtists = domainArtists.OrderBy(artist => artist.Name).ToList();
+
+                return domainArtists;                
+            }
+
+            return new List<Domain.Models.Artist>();
+        }
     }
 }
