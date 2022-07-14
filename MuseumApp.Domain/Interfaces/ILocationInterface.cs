@@ -9,5 +9,6 @@ namespace MuseumApp.Domain.Interfaces
         bool EditLocation(Location location);
         Location GetLocationById(int id);
         IEnumerable<Location> GetLocations(string name = null);
+        IEnumerable<Location> GetLocationsABC(string name = null);
     }
 }

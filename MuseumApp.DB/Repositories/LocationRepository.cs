@@ -144,5 +144,10 @@ namespace MuseumApp.DB.Repositories
 
             return domainArtworks;
         }
+
+        public IEnumerable<Domain.Models.Location> GetLocationsABC(string name = null)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
