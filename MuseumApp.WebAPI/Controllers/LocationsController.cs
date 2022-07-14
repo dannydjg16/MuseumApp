@@ -35,8 +35,8 @@ namespace MuseumApp.WebAPI.Controllers
             return NotFound();
         }
 
-        // GET: api/locationsabc
-        [HttpGet]
+        // GET: api/locations/abc
+        [HttpGet("abc")]
         [Authorize]
         public async Task<ActionResult<IEnumerable<LocationModel>>> GetABC([FromQuery] string locationName = null)
         {
