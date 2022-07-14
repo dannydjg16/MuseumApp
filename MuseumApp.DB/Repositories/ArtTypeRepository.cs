@@ -41,6 +41,21 @@ namespace MuseumApp.DB.Repositories
             {
                 List<Domain.Models.ArtType> artTypes = dbArtTypes.Select(at => ArtTypeMapper.Map(at)).ToList();
 
+                return artTypes;
+            }
+
+            return new List<Domain.Models.ArtType>();
+        }
+
+        // Get all ArtTypes Alphabetically
+        public IEnumerable<Domain.Models.ArtType> GetArtTypesABC()
+        {
+            List<ArtType> dbArtTypes = _context.ArtTypes.ToList();
+
+            if (dbArtTypes.Any())
+            {
+                List<Domain.Models.ArtType> artTypes = dbArtTypes.Select(at => ArtTypeMapper.Map(at)).ToList();
+
                 artTypes = artTypes.OrderBy(at => at.Name).ToList();
 
                 return artTypes;

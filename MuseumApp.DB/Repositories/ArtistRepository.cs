@@ -155,7 +155,7 @@ namespace MuseumApp.DB.Repositories
             return domainArtists;
         }
 
-        // Get all Artists/ Search by artist name
+        // Get all Artists/ Search by artist name (Alphabetically)
         public IEnumerable<Domain.Models.Artist> GetArtistsABC(string artistName = null)
         {
             List<Artist> dbArtists = new List<Artist>();
