@@ -33,13 +33,29 @@ namespace MuseumApp.WebAPI.Controllers
             {
                 return Ok(artists);
             }
+
+            return NotFound();
+        }
+
+        // GET: api/artists
+        [HttpGet("abc")]
+        [Authorize]
+        public async Task<ActionResult<IEnumerable<ArtistModel>>> GetABC()
+        {
+            var appArtists = await Task.FromResult(_artistRepository.GetArtistsABC());
+
+            if (appArtists.Select(Mappers.ArtistModelMapper.Map) is IEnumerable<ArtistModel> artists)
+            {
+                return Ok(artists);
+            }
+
             return NotFound();
         }
 
         // GET api/artists/5
         [HttpGet("{id}")]
         [Authorize]
-        public async Task<ActionResult<UserModel>> Get(int id)
+        public async Task<ActionResult<ArtistModel>> Get(int id)
         {
             var appArtist = await Task.FromResult(_artistRepository.GetArtistByID(id));
             //appArtist.Artworks = _artworkRepository.GetArtworksByArtist(id);
