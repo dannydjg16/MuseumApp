@@ -145,6 +145,7 @@ namespace MuseumApp.DB.Repositories
             return domainArtworks;
         }
 
+        // Sort the list alphabetically then return that list
         public IEnumerable<Domain.Models.Location> GetLocationsABC(string name = null)
         {
             List<Location> dbLocations = new List<Location>();
