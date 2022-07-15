@@ -35,6 +35,21 @@ namespace MuseumApp.WebAPI.Controllers
             return NotFound();
         }
 
+        // GET: api/arttype/abc
+        [HttpGet("abc")]
+        [Authorize]
+        public async Task<ActionResult<IEnumerable<ArtTypeModel>>> GetABC()
+        {
+            var artTypes = await Task.FromResult(_artTypeRespository.GetArtTypesABC());
+
+            if (artTypes.Select(Mappers.ArtTypeModelMapper.Map) is IEnumerable<ArtTypeModel> retrievedATMs)
+            {
+                return Ok(retrievedATMs);
+            }
+
+            return NotFound();
+        }
+
         // POST api/arttype
         [HttpPost]
         [Authorize]

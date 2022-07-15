@@ -41,5 +41,24 @@ namespace MuseumApp.DB.Repositories
 
             return locationTypes;
         }
+
+        // Get Location Types (Alphabetically)
+        public IEnumerable<Domain.Models.LocationType> GetLocationTypesABC()
+        {
+            List<LocationType> dbLocationTypes = new List<LocationType>();
+
+            dbLocationTypes = _context.LocationTypes.ToList();
+
+            if (dbLocationTypes.Any())
+            {
+                List<Domain.Models.LocationType> locationTypes = dbLocationTypes.Select(lt => Mappers.LocationTypeMapper.Map(lt)).ToList();
+
+                locationTypes = locationTypes.OrderBy(lt => lt.Name).ToList();
+
+                return locationTypes;
+            }
+
+            return new List<Domain.Models.LocationType>();
+        }
     }
 }

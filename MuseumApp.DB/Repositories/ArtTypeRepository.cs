@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using MuseumApp.DB.Mappers;
 using MuseumApp.Domain.Interfaces;
 
 namespace MuseumApp.DB.Repositories
@@ -36,19 +37,31 @@ namespace MuseumApp.DB.Repositories
         {
             List<ArtType> dbArtTypes = _context.ArtTypes.ToList();
 
-            if (!dbArtTypes.Any())
+            if (dbArtTypes.Any())
             {
-                return new List<Domain.Models.ArtType>();
+                List<Domain.Models.ArtType> artTypes = dbArtTypes.Select(at => ArtTypeMapper.Map(at)).ToList();
+
+                return artTypes;
             }
 
-            List<Domain.Models.ArtType> artTypes = dbArtTypes.Select(at => new Domain.Models.ArtType
-            {
-                Id = at.Id,
-                Name = at.Name,
-                Description = at.Description
-            }).ToList();
+            return new List<Domain.Models.ArtType>();
+        }
 
-            return artTypes;
+        // Get all ArtTypes Alphabetically
+        public IEnumerable<Domain.Models.ArtType> GetArtTypesABC()
+        {
+            List<ArtType> dbArtTypes = _context.ArtTypes.ToList();
+
+            if (dbArtTypes.Any())
+            {
+                List<Domain.Models.ArtType> artTypes = dbArtTypes.Select(at => ArtTypeMapper.Map(at)).ToList();
+
+                artTypes = artTypes.OrderBy(at => at.Name).ToList();
+
+                return artTypes;
+            }
+
+            return new List<Domain.Models.ArtType>();
         }
     }
 }
