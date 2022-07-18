@@ -54,7 +54,8 @@ namespace MuseumApp.WebAPI.Mappers
                 ArtWorkAdderId = artwork.ArtWorkAdderId,
                 Artist = ArtistModelMapper.Map(artwork.Artist),
                 Location = LocationModelMapper.Map(artwork.Location),
-                Medium = ArtTypeModelMapper.Map(artwork.Medium)
+                Medium = ArtTypeModelMapper.Map(artwork.Medium),
+                DateAdded = artwork.DateAdded
             };
         }
 
@@ -74,7 +75,8 @@ namespace MuseumApp.WebAPI.Mappers
                 ArtWorkAdderId = model.ArtWorkAdderId,
                 Artist = ArtistModelMapper.Map(model.Artist),
                 Location = LocationModelMapper.Map(model.Location),
-                Medium = ArtTypeModelMapper.Map(model.Medium)
+                Medium = ArtTypeModelMapper.Map(model.Medium),
+                DateAdded = model.DateAdded
             };
         }
     }
