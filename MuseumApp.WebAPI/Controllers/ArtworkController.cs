@@ -97,6 +97,31 @@ namespace MuseumApp.WebAPI.Controllers
             }
         }
 
+
+        // GET api/artwork/location/5
+        [HttpGet("location/{id}")]
+        [Authorize]
+        public async Task<ActionResult<ArtworkModel>> GetArtByLocation([FromRoute] int id)
+        {
+            try
+            {
+                var domain_artworks = await Task.FromResult(_artworkRepository.GetArtworksByLocation(id));
+
+                if (domain_artworks.Select(Mappers.ArtworkModelMapper.Map) is IEnumerable<ArtworkModel> artworkModels)
+                {
+                    return Ok(artworkModels);
+                }
+                else
+                {
+                    return NoContent();
+                }
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
+
         // GET api/artwork/artist/5
         [HttpGet("artist/{id}")]
         [Authorize]
