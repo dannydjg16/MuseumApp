@@ -52,7 +52,8 @@
                 ArtWorkAdderId = artwork.ArtWorkAdderId,
                 Artist = ArtistMapper.Map(artwork.Artist),
                 LocationNowNavigation = LocationMapper.Map(artwork.Location),
-                Medium = ArtTypeMapper.Map(artwork.Medium)
+                Medium = ArtTypeMapper.Map(artwork.Medium),
+                DateAdded = artwork.DateAdded
             };
         }
 
@@ -72,8 +73,8 @@
                 ArtWorkAdderId = entity.ArtWorkAdderId,
                 Artist = ArtistMapper.Map(entity.Artist),
                 Location = LocationMapper.Map(entity.LocationNowNavigation),
-                Medium = ArtTypeMapper.Map(entity.Medium)
-
+                Medium = ArtTypeMapper.Map(entity.Medium),
+                DateAdded = entity.DateAdded
             };
         }
     }

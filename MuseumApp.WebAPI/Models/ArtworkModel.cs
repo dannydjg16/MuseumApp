@@ -1,4 +1,6 @@
-﻿namespace MuseumApp.WebAPI.Models
+﻿using System;
+
+namespace MuseumApp.WebAPI.Models
 {
     public class ArtworkModel
     {
@@ -12,6 +14,7 @@
         public int? MediumId { get; set; }
         public int? LocationNow { get; set; }
         public int? ArtWorkAdderId { get; set; }
+        public DateTime? DateAdded { get; set; }
 
         public virtual ArtistModel Artist { get; set; }
         public virtual LocationModel Location { get; set; }

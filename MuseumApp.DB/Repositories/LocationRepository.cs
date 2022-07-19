@@ -34,9 +34,9 @@ namespace MuseumApp.DB.Repositories
         // Edit Location
         public bool EditLocation(Domain.Models.Location location)
         {
-            var dbLocation = _context.Locations.FirstOrDefault(l => l.LocationName == location.LocationName);
+            var dbLocation = _context.Locations.FirstOrDefault(l => l.Id == location.Id);
 
-            if (dbLocation == null)
+            if(dbLocation == null)
             {
                 return false;
             }

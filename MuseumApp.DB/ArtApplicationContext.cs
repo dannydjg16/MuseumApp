@@ -75,6 +75,10 @@ namespace MuseumApp.DB
 
                 entity.Property(e => e.ArtistId).HasColumnName("ArtistID");
 
+                entity.Property(e => e.DateAdded)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
                 entity.Property(e => e.FileName).IsRequired();
 
                 entity.Property(e => e.MediumId).HasColumnName("MediumID");

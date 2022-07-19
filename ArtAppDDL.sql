@@ -22,6 +22,10 @@ ALTER TABLE [ArtApp].[Artwork]
 ADD CONSTRAINT FK_ArtWorkAdderUserID
 FOREIGN KEY (ArtWorkAdderID) REFERENCES [ArtApp].[User](ID)
 ON DELETE CASCADE;
+
+
+ALTER TABLE [ArtApp].[Artwork]
+ADD DateAdded DATETIME DEFAULT GETDATE()
 --------------------------------------------------------------------------------------
 
 
@@ -147,4 +151,3 @@ Select * from [ArtApp].[Location]
 Select * from [ArtApp].[LocationType]
 Select * from [ArtApp].[Likes]
 Select * from [ArtApp].[ArtType]
-
