@@ -151,4 +151,3 @@ Select * from [ArtApp].[Location]
 Select * from [ArtApp].[LocationType]
 Select * from [ArtApp].[Likes]
 Select * from [ArtApp].[ArtType]
-
