@@ -37,6 +37,23 @@ namespace MuseumApp.WebAPI.Controllers
             return NotFound();
         }
 
+        // GET: api/artwork
+        [HttpGet("orderByYear")]
+        [Authorize]
+        public async Task<ActionResult<IEnumerable<ArtworkModel>>> GetOrderByYear([FromQuery] string title = null)
+        {
+            var domain_artworks = await Task.FromResult(_artworkRepository.GetArtOrderByYear(title));
+
+            IEnumerable<ArtworkModel> artworkModels = domain_artworks.Select(Mappers.ArtworkModelMapper.Map);
+
+            if (artworkModels.Any())
+            {
+                return Ok(artworkModels);
+            }
+
+            return NotFound();
+        }
+
         // GET api/artwork/5
         [HttpGet("{id}")]
         [Authorize]
