@@ -66,6 +66,31 @@ namespace MuseumApp.DB.Repositories
             return artworks;
         }
 
+        public IEnumerable<Domain.Models.Artwork> GetArtOrderByYear(string title = null)
+        {
+            List<Artwork> dbArtworks = new List<Artwork>();
+
+            if (!string.IsNullOrWhiteSpace(title))
+            {
+                dbArtworks = _context.Artworks.Include(a => a.Artist).Where(aw => aw.Title.Contains(title)).ToList();
+            }
+            else
+            {
+                dbArtworks = _context.Artworks.Include(a => a.Artist).ToList();
+            }
+
+            if (dbArtworks.Any())
+            {
+                List<Domain.Models.Artwork> artworks = dbArtworks.Select(aw => Mappers.ArtworkMapper.Map(aw)).ToList();
+
+                artworks = artworks.OrderBy(artwork => artwork.YearCreated).Reverse().ToList();
+
+                return artworks;
+            }
+
+            return new List<Domain.Models.Artwork>();
+        }
+
         // Get Artworks by Artist
         public IEnumerable<Domain.Models.Artwork> GetArtworksByArtist(int artistId)
         {
@@ -211,31 +236,6 @@ namespace MuseumApp.DB.Repositories
             _context.SaveChanges();
 
             return true;
-        }
-
-        public IEnumerable<Domain.Models.Artwork> GetArtOrderByYear(string title = null)
-        {
-            List<Artwork> dbArtworks = new List<Artwork>();
-
-            if (!string.IsNullOrWhiteSpace(title))
-            {
-                dbArtworks = _context.Artworks.Include(a => a.Artist).Where(aw => aw.Title.Contains(title)).ToList();
-            }
-            else
-            {
-                dbArtworks = _context.Artworks.Include(a => a.Artist).ToList();
-            }
-
-            if (dbArtworks.Any())
-            {
-                List<Domain.Models.Artwork> artworks = dbArtworks.Select(aw => Mappers.ArtworkMapper.Map(aw)).ToList();
-
-                artworks = artworks.OrderBy(artwork => artwork.YearCreated).ToList();
-
-                return artworks;
-            }
-
-            return new List<Domain.Models.Artwork>();
         }
     }
 }
