@@ -213,7 +213,7 @@ namespace MuseumApp.DB.Repositories
             return true;
         }
 
-        IEnumerable<Domain.Models.Artwork> IArtworkInterface.GetArtOrderByYear(string title = null)
+        public IEnumerable<Domain.Models.Artwork> GetArtOrderByYear(string title = null)
         {
             List<Artwork> dbArtworks = new List<Artwork>();
 
@@ -233,7 +233,6 @@ namespace MuseumApp.DB.Repositories
                 artworks = artworks.OrderBy(artwork => artwork.YearCreated).ToList();
 
                 return artworks;
-                
             }
 
             return new List<Domain.Models.Artwork>();
