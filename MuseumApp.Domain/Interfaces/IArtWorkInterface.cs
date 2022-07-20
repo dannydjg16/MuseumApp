@@ -14,6 +14,7 @@ namespace MuseumApp.Domain.Interfaces
         public IEnumerable<Artwork> GetArtworksByAdder(int adderId);
         public Artwork GetFullArtworkByID(int id);
         public IEnumerable<Artwork> GetArtworksByLocation(int locationId);
+        public IEnumerable<Artwork> GetArtOrderByYear(int locationId);
         // Add methods for getting artwork by Type/Artist/etc.
     }
 }

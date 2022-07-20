@@ -212,5 +212,10 @@ namespace MuseumApp.DB.Repositories
 
             return true;
         }
+
+        IEnumerable<Domain.Models.Artwork> IArtworkInterface.GetArtOrderByYear(int locationId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
