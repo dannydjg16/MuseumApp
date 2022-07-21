@@ -2,6 +2,7 @@
 {
     public static class ArtTypeMapper
     {
+        // Put in Domain Model, Get back DB Model
         public static ArtType Map(Domain.Models.ArtType artType)
         {
             return new ArtType
@@ -12,6 +13,7 @@
             };
         }
 
+        // Put in DB Model, Get back Domain Model
         public static Domain.Models.ArtType Map(ArtType entity)
         {
             return new Domain.Models.ArtType
