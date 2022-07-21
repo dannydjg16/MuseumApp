@@ -1,4 +1,5 @@
-# MuseumApp
+# MuseumApp 
+[![Build and deploy ASP.Net Core app to Azure Web App - GrantArtApplication](https://github.com/dannydjg16/MuseumApp/actions/workflows/master_grantartapplication.yml/badge.svg)](https://github.com/dannydjg16/MuseumApp/actions/workflows/master_grantartapplication.yml)
 DGArt is an online collection of the most famous works from the most famous museums in the world
 
 ## Check It Out! 
