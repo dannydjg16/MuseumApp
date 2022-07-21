@@ -2,6 +2,7 @@
 {
     public static class ArtworkMapper
     {
+        // Put in Domain Model, Get back DB Model
         public static Artwork Map(Domain.Models.Artwork artwork)
         {
             return new Artwork
@@ -19,6 +20,7 @@
             };
         }
 
+        // Put in DB Model, Get back Domain Model
         public static Domain.Models.Artwork Map(Artwork entity)
         {
             return new Domain.Models.Artwork
@@ -36,6 +38,7 @@
             };
         }
 
+        // Put in Domain Model, Get back DB Model
         public static Artwork MapFull(Domain.Models.Artwork artwork)
         {
             return new Artwork
@@ -57,6 +60,7 @@
             };
         }
 
+        // Put in DB Model, Get back Domain Model
         public static Domain.Models.Artwork MapFull(Artwork entity)
         {
             return new Domain.Models.Artwork
