@@ -4,6 +4,7 @@ namespace MuseumApp.DB.Mappers
 {
     public static class LocationMapper
     {
+        // Put in Domain Model, Get back DB Model
         public static Location Map(Domain.Models.Location location)
         {
             return new Location
@@ -16,6 +17,7 @@ namespace MuseumApp.DB.Mappers
             };
         }
 
+        // Put in DB Model, Get back Domain Model
         public static Domain.Models.Location Map(Location entity)
         {
             return new Domain.Models.Location
@@ -29,6 +31,7 @@ namespace MuseumApp.DB.Mappers
             };
         }
 
+        // Put in Domain Model, Get back DB Model
         public static Location MapFullNoArtworks(Domain.Models.Location location)
         {
             return new Location
@@ -45,6 +48,7 @@ namespace MuseumApp.DB.Mappers
             };
         }
 
+        // Put in DB Model, Get back Domain Model
         public static Domain.Models.Location MapFullNoArtworks(Location entity)
         {
             return new Domain.Models.Location
@@ -61,6 +65,7 @@ namespace MuseumApp.DB.Mappers
             };
         }
 
+        // Put in Domain Model, Get back DB Model
         public static Location MapFull(Domain.Models.Location location)
         {
             return new Location
@@ -77,6 +82,7 @@ namespace MuseumApp.DB.Mappers
             };
         }
 
+        // Put in DB Model, Get back Domain Model
         public static Domain.Models.Location MapFull(Location entity)
         {
             return new Domain.Models.Location
