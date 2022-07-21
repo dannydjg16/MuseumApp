@@ -4,6 +4,7 @@ namespace MuseumApp.DB.Mappers
 {
     public static class UserMapper
     {
+        // Put in DB Model, Get back Domain Model
         public static Domain.Models.User Map(User entity)
         {
             return new Domain.Models.User
@@ -17,6 +18,7 @@ namespace MuseumApp.DB.Mappers
             };
         }
 
+        // Put in Domain Model, Get back DB Model
         public static User Map(Domain.Models.User model)
         {
             return new User
