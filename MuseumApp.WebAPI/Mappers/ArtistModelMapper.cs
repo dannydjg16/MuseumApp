@@ -5,6 +5,7 @@ namespace MuseumApp.WebAPI.Mappers
 {
     public static class ArtistModelMapper
     {
+        // Put in Domain Model, return API Model
         public static ArtistModel Map(Domain.Models.Artist artist)
         {
             return new ArtistModel
@@ -21,7 +22,7 @@ namespace MuseumApp.WebAPI.Mappers
             };
         }
 
-
+        // Put in Domain Model, return API Model
         public static ArtistModel MapWithArtworks(Domain.Models.Artist artist)
         {
             if (artist == null)
@@ -55,6 +56,7 @@ namespace MuseumApp.WebAPI.Mappers
             }
         }
 
+        // Put in API Model, return Domain Model
         public static Domain.Models.Artist Map(ArtistModel model)
         {
             return new Domain.Models.Artist

@@ -4,6 +4,7 @@ namespace MuseumApp.WebAPI.Mappers
 {
     public static class ArtTypeModelMapper
     {
+        // Put in Domain Model, return API Model
         public static ArtTypeModel Map(Domain.Models.ArtType artType)
         {
             return new ArtTypeModel
@@ -14,6 +15,7 @@ namespace MuseumApp.WebAPI.Mappers
             };
         }
 
+        // Put in API Model, return Domain Model
         public static Domain.Models.ArtType Map(ArtTypeModel model)
         {
             return new Domain.Models.ArtType
