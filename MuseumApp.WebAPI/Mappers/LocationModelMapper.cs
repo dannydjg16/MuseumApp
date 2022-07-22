@@ -5,6 +5,7 @@ namespace MuseumApp.WebAPI.Mappers
 {
     public static class LocationModelMapper
     {
+        // Put in Domain Model, return API Model
         public static LocationModel Map(Domain.Models.Location location)
         {
             return new LocationModel
@@ -18,6 +19,7 @@ namespace MuseumApp.WebAPI.Mappers
             };
         }
 
+        // Put in API Model, return Domain Model
         public static Domain.Models.Location Map(LocationModel model)
         {
             return new Domain.Models.Location
@@ -43,6 +45,7 @@ namespace MuseumApp.WebAPI.Mappers
             };
         }
 
+        // Put in Domain Model, return API Model
         public static LocationModel MapFull(Domain.Models.Location location)
         {
             return new LocationModel
@@ -77,6 +80,7 @@ namespace MuseumApp.WebAPI.Mappers
             };
         }
 
+        // Put in Domain Model, return API Model
         public static LocationModel MapFullNoArtworks(Domain.Models.Location location)
         {
             return new LocationModel
