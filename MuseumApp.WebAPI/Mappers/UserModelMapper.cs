@@ -4,6 +4,7 @@ namespace MuseumApp.WebAPI.Mappers
 {
     public static class UserModelMapper
     {
+        // Put in Domain Model, return API Model
         public static UserModel Map(Domain.Models.User user)
         {
             return new UserModel
@@ -17,6 +18,7 @@ namespace MuseumApp.WebAPI.Mappers
             };
         }
 
+        // Put in API Model, return Domain Model
         public static Domain.Models.User Map(UserModel model)
         {
             return new Domain.Models.User
