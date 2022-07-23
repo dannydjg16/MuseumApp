@@ -16,7 +16,5 @@ namespace MuseumApp.WebAPI.Models
 
         public virtual LocationTypeModel Type { get; set; }
         public virtual IEnumerable<ArtworkModel> Artworks { get; set; }
-
-
     }
 }
