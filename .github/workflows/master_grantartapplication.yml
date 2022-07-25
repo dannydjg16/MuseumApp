@@ -70,6 +70,7 @@ jobs:
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
 
   deploy:
+    if: github.ref_name == 'master'
     runs-on: windows-latest
     needs: build
     environment:
