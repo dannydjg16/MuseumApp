@@ -25,35 +25,18 @@ namespace MuseumApp.WebAPI.Mappers
         // Put in Domain Model, return API Model
         public static ArtistModel MapWithArtworks(Domain.Models.Artist artist)
         {
-            if (artist == null)
+            return new ArtistModel
             {
-                return new ArtistModel
-                {
-                    Id = artist.Id,
-                    Biography = artist.Biography,
-                    Born = artist.Born,
-                    Died = artist.Died,
-                    BornLocation = artist.BornLocation,
-                    Name = artist.Name,
-                    PictureURL = artist.PictureURL,
-                    ArtistAdderId = artist.ArtistAdderId,
-                    Artworks = artist.Artworks.Select(ArtworkModelMapper.Map)
-                };
-            } else
-            {
-                return new ArtistModel
-                {
-                    Id = artist.Id,
-                    Biography = artist.Biography,
-                    Born = artist.Born,
-                    Died = artist.Died,
-                    BornLocation = artist.BornLocation,
-                    Name = artist.Name,
-                    PictureURL = artist.PictureURL,
-                    ArtistAdderId = artist.ArtistAdderId,
-                    Artworks = artist.Artworks.Select(ArtworkModelMapper.Map)
-                };
-            }
+                Id = artist.Id,
+                Biography = artist.Biography,
+                Born = artist.Born,
+                Died = artist.Died,
+                BornLocation = artist.BornLocation,
+                Name = artist.Name,
+                PictureURL = artist.PictureURL,
+                ArtistAdderId = artist.ArtistAdderId,
+                Artworks = artist.Artworks.Select(ArtworkModelMapper.Map)
+            };
         }
 
         // Put in API Model, return Domain Model
