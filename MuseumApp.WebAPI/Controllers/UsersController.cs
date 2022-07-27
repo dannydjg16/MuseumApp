@@ -84,7 +84,7 @@ namespace MuseumApp.WebAPI.Controllers
         [Authorize]
         public async Task<IActionResult> Put([FromBody] UserModel user)
         {
-            if (_userRepository.GetUserByID(user.ID) is User)
+            if (_userRepository.GetUserByID(user.ID) != null)
             {
                 var updated = await Task.FromResult(_userRepository.EditAccount(Mappers.UserModelMapper.Map(user)));
 
@@ -105,7 +105,7 @@ namespace MuseumApp.WebAPI.Controllers
         [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
-            if(_userRepository.GetUserByID(id) is User)
+            if(_userRepository.GetUserByID(id) != null)
             {
                 // deleted returns true if the deletion is successful
                 var deleted = await Task.FromResult(_userRepository.DeleteAccount(id));
