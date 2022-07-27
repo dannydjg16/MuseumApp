@@ -125,7 +125,7 @@ namespace MuseumApp.DB.Repositories
         // Get all users/search by users name
         public IEnumerable<Domain.Models.User> GetUsers(string name = null)
         {
-            List<User> dbUsers = new List<User>();
+            List<User> dbUsers;
 
             if (!string.IsNullOrWhiteSpace(name))
             {

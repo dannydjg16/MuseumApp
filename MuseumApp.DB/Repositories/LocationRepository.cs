@@ -105,7 +105,7 @@ namespace MuseumApp.DB.Repositories
         // Search Locations/Get all locations
         public IEnumerable<Domain.Models.Location> GetLocations(string name = null)
         {
-            List<Location> dbLocations = new List<Location>();
+            List<Location> dbLocations;
 
             if (!string.IsNullOrWhiteSpace(name))
             {
@@ -148,7 +148,7 @@ namespace MuseumApp.DB.Repositories
         // Sort the list alphabetically then return that list
         public IEnumerable<Domain.Models.Location> GetLocationsABC(string name = null)
         {
-            List<Location> dbLocations = new List<Location>();
+            List<Location> dbLocations;
 
             if (!string.IsNullOrWhiteSpace(name))
             {

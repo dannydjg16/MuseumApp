@@ -17,11 +17,11 @@ namespace MuseumApp.DB.Repositories
         }
 
         // Get Users Likes
-        public IEnumerable<Domain.Models.Artwork> GetUsersLikes(int usersID)
+        public IEnumerable<Domain.Models.Artwork> GetUsersLikes(int userID)
         {
             return _context.Artworks
                 .Include(u => u.LikesNavigation)
-                .Where(aw => aw.LikesNavigation.Any(l => l.UserId == usersID))
+                .Where(aw => aw.LikesNavigation.Any(l => l.UserId == userID))
                 .Select(Mappers.ArtworkMapper.Map);
         }
 

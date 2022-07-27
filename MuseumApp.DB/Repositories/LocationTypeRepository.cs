@@ -33,7 +33,7 @@ namespace MuseumApp.DB.Repositories
         // Get Location Types
         public IEnumerable<Domain.Models.LocationType> GetLocationTypes()
         {
-            List<LocationType> dbLocationTypes = new List<LocationType>();
+            List<LocationType> dbLocationTypes;
 
             dbLocationTypes = _context.LocationTypes.ToList();
 
@@ -45,7 +45,7 @@ namespace MuseumApp.DB.Repositories
         // Get Location Types (Alphabetically)
         public IEnumerable<Domain.Models.LocationType> GetLocationTypesABC()
         {
-            List<LocationType> dbLocationTypes = new List<LocationType>();
+            List<LocationType> dbLocationTypes;
 
             dbLocationTypes = _context.LocationTypes.ToList();
 

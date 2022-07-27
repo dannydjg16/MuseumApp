@@ -14,12 +14,10 @@ namespace MuseumApp.WebAPI.Controllers
     public class ArtistsController : ControllerBase
     {
         private readonly IArtistInterface _artistRepository;
-        private readonly IArtworkInterface _artworkRepository;
 
-        public ArtistsController(IArtistInterface artistRepository, IArtworkInterface artworkRepository)
+        public ArtistsController(IArtistInterface artistRepository)
         {
             _artistRepository = artistRepository;
-            _artworkRepository = artworkRepository;
         }
 
         // GET: api/artists
@@ -32,6 +30,21 @@ namespace MuseumApp.WebAPI.Controllers
             if(appArtists.Select(Mappers.ArtistModelMapper.Map) is IEnumerable<ArtistModel> artists)
             {
                 return Ok(artists);
+            }
+
+            return NotFound();
+        }
+
+        // GET api/artists/5
+        [HttpGet("{id}")]
+        [Authorize]
+        public async Task<ActionResult<ArtistModel>> Get(int id)
+        {
+            var appArtist = await Task.FromResult(_artistRepository.GetArtistByID(id));
+
+            if (Mappers.ArtistModelMapper.MapWithArtworks(appArtist) is ArtistModel artist)
+            {
+                return Ok(artist);
             }
 
             return NotFound();
@@ -52,22 +65,6 @@ namespace MuseumApp.WebAPI.Controllers
             return NotFound();
         }
 
-        // GET api/artists/5
-        [HttpGet("{id}")]
-        [Authorize]
-        public async Task<ActionResult<ArtistModel>> Get(int id)
-        {
-            var appArtist = await Task.FromResult(_artistRepository.GetArtistByID(id));
-            //appArtist.Artworks = _artworkRepository.GetArtworksByArtist(id);
-
-            if(Mappers.ArtistModelMapper.MapWithArtworks(appArtist) is ArtistModel artist)
-            {
-                return Ok(artist);
-            }
-
-            return NotFound();
-        }
-
         // POST api/artists
         [HttpPost]
         [Authorize]
@@ -75,7 +72,7 @@ namespace MuseumApp.WebAPI.Controllers
         {
             var success = await Task.FromResult(_artistRepository.CreateArtist(Mappers.ArtistModelMapper.Map(artistModel)));
 
-            if (success == true)
+            if (success)
             {
                 return Ok();
             }
@@ -90,7 +87,7 @@ namespace MuseumApp.WebAPI.Controllers
         {
             var pass = await Task.FromResult(_artistRepository.EditArtist(Mappers.ArtistModelMapper.Map(artistModel)));
 
-            if (pass == true)
+            if (pass)
             {
                 return NoContent();
             }
@@ -105,7 +102,7 @@ namespace MuseumApp.WebAPI.Controllers
         {
             var pass = await Task.FromResult(_artistRepository.DeleteArtist(id));
 
-            if (pass == true)
+            if (pass)
             {
                 return NoContent();
             }

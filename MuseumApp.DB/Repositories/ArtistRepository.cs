@@ -122,7 +122,7 @@ namespace MuseumApp.DB.Repositories
             }
             catch (Exception e)
             {
-                Console.WriteLine("Not able to convert Databse Artist into Domain Artist", e);
+                Console.WriteLine("Not able to convert Databse Artist into Domain Artist" + e.Message);
 
                 return null;
             }
@@ -133,7 +133,7 @@ namespace MuseumApp.DB.Repositories
         // Get all Artists/ Search by artist name
         public IEnumerable<Domain.Models.Artist> GetArtists(string artistName = null)
         {
-            List<Artist> dbArtists = new List<Artist>();
+            List<Artist> dbArtists;
 
             // If the string has writing, go in to block
             if (!string.IsNullOrWhiteSpace(artistName))
@@ -158,7 +158,7 @@ namespace MuseumApp.DB.Repositories
         // Get all Artists/ Search by artist name (Alphabetically)
         public IEnumerable<Domain.Models.Artist> GetArtistsABC(string artistName = null)
         {
-            List<Artist> dbArtists = new List<Artist>();
+            List<Artist> dbArtists;
 
             // If the string has writing, go in to block
             if (!string.IsNullOrWhiteSpace(artistName))

@@ -37,6 +37,21 @@ namespace MuseumApp.WebAPI.Controllers
             return NotFound();
         }
 
+        // GET api/artwork/5
+        [HttpGet("{id}")]
+        [Authorize]
+        public async Task<ActionResult<ArtworkModel>> Get([FromRoute] int id)
+        {
+            var domainArtwork = await Task.FromResult(_artworkRepository.GetArtworkByID(id));
+
+            if (domainArtwork != null && Mappers.ArtworkModelMapper.Map(domainArtwork) is ArtworkModel artworkModel)
+            {
+                return Ok(artworkModel);
+            }
+
+            return NotFound();
+        }
+
         // GET: api/artwork
         [HttpGet("orderByYear")]
         [Authorize]
@@ -55,36 +70,15 @@ namespace MuseumApp.WebAPI.Controllers
         }
 
         // GET api/artwork/5
-        [HttpGet("{id}")]
-        [Authorize]
-        public async Task<ActionResult<ArtworkModel>> Get([FromRoute]int id)
-        {
-            var domainArtwork = await Task.FromResult(_artworkRepository.GetArtworkByID(id));
-
-            if (domainArtwork != null)
-            {
-                if (Mappers.ArtworkModelMapper.Map(domainArtwork) is ArtworkModel artworkModel)
-                {
-                    return Ok(artworkModel);
-                }
-            }
-
-            return NotFound();
-        }
-
-        // GET api/artwork/5
         [HttpGet("full/{id}")]
         [Authorize]
         public async Task<ActionResult<ArtworkModel>> GetFull([FromRoute] int id)
         {
             var domainArtwork = await Task.FromResult(_artworkRepository.GetFullArtworkByID(id));
 
-            if (domainArtwork != null)
+            if (domainArtwork != null && Mappers.ArtworkModelMapper.MapFull(domainArtwork) is ArtworkModel artworkModel)
             {
-                if (Mappers.ArtworkModelMapper.MapFull(domainArtwork) is ArtworkModel artworkModel)
-                {
-                    return Ok(artworkModel);
-                }
+                return Ok(artworkModel);  
             }
 
             return NotFound();

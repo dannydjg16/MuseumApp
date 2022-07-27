@@ -18,8 +18,6 @@ namespace MuseumApp.DB.Repositories
         // Add Artwork
         public bool AddArtwork(Domain.Models.Artwork artwork)
         {
-            var dbArtwork = _context.Artworks.FirstOrDefault(aw => aw.Title == artwork.Title);
-
             _context.Artworks.Add(Mappers.ArtworkMapper.Map(artwork));
             _context.SaveChanges();
 
@@ -45,7 +43,7 @@ namespace MuseumApp.DB.Repositories
         // Get All Artworks/Search by title for artwork
         public IEnumerable<Domain.Models.Artwork> GetAllArtworks(string title = null)
         {
-            List<Artwork> dbArtworks = new List<Artwork>();
+            List<Artwork> dbArtworks;
 
             if (!string.IsNullOrWhiteSpace(title))
             {
@@ -68,7 +66,7 @@ namespace MuseumApp.DB.Repositories
 
         public IEnumerable<Domain.Models.Artwork> GetArtOrderByYear(string title = null)
         {
-            List<Artwork> dbArtworks = new List<Artwork>();
+            List<Artwork> dbArtworks;
 
             if (!string.IsNullOrWhiteSpace(title))
             {
