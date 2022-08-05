@@ -16,6 +16,15 @@ namespace MuseumApp.Tests.Domain
         {
             Assert.True(TestArtist.GetArtworkByID(1).Title == "Starry Night", "The chapters should have the same title");
         }
+
+        [Theory]
+        [InlineData(1)]
+        [InlineData(9)]
+        [InlineData(12)]
+        public void CheckAgeIsLegitimate(int value)
+        {
+            Assert.True(true);
+        }
     }
 }
 
