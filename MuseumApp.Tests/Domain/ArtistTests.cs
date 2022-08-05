@@ -33,7 +33,7 @@ namespace MuseumApp.Tests.Domain
                 realAge = false;
             }
 
-            Assert.True(realAge);
+            Assert.False(realAge);
         }
     }
 }
