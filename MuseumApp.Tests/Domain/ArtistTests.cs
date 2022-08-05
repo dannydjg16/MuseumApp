@@ -24,15 +24,9 @@ namespace MuseumApp.Tests.Domain
         [InlineData(0)]
         public void CheckAgeIsNotLegitimate(int value)
         {
-            bool realAge = true;
+            TestArtist.Born = value;
 
-            if(value > 2025)
-            {
-                realAge = false;
-            } else if (value < -60000)
-            {
-                realAge = false;
-            }
+            bool realAge = TestArtist.VerifyArtistBirthYear();
 
             Assert.False(realAge);
         }
