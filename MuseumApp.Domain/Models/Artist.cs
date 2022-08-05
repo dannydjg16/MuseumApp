@@ -20,13 +20,13 @@ namespace MuseumApp.Domain.Models
             return Artworks.FirstOrDefault(aw => aw.Id == id);
         }
 
-        public bool VerifyArtistAge(int yearBorn)
+        public bool VerifyArtistAge()
         {
-            if (yearBorn > 2025)
+            if (Born > 2025)
             {
                 return false;
             }
-            else if (yearBorn < -60000)
+            else if (Born < -60000)
             {
                  return false;
             }
