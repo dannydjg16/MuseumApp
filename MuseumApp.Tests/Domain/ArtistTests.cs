@@ -35,6 +35,26 @@ namespace MuseumApp.Tests.Domain
 
             Assert.False(realAge);
         }
+
+        [Theory]
+        [InlineData(2025)]
+        [InlineData(2022)]
+        [InlineData(-60000)]
+        public void CheckAgeIsLegitimate(int value)
+        {
+            bool realAge = true;
+
+            if (value > 2025)
+            {
+                realAge = false;
+            }
+            else if (value < -60000)
+            {
+                realAge = false;
+            }
+
+            Assert.True(realAge);
+        }
     }
 }
 
