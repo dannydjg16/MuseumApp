@@ -21,6 +21,7 @@ namespace MuseumApp.Tests.Domain
         [InlineData(4000)]
         [InlineData(2026)]
         [InlineData(-60001)]
+        [InlineData(0)]
         public void CheckAgeIsNotLegitimate(int value)
         {
             bool realAge = true;
