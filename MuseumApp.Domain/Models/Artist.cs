@@ -22,7 +22,7 @@ namespace MuseumApp.Domain.Models
 
         public bool VerifyArtistBirthYear()
         {
-            if (Born > 2025)
+            if (Born > 2023)
             {
                 return false;
             }

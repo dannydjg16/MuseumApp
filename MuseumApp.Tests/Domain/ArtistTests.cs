@@ -19,7 +19,7 @@ namespace MuseumApp.Tests.Domain
 
         [Theory]
         [InlineData(4000)]
-        [InlineData(2026)]
+        [InlineData(2023)]
         [InlineData(-60001)]
         [InlineData(0)]
         public void CheckAgeIsNotLegitimate(int value)
@@ -32,7 +32,7 @@ namespace MuseumApp.Tests.Domain
         }
 
         [Theory]
-        [InlineData(2025)]
+        [InlineData(1)]
         [InlineData(2022)]
         [InlineData(-60000)]
         public void CheckAgeIsLegitimate(int value)
@@ -41,7 +41,7 @@ namespace MuseumApp.Tests.Domain
 
             bool realAge = TestArtist.VerifyArtistBirthYear();
 
-            Assert.False(realAge);
+            Assert.True(realAge);
         }
     }
 }
