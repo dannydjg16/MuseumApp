@@ -19,6 +19,9 @@ namespace MuseumApp.DB
         public string Name { get; set; }
         public string FromLocation { get; set; }
         public string ProfilePicUrl { get; set; }
+        public string CurrentCountry { get; set; }
+        public string CurrentStateProvince { get; set; }
+        public string CurrentCity { get; set; }
 
         public virtual ICollection<Artist> Artists { get; set; }
         public virtual ICollection<Artwork> Artworks { get; set; }
