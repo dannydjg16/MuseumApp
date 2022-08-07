@@ -184,6 +184,12 @@ namespace MuseumApp.DB
 
                 entity.Property(e => e.Id).HasColumnName("ID");
 
+                entity.Property(e => e.CurrentCity).HasMaxLength(100);
+
+                entity.Property(e => e.CurrentCountry).HasMaxLength(100);
+
+                entity.Property(e => e.CurrentStateProvince).HasMaxLength(100);
+
                 entity.Property(e => e.Email)
                     .IsRequired()
                     .HasMaxLength(50)
