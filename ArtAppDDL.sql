@@ -71,11 +71,23 @@ CREATE TABLE [ArtApp].[User] (
     FromLocation NVARCHAR(100)
 );
 
-Select * from [ArtApp].[User]
+Select * from [ArtApp].[User];
 
 -- Add Profile Picture URL to User Table
 ALTER TABLE [ArtApp].[User]
 ADD ProfilePicURL NVARCHAR(max)
+
+-- Add Country Column
+ALTER TABLE [ArtApp].[User]
+ADD CurrentCountry NVARCHAR(100)
+
+-- Add State/Province Column
+ALTER TABLE [ArtApp].[User]
+ADD CurrentStateProvince NVARCHAR(100)
+
+-- Add City Column
+ALTER TABLE [ArtApp].[User]
+ADD CurrentCity NVARCHAR(100)
 --------------------------------------------------------------------------------------
 
 
