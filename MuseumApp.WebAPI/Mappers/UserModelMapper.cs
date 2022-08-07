@@ -14,6 +14,9 @@ namespace MuseumApp.WebAPI.Mappers
                 Email = user.Email,
                 FromLocation = user.FromLocation,
                 ProfilePicURL = user.ProfilePicURL,
+                CurrentCity = user.CurrentCity,
+                CurrentCountry = user.CurrentCountry,
+                CurrentStateProvince = user.CurrentStateProvince,
                 Likes = user.Likes
             };
         }
@@ -28,6 +31,9 @@ namespace MuseumApp.WebAPI.Mappers
                 Email = model.Email,
                 FromLocation = model.FromLocation,
                 ProfilePicURL = model.ProfilePicURL,
+                CurrentCity = model.CurrentCity,
+                CurrentCountry = model.CurrentCountry,
+                CurrentStateProvince = model.CurrentStateProvince,
                 Likes = model.Likes
             };
         }
