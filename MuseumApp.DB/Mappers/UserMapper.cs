@@ -14,9 +14,9 @@ namespace MuseumApp.DB.Mappers
                 Email = entity.Email,
                 FromLocation = entity.FromLocation,
                 ProfilePicURL = entity.ProfilePicUrl,
-                CurrentStateProvince = entity.CurrentStateProvince,
-                CurrentCountry = entity.CurrentCountry,
                 CurrentCity = entity.CurrentCity,
+                CurrentCountry = entity.CurrentCountry,
+                CurrentStateProvince = entity.CurrentStateProvince,
                 Likes = entity.Likes.Select(LikeMapper.Map)
             };
         }
@@ -31,9 +31,9 @@ namespace MuseumApp.DB.Mappers
                 Email = model.Email,
                 FromLocation = model.FromLocation,
                 ProfilePicUrl = model.ProfilePicURL,
-                CurrentStateProvince = model.CurrentStateProvince,
+                CurrentCity = model.CurrentCity,
                 CurrentCountry = model.CurrentCountry,
-                CurrentCity = model.CurrentCity
+                CurrentStateProvince = model.CurrentStateProvince,
             };
         }
     }
