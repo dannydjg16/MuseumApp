@@ -77,24 +77,24 @@ namespace MuseumApp.DB.Repositories
                 dbUser.ProfilePicUrl = user.ProfilePicURL;
             }
 
-            // If dbuser profilepicURL is NOT null or white space 
+            // If dbuser CurrentCity is NOT null or white space 
             if (!string.IsNullOrWhiteSpace(user.CurrentCity))
             {
-                // Change the name 
+                // Change the CurrentCity 
                 dbUser.CurrentCity = user.CurrentCity;
             }
 
-            // If dbuser profilepicURL is NOT null or white space 
+            // If dbuser CurrentCountry is NOT null or white space 
             if (!string.IsNullOrWhiteSpace(user.CurrentCountry))
             {
-                // Change the name 
+                // Change the CurrentCountry 
                 dbUser.CurrentCountry = user.CurrentCountry;
             }
 
-            // If dbuser profilepicURL is NOT null or white space 
+            // If dbuser CurrentStateProvince is NOT null or white space 
             if (!string.IsNullOrWhiteSpace(user.CurrentStateProvince))
             {
-                // Change the name 
+                // Change the CurrentStateProvince 
                 dbUser.CurrentStateProvince = user.CurrentStateProvince;
             }
 
