@@ -1,11 +1,17 @@
 ﻿using System;
+using MuseumApp.Domain.Models;
+
 namespace MuseumApp.Tests.Domain
 {
     public class ArtworkTests
     {
-        public ArtworkTests()
+        readonly Artwork TestArtwork = new Artwork
         {
-        }
+            ArtistId = 1
+        };
+
+
+
     }
 }
 
