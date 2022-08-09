@@ -28,7 +28,7 @@ namespace MuseumApp.Tests.Domain
         [InlineData(1)]
         [InlineData(2022)]
         [InlineData(-60000)]
-        public void CheckAgeIsLegitimate(int value)
+        public void CheckArtYearIsLegitimate(int value)
         {
             TestArtwork.YearCreated = value;
 
