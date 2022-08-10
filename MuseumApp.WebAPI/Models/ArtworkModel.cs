@@ -19,5 +19,19 @@ namespace MuseumApp.WebAPI.Models
         public virtual ArtistModel Artist { get; set; }
         public virtual LocationModel Location { get; set; }
         public virtual ArtTypeModel Medium { get; set; }
+
+
+        public bool VerifyArtCreatedYear()
+        {
+            if (YearCreated > 2023)
+            {
+                return false;
+            }
+            else if (YearCreated < -60000)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }

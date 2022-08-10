@@ -32,5 +32,20 @@ namespace MuseumApp.Domain.Models
             }
             return true;
         }
+
+        /// <summary>
+        /// Want to have this method contain all verification methods I add now and in the future.
+        ///     When I add an artwork, want it to have to pass these validations.
+        /// </summary>
+        /// <returns></returns>
+        public bool VerifyArtMethods()
+        {
+            // For now, 08/10/2022, just one method
+            if (VerifyArtCreatedYear())
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

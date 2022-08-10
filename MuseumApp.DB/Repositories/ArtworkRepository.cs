@@ -18,10 +18,15 @@ namespace MuseumApp.DB.Repositories
         // Add Artwork
         public bool AddArtwork(Domain.Models.Artwork artwork)
         {
-            _context.Artworks.Add(Mappers.ArtworkMapper.Map(artwork));
-            _context.SaveChanges();
+            if (artwork.VerifyArtMethods())
+            {
+                _context.Artworks.Add(Mappers.ArtworkMapper.Map(artwork));
+                _context.SaveChanges();
 
-            return true;
+                return true;
+            }
+
+            return false;
         }
 
         // Delete Artwork
@@ -204,7 +209,7 @@ namespace MuseumApp.DB.Repositories
                 dbArtwork.FileName = artwork.FileName;
             }
 
-            if (-70000 <= artwork.YearCreated && artwork.YearCreated <= 2050)
+            if (artwork.VerifyArtCreatedYear())
             {
                 dbArtwork.YearCreated = artwork.YearCreated;
             }
