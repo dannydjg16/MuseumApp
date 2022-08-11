@@ -18,7 +18,7 @@ namespace MuseumApp.DB.Repositories
         // Add ArtType
         public bool AddArtType(Domain.Models.ArtType artType)
         {
-            var dbArtType = _context.ArtTypes.FirstOrDefault(at => at.Name == artType.Name);
+            var dbArtType = _context.ArtTypes.SingleOrDefault(at => at.Name == artType.Name);
 
             // If the ArtType exists in the database, return false
             if (dbArtType != null)
