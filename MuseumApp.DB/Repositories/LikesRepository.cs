@@ -35,11 +35,11 @@ namespace MuseumApp.DB.Repositories
                 ArtId = artworkID
             };
 
-            var dbLike = _context.Likes.Select(like => like.ArtId == artworkID
+            var dbLike = _context.Likes.SingleOrDefault(like => like.ArtId == artworkID
                                                             && like.UserId == userID);
 
             // START process to increment like amount
-            var dbArtwork = _context.Artworks.FirstOrDefault(aw => aw.Id == artworkID);
+            var dbArtwork = _context.Artworks.SingleOrDefault(aw => aw.Id == artworkID);
 
             // If the artwork is not found OR the like IS found, return false
             if (dbArtwork == null || dbLike is Like)
@@ -67,11 +67,11 @@ namespace MuseumApp.DB.Repositories
         // Delete Old Like
         public bool UnlikeArtwork(int userID, int artworkID)
         {
-            var dbLike = _context.Likes.FirstOrDefault(like => like.ArtId == artworkID
+            var dbLike = _context.Likes.SingleOrDefault(like => like.ArtId == artworkID
                                                             && like.UserId == userID);
 
             // START process to decrement like amount
-            var dbArtwork = _context.Artworks.FirstOrDefault(aw => aw.Id == artworkID);
+            var dbArtwork = _context.Artworks.SingleOrDefault(aw => aw.Id == artworkID);
 
             // If the artwork is not found OR the like is not found, return false
             if (dbArtwork == null || dbLike == null)
