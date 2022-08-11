@@ -42,7 +42,7 @@ namespace MuseumApp.DB.Repositories
             var dbArtwork = _context.Artworks.SingleOrDefault(aw => aw.Id == artworkID);
 
             // If the artwork is not found OR the like IS found, return false
-            if (dbArtwork == null || dbLike is Like)
+            if (dbArtwork == null || dbLike is not null)
             {
                 return false;
             }
