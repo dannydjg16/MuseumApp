@@ -103,7 +103,7 @@ namespace MuseumApp.DB.Repositories
             return true;
         }
 
-        // Get User By Email - can implement later
+        // Get User By Email
         public Domain.Models.User GetUserByEmail(string email)
         {
             try
