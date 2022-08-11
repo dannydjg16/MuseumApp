@@ -19,13 +19,6 @@ namespace MuseumApp.DB.Repositories
         // Create Artist
         public bool CreateArtist(Domain.Models.Artist artist)
         {
-            var dbArtist = _context.Artists.FirstOrDefault(a => a.Id == artist.Id);
-
-            if (dbArtist != null)
-            {
-                return false;
-            }
-
             _context.Artists.Add(Mappers.ArtistMapper.Map(artist));
             _context.SaveChanges();
 
@@ -35,7 +28,7 @@ namespace MuseumApp.DB.Repositories
         // Delete Artist
         public bool DeleteArtist(int artistID)
         {
-            var dbArtist = _context.Artists.FirstOrDefault(a => a.Id == artistID);
+            var dbArtist = _context.Artists.SingleOrDefault(a => a.Id == artistID);
 
             if (dbArtist == null)
             {
@@ -51,7 +44,7 @@ namespace MuseumApp.DB.Repositories
         // Edit Artist
         public bool EditArtist(Domain.Models.Artist artist)
         {
-            var dbArtist = _context.Artists.FirstOrDefault(a => a.Id == artist.Id);
+            var dbArtist = _context.Artists.SingleOrDefault(a => a.Id == artist.Id);
 
             if (dbArtist == null)
             {
@@ -108,7 +101,7 @@ namespace MuseumApp.DB.Repositories
         // Get Artist by ID
         public Domain.Models.Artist GetArtistByID(int id)
         {
-            var dbArtist = _context.Artists.FirstOrDefault(a => a.Id == id);
+            var dbArtist = _context.Artists.SingleOrDefault(a => a.Id == id);
             var domainArtist = new Domain.Models.Artist();
 
             if (dbArtist == null)
