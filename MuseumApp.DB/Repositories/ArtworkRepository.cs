@@ -32,7 +32,7 @@ namespace MuseumApp.DB.Repositories
         // Delete Artwork
         public bool DeleteArtwork(int id)
         {
-            var dbArtwork = _context.Artworks.FirstOrDefault(aw => aw.Id == id);
+            var dbArtwork = _context.Artworks.SingleOrDefault(aw => aw.Id == id);
 
             if (dbArtwork == null)
             {
@@ -154,7 +154,7 @@ namespace MuseumApp.DB.Repositories
         // Get artwork by ID
         public Domain.Models.Artwork GetArtworkByID(int id)
         {
-            var dbArtwork = _context.Artworks.FirstOrDefault(aw => aw.Id == id);
+            var dbArtwork = _context.Artworks.SingleOrDefault(aw => aw.Id == id);
 
             if (dbArtwork == null)
             {
@@ -173,7 +173,7 @@ namespace MuseumApp.DB.Repositories
                 .Include(aw => aw.Artist)
                 .Include(aw => aw.LocationNowNavigation)
                 .Include(aw => aw.Medium)
-                .FirstOrDefault(aw => aw.Id == id);
+                .SingleOrDefault(aw => aw.Id == id);
 
             if (dbArtwork == null)
             {
@@ -188,7 +188,7 @@ namespace MuseumApp.DB.Repositories
         // Edit Artwork
         public bool UpdateArtwork(Domain.Models.Artwork artwork)
         {
-            var dbArtwork = _context.Artworks.FirstOrDefault(aw => aw.Id == artwork.Id);
+            var dbArtwork = _context.Artworks.SingleOrDefault(aw => aw.Id == artwork.Id);
 
             if (dbArtwork == null)
             {

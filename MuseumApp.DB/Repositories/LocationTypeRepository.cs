@@ -17,7 +17,7 @@ namespace MuseumApp.DB.Repositories
         // Add Location Type
         public bool AddLocationType(Domain.Models.LocationType locationType)
         {
-            var dbLocationType = _context.LocationTypes.FirstOrDefault(lt => lt.Name == locationType.Name);
+            var dbLocationType = _context.LocationTypes.SingleOrDefault(lt => lt.Name == locationType.Name);
 
             if (dbLocationType != null)
             {
