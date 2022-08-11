@@ -18,7 +18,7 @@ namespace MuseumApp.DB.Repositories
         // Create Account
         public bool CreateAccount(Domain.Models.User user)
         {
-            var dbUser = _context.Users.SingleOrDefault(u => u.Id == user.ID);
+            var dbUser = _context.Users.SingleOrDefault(u => u.Email == user.Email);
 
             if(dbUser != null)
             {
