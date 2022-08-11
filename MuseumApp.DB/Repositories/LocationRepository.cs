@@ -18,7 +18,7 @@ namespace MuseumApp.DB.Repositories
         // Add Location
         public bool AddLocation(Domain.Models.Location location)
         {
-            var dbLocation = _context.Locations.FirstOrDefault(l => l.LocationName == location.LocationName);
+            var dbLocation = _context.Locations.SingleOrDefault(l => l.LocationName == location.LocationName);
 
             if (dbLocation != null)
             {
@@ -34,7 +34,7 @@ namespace MuseumApp.DB.Repositories
         // Edit Location
         public bool EditLocation(Domain.Models.Location location)
         {
-            var dbLocation = _context.Locations.FirstOrDefault(l => l.Id == location.Id);
+            var dbLocation = _context.Locations.SingleOrDefault(l => l.Id == location.Id);
 
             if(dbLocation == null)
             {
@@ -92,7 +92,7 @@ namespace MuseumApp.DB.Repositories
             var dbLocation = _context.Locations
                 .Include(l => l.Artworks)
                 .ThenInclude(aws => aws.Artist)
-                .FirstOrDefault(l => l.Id == id);
+                .SingleOrDefault(l => l.Id == id);
 
             if (dbLocation == null)
             {
