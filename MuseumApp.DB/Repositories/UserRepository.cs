@@ -18,7 +18,7 @@ namespace MuseumApp.DB.Repositories
         // Create Account
         public bool CreateAccount(Domain.Models.User user)
         {
-            var dbUser = _context.Users.FirstOrDefault(u => u.Id == user.ID);
+            var dbUser = _context.Users.SingleOrDefault(u => u.Id == user.ID);
 
             if(dbUser != null)
             {
@@ -34,7 +34,7 @@ namespace MuseumApp.DB.Repositories
         // Delete Account
         public bool DeleteAccount(int userID)
         {
-            var dbUser = _context.Users.FirstOrDefault(u => u.Id == userID);
+            var dbUser = _context.Users.SingleOrDefault(u => u.Id == userID);
             if (dbUser == null)
             {
                 return false;
@@ -49,7 +49,7 @@ namespace MuseumApp.DB.Repositories
         // Edit Account
         public bool EditAccount(Domain.Models.User user)
         {
-            var dbUser = _context.Users.FirstOrDefault(u => u.Id == user.ID);
+            var dbUser = _context.Users.SingleOrDefault(u => u.Id == user.ID);
 
             if (dbUser == null)
             {
@@ -116,7 +116,7 @@ namespace MuseumApp.DB.Repositories
                     return null;
                 }
 
-                var user = Mappers.UserMapper.Map(fullUsers.First(u => u.Email == email));
+                var user = Mappers.UserMapper.Map(fullUsers.SingleOrDefault(u => u.Email == email));
 
                 return user;
             }
@@ -138,7 +138,7 @@ namespace MuseumApp.DB.Repositories
                 return null;
             }
 
-            var user = Mappers.UserMapper.Map(fullUsers.First(u => u.Id == id));
+            var user = Mappers.UserMapper.Map(fullUsers.SingleOrDefault(u => u.Id == id));
 
             return user;
         }
