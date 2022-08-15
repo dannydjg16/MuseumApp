@@ -30,7 +30,7 @@ namespace MuseumApp.DB.Repositories
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine(e.ToString());
             }
             return false;
         }
@@ -52,7 +52,7 @@ namespace MuseumApp.DB.Repositories
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine(e.ToString());
             }
 
             return true;
@@ -85,7 +85,7 @@ namespace MuseumApp.DB.Repositories
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine(e.ToString());
 
                 return new List<Domain.Models.Artwork>();
             }
@@ -119,7 +119,7 @@ namespace MuseumApp.DB.Repositories
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine(e.ToString());
 
                 return new List<Domain.Models.Artwork>();
             }
@@ -138,7 +138,7 @@ namespace MuseumApp.DB.Repositories
             }
             catch (Exception e)
             {
-                Console.WriteLine("Exception: " + e);
+                Console.WriteLine("Exception: " + e.ToString());
 
                 return new List<Domain.Models.Artwork>();
             }
@@ -157,7 +157,7 @@ namespace MuseumApp.DB.Repositories
             }
             catch (Exception e)
             {
-                Console.WriteLine("Exception: " + e);
+                Console.WriteLine("Exception: " + e.ToString());
 
                 return new List<Domain.Models.Artwork>();
             }
@@ -176,7 +176,7 @@ namespace MuseumApp.DB.Repositories
             }
             catch (Exception e)
             {
-                Console.WriteLine("Exception: " + e);
+                Console.WriteLine("Exception: " + e.ToString());
 
                 return new List<Domain.Models.Artwork>();
             }
@@ -200,7 +200,7 @@ namespace MuseumApp.DB.Repositories
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine(e.ToString());
 
                 return new Domain.Models.Artwork();
             }
@@ -228,7 +228,7 @@ namespace MuseumApp.DB.Repositories
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine(e.ToString());
 
                 return new Domain.Models.Artwork();
             }
@@ -293,7 +293,7 @@ namespace MuseumApp.DB.Repositories
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine(e.ToString());
 
                 return false;
             } 

@@ -17,48 +17,76 @@ namespace MuseumApp.DB.Repositories
         // Add Location Type
         public bool AddLocationType(Domain.Models.LocationType locationType)
         {
-            var dbLocationType = _context.LocationTypes.SingleOrDefault(lt => lt.Name == locationType.Name);
-
-            if (dbLocationType != null)
+            try
             {
+                var dbLocationType = _context.LocationTypes.SingleOrDefault(lt => lt.Name == locationType.Name);
+
+                if (dbLocationType != null)
+                {
+                    return false;
+                }
+
+                _context.Add(Mappers.LocationTypeMapper.Map(locationType));
+                _context.SaveChanges();
+
+                return true;
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.ToString());
+
                 return false;
             }
-
-            _context.Add(Mappers.LocationTypeMapper.Map(locationType));
-            _context.SaveChanges();
-
-            return true;
         }
 
         // Get Location Types
         public IEnumerable<Domain.Models.LocationType> GetLocationTypes()
         {
-            List<LocationType> dbLocationTypes;
+            try
+            {
 
-            dbLocationTypes = _context.LocationTypes.ToList();
+                List<LocationType> dbLocationTypes;
 
-            List<Domain.Models.LocationType> locationTypes = dbLocationTypes.Select(lt => Mappers.LocationTypeMapper.Map(lt)).ToList();
+                dbLocationTypes = _context.LocationTypes.ToList();
 
-            return locationTypes;
+                List<Domain.Models.LocationType> locationTypes = dbLocationTypes.Select(lt => Mappers.LocationTypeMapper.Map(lt)).ToList();
+
+                return locationTypes;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+
+                return new List<Domain.Models.LocationType>();
+            }
         }
 
         // Get Location Types (Alphabetically)
         public IEnumerable<Domain.Models.LocationType> GetLocationTypesABC()
         {
-            List<LocationType> dbLocationTypes;
-
-            dbLocationTypes = _context.LocationTypes.ToList();
-
-            if (dbLocationTypes.Any())
+            try
             {
-                List<Domain.Models.LocationType> locationTypes = dbLocationTypes.Select(lt => Mappers.LocationTypeMapper.Map(lt)).ToList();
+                List<LocationType> dbLocationTypes;
 
-                locationTypes = locationTypes.OrderBy(lt => lt.Name).ToList();
+                dbLocationTypes = _context.LocationTypes.ToList();
 
-                return locationTypes;
+                if (dbLocationTypes.Any())
+                {
+                    List<Domain.Models.LocationType> locationTypes = dbLocationTypes.Select(lt => Mappers.LocationTypeMapper.Map(lt)).ToList();
+
+                    locationTypes = locationTypes.OrderBy(lt => lt.Name).ToList();
+
+                    return locationTypes;
+                }
+
+                return new List<Domain.Models.LocationType>();
             }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
 
-            return new List<Domain.Models.LocationType>();
+                return new List<Domain.Models.LocationType>();
+            }
         }
     }
 }
