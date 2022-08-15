@@ -130,9 +130,7 @@ namespace MuseumApp.DB.Repositories
         {
             try
             {
-                List<Artwork> dbArtworks = new List<Artwork>();
-
-                dbArtworks = _context.Artworks.Where(ar => ar.ArtistId == artistId).ToList();
+                List<Artwork> dbArtworks = _context.Artworks.Where(ar => ar.ArtistId == artistId).ToList();
 
                 var domainArtworks = dbArtworks.Select(Mappers.ArtworkMapper.Map);
 
@@ -151,9 +149,7 @@ namespace MuseumApp.DB.Repositories
         {
             try
             {
-                List<Artwork> dbArtworks = new List<Artwork>();
-
-                dbArtworks = _context.Artworks.Where(ar => ar.ArtWorkAdderId == adderId).ToList();
+                List<Artwork> dbArtworks = _context.Artworks.Where(ar => ar.ArtWorkAdderId == adderId).ToList();
 
                 var domainArtworks = dbArtworks.Select(Mappers.ArtworkMapper.Map);
 
@@ -172,9 +168,7 @@ namespace MuseumApp.DB.Repositories
         {
             try
             {
-                List<Artwork> dbArtworks = new List<Artwork>();
-
-                dbArtworks = _context.Artworks.Where(ar => ar.LocationNow == locationId).ToList();
+                List<Artwork> dbArtworks = _context.Artworks.Where(ar => ar.LocationNow == locationId).ToList();
 
                 var domainArtworks = dbArtworks.Select(Mappers.ArtworkMapper.Map);
 
