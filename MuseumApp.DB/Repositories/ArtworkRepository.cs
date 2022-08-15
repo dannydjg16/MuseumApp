@@ -18,6 +18,14 @@ namespace MuseumApp.DB.Repositories
         // Add Artwork
         public bool AddArtwork(Domain.Models.Artwork artwork)
         {
+            try
+            {
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
             if (artwork.VerifyArtMethods())
             {
                 _context.Artworks.Add(Mappers.ArtworkMapper.Map(artwork));
@@ -32,6 +40,17 @@ namespace MuseumApp.DB.Repositories
         // Delete Artwork
         public bool DeleteArtwork(int id)
         {
+            try
+            {
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+
+
             var dbArtwork = _context.Artworks.SingleOrDefault(aw => aw.Id == id);
 
             if (dbArtwork == null)
@@ -48,6 +67,16 @@ namespace MuseumApp.DB.Repositories
         // Get All Artworks/Search by title for artwork
         public IEnumerable<Domain.Models.Artwork> GetAllArtworks(string title = null)
         {
+            try
+            {
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+
             List<Artwork> dbArtworks;
 
             if (!string.IsNullOrWhiteSpace(title))
@@ -71,6 +100,16 @@ namespace MuseumApp.DB.Repositories
 
         public IEnumerable<Domain.Models.Artwork> GetArtOrderByYear(string title = null)
         {
+            try
+            {
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+
             List<Artwork> dbArtworks;
 
             if (!string.IsNullOrWhiteSpace(title))
@@ -97,6 +136,18 @@ namespace MuseumApp.DB.Repositories
         // Get Artworks by Artist
         public IEnumerable<Domain.Models.Artwork> GetArtworksByArtist(int artistId)
         {
+
+            try
+            {
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+
+
             List<Artwork> dbArtworks = new List<Artwork>();
 
             try
@@ -116,6 +167,17 @@ namespace MuseumApp.DB.Repositories
         // Get Artworks by Adder
         public IEnumerable<Domain.Models.Artwork> GetArtworksByAdder(int adderId)
         {
+            try
+            {
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+
+
             List<Artwork> dbArtworks = new List<Artwork>();
 
             try
@@ -135,6 +197,18 @@ namespace MuseumApp.DB.Repositories
         // Get Artworks by Adder
         public IEnumerable<Domain.Models.Artwork> GetArtworksByLocation(int locationId)
         {
+
+            try
+            {
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+
+
             List<Artwork> dbArtworks = new List<Artwork>();
 
             try
@@ -154,6 +228,18 @@ namespace MuseumApp.DB.Repositories
         // Get artwork by ID
         public Domain.Models.Artwork GetArtworkByID(int id)
         {
+            try
+            {
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+
+
+
             var dbArtwork = _context.Artworks.SingleOrDefault(aw => aw.Id == id);
 
             if (dbArtwork == null)
@@ -169,6 +255,17 @@ namespace MuseumApp.DB.Repositories
         // Get Full artwork by ID
         public Domain.Models.Artwork GetFullArtworkByID(int id)
         {
+            try
+            {
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+
+
             var dbArtwork = _context.Artworks
                 .Include(aw => aw.Artist)
                 .Include(aw => aw.LocationNowNavigation)
@@ -188,57 +285,66 @@ namespace MuseumApp.DB.Repositories
         // Edit Artwork
         public bool UpdateArtwork(Domain.Models.Artwork artwork)
         {
-            var dbArtwork = _context.Artworks.SingleOrDefault(aw => aw.Id == artwork.Id);
-
-            if (dbArtwork == null)
+            try
             {
+                var dbArtwork = _context.Artworks.SingleOrDefault(aw => aw.Id == artwork.Id);
+
+                if (dbArtwork == null)
+                {
+                    return false;
+                }
+
+                // If artwork title is NOT null or white space 
+                if (!string.IsNullOrWhiteSpace(artwork.Title))
+                {
+                    // Change the title 
+                    dbArtwork.Title = artwork.Title;
+                }
+
+                // If filename filename is NOT null or white space 
+                if (!string.IsNullOrWhiteSpace(artwork.FileName))
+                {
+                    // Change the filename 
+                    dbArtwork.FileName = artwork.FileName;
+                }
+
+                if (artwork.VerifyArtCreatedYear())
+                {
+                    dbArtwork.YearCreated = artwork.YearCreated;
+                }
+
+                // If description Description is NOT null or white space 
+                if (!string.IsNullOrWhiteSpace(artwork.Description))
+                {
+                    // Change the Description 
+                    dbArtwork.Description = artwork.Description;
+                }
+
+                if (artwork.ArtistId != 0)
+                {
+                    dbArtwork.ArtistId = artwork.Artist.Id;
+                }
+
+                if (artwork.MediumId != 0)
+                {
+                    dbArtwork.MediumId = artwork.Medium.Id;
+                }
+
+                if (artwork.Location is not null)
+                {
+                    dbArtwork.LocationNow = artwork.Location.Id;
+                }
+
+                _context.SaveChanges();
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+
                 return false;
-            }
-
-            // If artwork title is NOT null or white space 
-            if (!string.IsNullOrWhiteSpace(artwork.Title))
-            {
-                // Change the title 
-                dbArtwork.Title = artwork.Title;
-            }
-
-            // If filename filename is NOT null or white space 
-            if (!string.IsNullOrWhiteSpace(artwork.FileName))
-            {
-                // Change the filename 
-                dbArtwork.FileName = artwork.FileName;
-            }
-
-            if (artwork.VerifyArtCreatedYear())
-            {
-                dbArtwork.YearCreated = artwork.YearCreated;
-            }
-
-            // If description Description is NOT null or white space 
-            if (!string.IsNullOrWhiteSpace(artwork.Description))
-            {
-                // Change the Description 
-                dbArtwork.Description = artwork.Description;
-            }
-
-            if (artwork.ArtistId != 0)
-            {
-                dbArtwork.ArtistId = artwork.Artist.Id;
-            }
-
-            if (artwork.MediumId != 0)
-            {
-                dbArtwork.MediumId = artwork.Medium.Id;
-            }
-
-            if (artwork.Location is not null)
-            {
-                dbArtwork.LocationNow = artwork.Location.Id;
-            }
-
-            _context.SaveChanges();
-
-            return true;
+            } 
         }
     }
 }
