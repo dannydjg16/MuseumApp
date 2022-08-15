@@ -222,6 +222,7 @@ namespace MuseumApp.DB.Repositories
 
                     return domainArtists;
                 }
+                return new List<Domain.Models.Artist>();
             }
             catch (Exception e)
             {

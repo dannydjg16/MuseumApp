@@ -33,7 +33,8 @@ namespace MuseumApp.DB.Repositories
 
                 return true;
 
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 Console.WriteLine(e);
 
