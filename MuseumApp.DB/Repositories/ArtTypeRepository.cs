@@ -18,50 +18,77 @@ namespace MuseumApp.DB.Repositories
         // Add ArtType
         public bool AddArtType(Domain.Models.ArtType artType)
         {
-            var dbArtType = _context.ArtTypes.SingleOrDefault(at => at.Name == artType.Name);
-
-            // If the ArtType exists in the database, return false
-            if (dbArtType != null)
+            try
             {
+                var dbArtType = _context.ArtTypes.SingleOrDefault(at => at.Name == artType.Name);
+
+                // If the ArtType exists in the database, return false
+                if (dbArtType != null)
+                {
+                    return false;
+                }
+
+                _context.ArtTypes.Add(Mappers.ArtTypeMapper.Map(artType));
+                _context.SaveChanges();
+
+                return true;
+
+            } catch (Exception e)
+            {
+                Console.WriteLine(e);
+
                 return false;
             }
-
-            _context.ArtTypes.Add(Mappers.ArtTypeMapper.Map(artType));
-            _context.SaveChanges();
-
-            return true;
         }
 
         // Get all ArtTypes
         public IEnumerable<Domain.Models.ArtType> GetArtTypes()
         {
-            List<ArtType> dbArtTypes = _context.ArtTypes.ToList();
-
-            if (dbArtTypes.Any())
+            try
             {
-                List<Domain.Models.ArtType> artTypes = dbArtTypes.Select(at => ArtTypeMapper.Map(at)).ToList();
+                List<ArtType> dbArtTypes = _context.ArtTypes.ToList();
 
-                return artTypes;
+                if (dbArtTypes.Any())
+                {
+                    List<Domain.Models.ArtType> artTypes = dbArtTypes.Select(at => ArtTypeMapper.Map(at)).ToList();
+
+                    return artTypes;
+                }
+
+                return new List<Domain.Models.ArtType>();
             }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
 
-            return new List<Domain.Models.ArtType>();
+                return new List<Domain.Models.ArtType>();
+            }
         }
 
         // Get all ArtTypes Alphabetically
         public IEnumerable<Domain.Models.ArtType> GetArtTypesABC()
         {
-            List<ArtType> dbArtTypes = _context.ArtTypes.ToList();
-
-            if (dbArtTypes.Any())
+            try
             {
-                List<Domain.Models.ArtType> artTypes = dbArtTypes.Select(at => ArtTypeMapper.Map(at)).ToList();
+                List<ArtType> dbArtTypes = _context.ArtTypes.ToList();
 
-                artTypes = artTypes.OrderBy(at => at.Name).ToList();
+                if (dbArtTypes.Any())
+                {
+                    List<Domain.Models.ArtType> artTypes = dbArtTypes.Select(at => ArtTypeMapper.Map(at)).ToList();
 
-                return artTypes;
+                    artTypes = artTypes.OrderBy(at => at.Name).ToList();
+
+                    return artTypes;
+                }
+
+                return new List<Domain.Models.ArtType>();
             }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
 
-            return new List<Domain.Models.ArtType>();
+                return new List<Domain.Models.ArtType>();
+            }
         }
     }
 }
