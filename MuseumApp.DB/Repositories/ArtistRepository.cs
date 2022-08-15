@@ -133,21 +133,9 @@ namespace MuseumApp.DB.Repositories
             try
             {
                 var dbArtist = _context.Artists.SingleOrDefault(a => a.Id == id);
-                var domainArtist = new Domain.Models.Artist();
 
                 if (dbArtist == null)
                 {
-                    return null;
-                }
-
-                try
-                {
-                    domainArtist = ArtistMapper.Map(dbArtist);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("Not able to convert Databse Artist into Domain Artist" + e.Message);
-
                     return null;
                 }
 
