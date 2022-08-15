@@ -17,6 +17,14 @@ namespace MuseumApp.DB.Repositories
         // Add Location Type
         public bool AddLocationType(Domain.Models.LocationType locationType)
         {
+            try
+            {
+
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
             var dbLocationType = _context.LocationTypes.SingleOrDefault(lt => lt.Name == locationType.Name);
 
             if (dbLocationType != null)
@@ -33,6 +41,16 @@ namespace MuseumApp.DB.Repositories
         // Get Location Types
         public IEnumerable<Domain.Models.LocationType> GetLocationTypes()
         {
+            try
+            {
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+
             List<LocationType> dbLocationTypes;
 
             dbLocationTypes = _context.LocationTypes.ToList();
@@ -45,6 +63,16 @@ namespace MuseumApp.DB.Repositories
         // Get Location Types (Alphabetically)
         public IEnumerable<Domain.Models.LocationType> GetLocationTypesABC()
         {
+            try
+            {
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+
             List<LocationType> dbLocationTypes;
 
             dbLocationTypes = _context.LocationTypes.ToList();
