@@ -18,6 +18,14 @@ namespace MuseumApp.DB.Repositories
         // Add Location
         public bool AddLocation(Domain.Models.Location location)
         {
+            try
+            {
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
             var dbLocation = _context.Locations.SingleOrDefault(l => l.LocationName == location.LocationName);
 
             if (dbLocation != null)
