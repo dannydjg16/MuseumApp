@@ -37,72 +37,90 @@ namespace MuseumApp.DB.Repositories
         // Add New Like
         public bool LikeArtwork(int userID, int artworkID)
         {
-            // Create the Like Model to add to DB
-            var newLike = new Like
+            try
             {
-                UserId = userID,
-                ArtId = artworkID
-            };
+                // Create the Like Model to add to DB
+                var newLike = new Like
+                {
+                    UserId = userID,
+                    ArtId = artworkID
+                };
 
-            var dbLike = _context.Likes.SingleOrDefault(like => like.ArtId == artworkID
-                                                            && like.UserId == userID);
+                var dbLike = _context.Likes.SingleOrDefault(like => like.ArtId == artworkID
+                                                                && like.UserId == userID);
 
-            // START process to increment like amount
-            var dbArtwork = _context.Artworks.SingleOrDefault(aw => aw.Id == artworkID);
+                // START process to increment like amount
+                var dbArtwork = _context.Artworks.SingleOrDefault(aw => aw.Id == artworkID);
 
-            // If the artwork is not found OR the like IS found, return false
-            if (dbArtwork == null || dbLike is not null)
+                // If the artwork is not found OR the like IS found, return false
+                if (dbArtwork == null || dbLike is not null)
+                {
+                    return false;
+                }
+
+                if (dbArtwork.Likes == null)
+                {
+                    dbArtwork.Likes = 1;
+                }
+                else
+                {
+                    dbArtwork.Likes++;
+                }
+                // ^END process to increment like amount
+
+                // Set the like
+                _context.Likes.Add(newLike);
+                _context.SaveChanges();
+
+                return true;
+            }
+            catch (Exception e)
             {
-                return false;
+                Console.WriteLine(e);
             }
 
-            if (dbArtwork.Likes == null)
-            {
-                dbArtwork.Likes = 1;
-            }
-            else
-            {
-                dbArtwork.Likes++;
-            }
-            // ^END process to increment like amount
-
-            // Set the like
-            _context.Likes.Add(newLike);
-            _context.SaveChanges();
-
-            return true;
+            return false;
         }
 
         // Delete Old Like
         public bool UnlikeArtwork(int userID, int artworkID)
         {
-            var dbLike = _context.Likes.SingleOrDefault(like => like.ArtId == artworkID
-                                                            && like.UserId == userID);
-
-            // START process to decrement like amount
-            var dbArtwork = _context.Artworks.SingleOrDefault(aw => aw.Id == artworkID);
-
-            // If the artwork is not found OR the like is not found, return false
-            if (dbArtwork == null || dbLike == null)
+            try
             {
-                return false;
+                var dbLike = _context.Likes.SingleOrDefault(like => like.ArtId == artworkID
+                                                && like.UserId == userID);
+
+                // START process to decrement like amount
+                var dbArtwork = _context.Artworks.SingleOrDefault(aw => aw.Id == artworkID);
+
+                // If the artwork is not found OR the like is not found, return false
+                if (dbArtwork == null || dbLike == null)
+                {
+                    return false;
+                }
+                // Should never be called with null likes
+                if (dbArtwork.Likes == null)
+                {
+                    dbArtwork.Likes = 0;
+                }
+                else
+                {
+                    dbArtwork.Likes = dbArtwork.Likes - 1;
+                }
+                // ^END process to decrement like amount
+
+
+                _context.Likes.Remove(dbLike);
+                _context.SaveChanges();
+
+                return true;
             }
-            // Should never be called with null likes
-            if (dbArtwork.Likes == null)
+            catch (Exception e)
             {
-                dbArtwork.Likes = 0;
+                Console.WriteLine(e);
             }
-            else
-            {
-                dbArtwork.Likes = dbArtwork.Likes - 1;
-            }
-            // ^END process to decrement like amount
 
-
-            _context.Likes.Remove(dbLike);
-            _context.SaveChanges();
-
-            return true;
+            return false;
         }
     }
 }
