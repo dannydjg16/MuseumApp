@@ -29,6 +29,7 @@ namespace MuseumApp.DB.Repositories
             catch (Exception e)
             {
                 Console.WriteLine(e);
+
                 return false;
             }
         }
@@ -54,6 +55,7 @@ namespace MuseumApp.DB.Repositories
             catch (Exception e)
             {
                 Console.WriteLine(e);
+
                 return false;
             }
 
@@ -120,9 +122,9 @@ namespace MuseumApp.DB.Repositories
             catch (Exception e)
             {
                 Console.WriteLine(e);
-            }
 
-            return false;
+                return false;
+            }
         }
 
         // Get Artist by ID
@@ -154,9 +156,9 @@ namespace MuseumApp.DB.Repositories
             catch (Exception e)
             {
                 Console.WriteLine(e);
-            }
 
-            return new Domain.Models.Artist();
+                return new Domain.Models.Artist();
+            }
         }
 
         // Get all Artists/ Search by artist name
@@ -189,9 +191,9 @@ namespace MuseumApp.DB.Repositories
             catch (Exception e)
             {
                 Console.WriteLine(e);
-            }
 
-            return new List<Domain.Models.Artist>();
+                return new List<Domain.Models.Artist>();
+            }
         }
 
         // Get all Artists/ Search by artist name (Alphabetically)
@@ -224,9 +226,9 @@ namespace MuseumApp.DB.Repositories
             catch (Exception e)
             {
                 Console.WriteLine(e);
-            }
 
-            return new List<Domain.Models.Artist>();
+                return new List<Domain.Models.Artist>();
+            }
         }
     }
 }
