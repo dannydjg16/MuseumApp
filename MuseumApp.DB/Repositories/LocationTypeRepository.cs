@@ -19,23 +19,24 @@ namespace MuseumApp.DB.Repositories
         {
             try
             {
+                var dbLocationType = _context.LocationTypes.SingleOrDefault(lt => lt.Name == locationType.Name);
 
+                if (dbLocationType != null)
+                {
+                    return false;
+                }
+
+                _context.Add(Mappers.LocationTypeMapper.Map(locationType));
+                _context.SaveChanges();
+
+                return true;
             }
             catch(Exception e)
             {
                 Console.WriteLine(e.ToString());
-            }
-            var dbLocationType = _context.LocationTypes.SingleOrDefault(lt => lt.Name == locationType.Name);
 
-            if (dbLocationType != null)
-            {
                 return false;
             }
-
-            _context.Add(Mappers.LocationTypeMapper.Map(locationType));
-            _context.SaveChanges();
-
-            return true;
         }
 
         // Get Location Types
@@ -44,20 +45,20 @@ namespace MuseumApp.DB.Repositories
             try
             {
 
+                List<LocationType> dbLocationTypes;
+
+                dbLocationTypes = _context.LocationTypes.ToList();
+
+                List<Domain.Models.LocationType> locationTypes = dbLocationTypes.Select(lt => Mappers.LocationTypeMapper.Map(lt)).ToList();
+
+                return locationTypes;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
+
+                return new List<Domain.Models.LocationType>();
             }
-
-
-            List<LocationType> dbLocationTypes;
-
-            dbLocationTypes = _context.LocationTypes.ToList();
-
-            List<Domain.Models.LocationType> locationTypes = dbLocationTypes.Select(lt => Mappers.LocationTypeMapper.Map(lt)).ToList();
-
-            return locationTypes;
         }
 
         // Get Location Types (Alphabetically)
@@ -65,28 +66,27 @@ namespace MuseumApp.DB.Repositories
         {
             try
             {
+                List<LocationType> dbLocationTypes;
 
+                dbLocationTypes = _context.LocationTypes.ToList();
+
+                if (dbLocationTypes.Any())
+                {
+                    List<Domain.Models.LocationType> locationTypes = dbLocationTypes.Select(lt => Mappers.LocationTypeMapper.Map(lt)).ToList();
+
+                    locationTypes = locationTypes.OrderBy(lt => lt.Name).ToList();
+
+                    return locationTypes;
+                }
+
+                return new List<Domain.Models.LocationType>();
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
+
+                return new List<Domain.Models.LocationType>();
             }
-
-
-            List<LocationType> dbLocationTypes;
-
-            dbLocationTypes = _context.LocationTypes.ToList();
-
-            if (dbLocationTypes.Any())
-            {
-                List<Domain.Models.LocationType> locationTypes = dbLocationTypes.Select(lt => Mappers.LocationTypeMapper.Map(lt)).ToList();
-
-                locationTypes = locationTypes.OrderBy(lt => lt.Name).ToList();
-
-                return locationTypes;
-            }
-
-            return new List<Domain.Models.LocationType>();
         }
     }
 }
