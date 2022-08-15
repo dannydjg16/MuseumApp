@@ -20,20 +20,18 @@ namespace MuseumApp.DB.Repositories
         {
             try
             {
+                if (artwork.VerifyArtMethods())
+                {
+                    _context.Artworks.Add(Mappers.ArtworkMapper.Map(artwork));
+                    _context.SaveChanges();
 
+                    return true;
+                }
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
             }
-            if (artwork.VerifyArtMethods())
-            {
-                _context.Artworks.Add(Mappers.ArtworkMapper.Map(artwork));
-                _context.SaveChanges();
-
-                return true;
-            }
-
             return false;
         }
 
@@ -42,24 +40,20 @@ namespace MuseumApp.DB.Repositories
         {
             try
             {
+                var dbArtwork = _context.Artworks.SingleOrDefault(aw => aw.Id == id);
 
+                if (dbArtwork == null)
+                {
+                    return false;
+                }
+
+                _context.Artworks.Remove(dbArtwork);
+                _context.SaveChanges();
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
             }
-
-
-
-            var dbArtwork = _context.Artworks.SingleOrDefault(aw => aw.Id == id);
-
-            if (dbArtwork == null)
-            {
-                return false;
-            }
-
-            _context.Artworks.Remove(dbArtwork);
-            _context.SaveChanges();
 
             return true;
         }
@@ -69,99 +63,87 @@ namespace MuseumApp.DB.Repositories
         {
             try
             {
+                List<Artwork> dbArtworks;
 
+                if (!string.IsNullOrWhiteSpace(title))
+                {
+                    dbArtworks = _context.Artworks.Include(a => a.Artist).Where(aw => aw.Title.Contains(title)).ToList();
+                }
+                else
+                {
+                    dbArtworks = _context.Artworks.Include(a => a.Artist).ToList();
+                }
+
+                if (!dbArtworks.Any())
+                {
+                    return new List<Domain.Models.Artwork>();
+                }
+
+                List<Domain.Models.Artwork> artworks = dbArtworks.Select(aw => Mappers.ArtworkMapper.Map(aw)).ToList();
+
+                return artworks;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-            }
 
-
-            List<Artwork> dbArtworks;
-
-            if (!string.IsNullOrWhiteSpace(title))
-            {
-                dbArtworks = _context.Artworks.Include(a => a.Artist).Where(aw => aw.Title.Contains(title)).ToList();
-            }
-            else
-            {
-                dbArtworks = _context.Artworks.Include(a => a.Artist).ToList();
-            }
-
-            if (!dbArtworks.Any())
-            {
                 return new List<Domain.Models.Artwork>();
             }
-
-            List<Domain.Models.Artwork> artworks = dbArtworks.Select(aw => Mappers.ArtworkMapper.Map(aw)).ToList();
-
-            return artworks;
         }
 
         public IEnumerable<Domain.Models.Artwork> GetArtOrderByYear(string title = null)
         {
             try
             {
+                List<Artwork> dbArtworks;
 
+                if (!string.IsNullOrWhiteSpace(title))
+                {
+                    dbArtworks = _context.Artworks.Include(a => a.Artist).Where(aw => aw.Title.Contains(title)).ToList();
+                }
+                else
+                {
+                    dbArtworks = _context.Artworks.Include(a => a.Artist).ToList();
+                }
+
+                if (dbArtworks.Any())
+                {
+                    List<Domain.Models.Artwork> artworks = dbArtworks.Select(aw => Mappers.ArtworkMapper.Map(aw)).ToList();
+
+                    artworks = artworks.OrderBy(artwork => artwork.YearCreated).Reverse().ToList();
+
+                    return artworks;
+                }
+
+                return new List<Domain.Models.Artwork>();
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
+
+                return new List<Domain.Models.Artwork>();
             }
-
-
-            List<Artwork> dbArtworks;
-
-            if (!string.IsNullOrWhiteSpace(title))
-            {
-                dbArtworks = _context.Artworks.Include(a => a.Artist).Where(aw => aw.Title.Contains(title)).ToList();
-            }
-            else
-            {
-                dbArtworks = _context.Artworks.Include(a => a.Artist).ToList();
-            }
-
-            if (dbArtworks.Any())
-            {
-                List<Domain.Models.Artwork> artworks = dbArtworks.Select(aw => Mappers.ArtworkMapper.Map(aw)).ToList();
-
-                artworks = artworks.OrderBy(artwork => artwork.YearCreated).Reverse().ToList();
-
-                return artworks;
-            }
-
-            return new List<Domain.Models.Artwork>();
         }
 
         // Get Artworks by Artist
         public IEnumerable<Domain.Models.Artwork> GetArtworksByArtist(int artistId)
         {
-
             try
             {
+                List<Artwork> dbArtworks = new List<Artwork>();
 
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-
-
-
-            List<Artwork> dbArtworks = new List<Artwork>();
-
-            try
-            {
                 dbArtworks = _context.Artworks.Where(ar => ar.ArtistId == artistId).ToList();
+
+                var domainArtworks = dbArtworks.Select(Mappers.ArtworkMapper.Map);
+
+                return domainArtworks;
             }
             catch (Exception e)
             {
                 Console.WriteLine("Exception: " + e);
+
+                return new List<Domain.Models.Artwork>();
             }
-
-            var domainArtworks = dbArtworks.Select(Mappers.ArtworkMapper.Map);
-
-            return domainArtworks; 
         }
 
         // Get Artworks by Adder
@@ -169,60 +151,41 @@ namespace MuseumApp.DB.Repositories
         {
             try
             {
+                List<Artwork> dbArtworks = new List<Artwork>();
 
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-
-
-
-            List<Artwork> dbArtworks = new List<Artwork>();
-
-            try
-            {
                 dbArtworks = _context.Artworks.Where(ar => ar.ArtWorkAdderId == adderId).ToList();
+
+                var domainArtworks = dbArtworks.Select(Mappers.ArtworkMapper.Map);
+
+                return domainArtworks;
             }
             catch (Exception e)
             {
                 Console.WriteLine("Exception: " + e);
+
+                return new List<Domain.Models.Artwork>();
             }
-
-            var domainArtworks = dbArtworks.Select(Mappers.ArtworkMapper.Map);
-
-            return domainArtworks;
         }
 
         // Get Artworks by Adder
         public IEnumerable<Domain.Models.Artwork> GetArtworksByLocation(int locationId)
         {
-
             try
             {
+                List<Artwork> dbArtworks = new List<Artwork>();
 
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-
-
-
-            List<Artwork> dbArtworks = new List<Artwork>();
-
-            try
-            {
                 dbArtworks = _context.Artworks.Where(ar => ar.LocationNow == locationId).ToList();
+
+                var domainArtworks = dbArtworks.Select(Mappers.ArtworkMapper.Map);
+
+                return domainArtworks;
             }
             catch (Exception e)
             {
                 Console.WriteLine("Exception: " + e);
+
+                return new List<Domain.Models.Artwork>();
             }
-
-            var domainArtworks = dbArtworks.Select(Mappers.ArtworkMapper.Map);
-
-            return domainArtworks;
         }
 
         // Get artwork by ID
@@ -230,26 +193,23 @@ namespace MuseumApp.DB.Repositories
         {
             try
             {
+                var dbArtwork = _context.Artworks.SingleOrDefault(aw => aw.Id == id);
 
+                if (dbArtwork == null)
+                {
+                    return null;
+                }
+
+                Domain.Models.Artwork artwork = Mappers.ArtworkMapper.Map(dbArtwork);
+
+                return artwork;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
+
+                return new Domain.Models.Artwork();
             }
-
-
-
-
-            var dbArtwork = _context.Artworks.SingleOrDefault(aw => aw.Id == id);
-
-            if (dbArtwork == null)
-            {
-                return null;
-            }
-
-            Domain.Models.Artwork artwork = Mappers.ArtworkMapper.Map(dbArtwork);
-
-            return artwork;
         }
 
         // Get Full artwork by ID
@@ -257,29 +217,27 @@ namespace MuseumApp.DB.Repositories
         {
             try
             {
+                var dbArtwork = _context.Artworks
+                    .Include(aw => aw.Artist)
+                    .Include(aw => aw.LocationNowNavigation)
+                    .Include(aw => aw.Medium)
+                    .SingleOrDefault(aw => aw.Id == id);
 
+                if (dbArtwork == null)
+                {
+                    return null;
+                }
+
+                Domain.Models.Artwork artwork = Mappers.ArtworkMapper.MapFull(dbArtwork);
+
+                return artwork;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
+
+                return new Domain.Models.Artwork();
             }
-
-
-
-            var dbArtwork = _context.Artworks
-                .Include(aw => aw.Artist)
-                .Include(aw => aw.LocationNowNavigation)
-                .Include(aw => aw.Medium)
-                .SingleOrDefault(aw => aw.Id == id);
-
-            if (dbArtwork == null)
-            {
-                return null;
-            }
-
-            Domain.Models.Artwork artwork = Mappers.ArtworkMapper.MapFull(dbArtwork);
-
-            return artwork;
         }
 
         // Edit Artwork
