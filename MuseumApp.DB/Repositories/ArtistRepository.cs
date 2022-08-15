@@ -28,7 +28,7 @@ namespace MuseumApp.DB.Repositories
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine(e.ToString());
 
                 return false;
             }
@@ -54,7 +54,7 @@ namespace MuseumApp.DB.Repositories
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine(e.ToString());
 
                 return false;
             }
@@ -121,7 +121,7 @@ namespace MuseumApp.DB.Repositories
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine(e.ToString());
 
                 return false;
             }
@@ -143,7 +143,7 @@ namespace MuseumApp.DB.Repositories
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine(e.ToString());
 
                 return new Domain.Models.Artist();
             }
@@ -178,7 +178,7 @@ namespace MuseumApp.DB.Repositories
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine(e.ToString());
 
                 return new List<Domain.Models.Artist>();
             }
@@ -214,7 +214,7 @@ namespace MuseumApp.DB.Repositories
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine(e.ToString());
 
                 return new List<Domain.Models.Artist>();
             }
