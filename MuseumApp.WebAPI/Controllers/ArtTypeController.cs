@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -25,14 +26,23 @@ namespace MuseumApp.WebAPI.Controllers
         [Authorize]
         public async Task<ActionResult<IEnumerable<ArtTypeModel>>> Get()
         {
-            var artTypes = await Task.FromResult(_artTypeRespository.GetArtTypes());
-
-            if (artTypes.Select(Mappers.ArtTypeModelMapper.Map) is IEnumerable<ArtTypeModel> retrievedATMs)
+            try
             {
-                return Ok(retrievedATMs);
-            }
+                var artTypes = await Task.FromResult(_artTypeRespository.GetArtTypes());
 
-            return NotFound();
+                if (artTypes.Select(Mappers.ArtTypeModelMapper.Map) is IEnumerable<ArtTypeModel> retrievedATMs)
+                {
+                    return Ok(retrievedATMs);
+                }
+
+                return NotFound();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+
+                return NotFound();
+            }
         }
 
         // GET: api/arttype/abc
@@ -40,14 +50,23 @@ namespace MuseumApp.WebAPI.Controllers
         [Authorize]
         public async Task<ActionResult<IEnumerable<ArtTypeModel>>> GetABC()
         {
-            var artTypes = await Task.FromResult(_artTypeRespository.GetArtTypesABC());
-
-            if (artTypes.Select(Mappers.ArtTypeModelMapper.Map) is IEnumerable<ArtTypeModel> retrievedATMs)
+            try
             {
-                return Ok(retrievedATMs);
-            }
+                var artTypes = await Task.FromResult(_artTypeRespository.GetArtTypesABC());
 
-            return NotFound();
+                if (artTypes.Select(Mappers.ArtTypeModelMapper.Map) is IEnumerable<ArtTypeModel> retrievedATMs)
+                {
+                    return Ok(retrievedATMs);
+                }
+
+                return NotFound();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+
+                return NotFound();
+            }
         }
 
         // POST api/arttype
@@ -55,14 +74,23 @@ namespace MuseumApp.WebAPI.Controllers
         [Authorize]
         public async Task<IActionResult> Post([FromBody] ArtTypeModel artTypeModel) 
         {
-            var complete = await Task.FromResult(_artTypeRespository.AddArtType(Mappers.ArtTypeModelMapper.Map(artTypeModel)));
-
-            if (complete)
+            try
             {
-                return Ok();
-            }
+                var complete = await Task.FromResult(_artTypeRespository.AddArtType(Mappers.ArtTypeModelMapper.Map(artTypeModel)));
 
-            return BadRequest();
+                if (complete)
+                {
+                    return Ok();
+                }
+
+                return BadRequest();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+
+                return BadRequest();
+            }
         }
     }
 }
