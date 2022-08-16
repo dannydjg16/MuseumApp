@@ -51,8 +51,7 @@ namespace MuseumApp.WebAPI.Controllers
         [HttpGet("{id}")]
         [Authorize]
         public async Task<ActionResult<ArtworkModel>> Get([FromRoute] int id)
-        {
-
+        { 
             try
             {
                 var domainArtwork = await Task.FromResult(_artworkRepository.GetArtworkByID(id));
@@ -135,10 +134,8 @@ namespace MuseumApp.WebAPI.Controllers
                 {
                     return Ok(artworkModels);
                 }
-                else
-                {
-                    return NoContent();
-                }
+
+                return NoContent();
             }
             catch
             {
@@ -160,10 +157,8 @@ namespace MuseumApp.WebAPI.Controllers
                 {
                     return Ok(artworkModels);
                 }
-                else
-                {
-                    return NoContent();
-                }
+
+                return NoContent();
             }
             catch
             {
@@ -185,11 +180,11 @@ namespace MuseumApp.WebAPI.Controllers
                 {
                     return Ok(artworkModels);
                 }
-                else
-                {
-                    return NoContent();
-                }
-            } catch {
+
+                return NoContent();
+            }
+            catch
+            {
                 return NotFound();
             }
         }
