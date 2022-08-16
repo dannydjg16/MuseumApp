@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -25,16 +26,25 @@ namespace MuseumApp.WebAPI.Controllers
         [Authorize]
         public async Task<ActionResult<IEnumerable<ArtworkModel>>> Get([FromQuery] string title = null)
         {
-            var domain_artworks = await Task.FromResult(_artworkRepository.GetAllArtworks(title));
-
-            IEnumerable<ArtworkModel> artworkModels = domain_artworks.Select(Mappers.ArtworkModelMapper.Map);
-
-            if (artworkModels.Any())
+            try
             {
-                return Ok(artworkModels);
-            }
+                var domain_artworks = await Task.FromResult(_artworkRepository.GetAllArtworks(title));
 
-            return NotFound();
+                IEnumerable<ArtworkModel> artworkModels = domain_artworks.Select(Mappers.ArtworkModelMapper.Map);
+
+                if (artworkModels.Any())
+                {
+                    return Ok(artworkModels);
+                }
+
+                return NotFound();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+
+                return NotFound();
+            }
         }
 
         // GET api/artwork/5
@@ -42,14 +52,24 @@ namespace MuseumApp.WebAPI.Controllers
         [Authorize]
         public async Task<ActionResult<ArtworkModel>> Get([FromRoute] int id)
         {
-            var domainArtwork = await Task.FromResult(_artworkRepository.GetArtworkByID(id));
 
-            if (domainArtwork != null && Mappers.ArtworkModelMapper.Map(domainArtwork) is ArtworkModel artworkModel)
+            try
             {
-                return Ok(artworkModel);
-            }
+                var domainArtwork = await Task.FromResult(_artworkRepository.GetArtworkByID(id));
 
-            return NotFound();
+                if (domainArtwork != null && Mappers.ArtworkModelMapper.Map(domainArtwork) is ArtworkModel artworkModel)
+                {
+                    return Ok(artworkModel);
+                }
+
+                return NotFound();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+
+                return NotFound();
+            }
         }
 
         // GET: api/artwork
@@ -57,16 +77,25 @@ namespace MuseumApp.WebAPI.Controllers
         [Authorize]
         public async Task<ActionResult<IEnumerable<ArtworkModel>>> GetOrderByYear([FromQuery] string title = null)
         {
-            var domain_artworks = await Task.FromResult(_artworkRepository.GetArtOrderByYear(title));
-
-            IEnumerable<ArtworkModel> artworkModels = domain_artworks.Select(Mappers.ArtworkModelMapper.Map);
-
-            if (artworkModels.Any())
+            try
             {
-                return Ok(artworkModels);
-            }
+                var domain_artworks = await Task.FromResult(_artworkRepository.GetArtOrderByYear(title));
 
-            return NotFound();
+                IEnumerable<ArtworkModel> artworkModels = domain_artworks.Select(Mappers.ArtworkModelMapper.Map);
+
+                if (artworkModels.Any())
+                {
+                    return Ok(artworkModels);
+                }
+
+                return NotFound();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+
+                return NotFound();
+            }
         }
 
         // GET api/artwork/5
@@ -74,14 +103,23 @@ namespace MuseumApp.WebAPI.Controllers
         [Authorize]
         public async Task<ActionResult<ArtworkModel>> GetFull([FromRoute] int id)
         {
-            var domainArtwork = await Task.FromResult(_artworkRepository.GetFullArtworkByID(id));
-
-            if (domainArtwork != null && Mappers.ArtworkModelMapper.MapFull(domainArtwork) is ArtworkModel artworkModel)
+            try
             {
-                return Ok(artworkModel);  
-            }
+                var domainArtwork = await Task.FromResult(_artworkRepository.GetFullArtworkByID(id));
 
-            return NotFound();
+                if (domainArtwork != null && Mappers.ArtworkModelMapper.MapFull(domainArtwork) is ArtworkModel artworkModel)
+                {
+                    return Ok(artworkModel);
+                }
+
+                return NotFound();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+
+                return NotFound();
+            }
         }
 
         // GET api/artwork/adder/5
@@ -161,15 +199,23 @@ namespace MuseumApp.WebAPI.Controllers
         [Authorize]
         public async Task<IActionResult> Post([FromBody] ArtworkModel artworkModel)
         {
-            var created = await Task.FromResult(_artworkRepository.AddArtwork(Mappers.ArtworkModelMapper.Map(artworkModel)));
-
-            if (created)
+            try
             {
-                return Ok();
+                var created = await Task.FromResult(_artworkRepository.AddArtwork(Mappers.ArtworkModelMapper.Map(artworkModel)));
+
+                if (created)
+                {
+                    return Ok();
+                }
+
+                return NotFound();
             }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
 
-            return NotFound();
-
+                return NotFound();
+            }
         }
 
         // PUT api/artwork/5
@@ -177,14 +223,23 @@ namespace MuseumApp.WebAPI.Controllers
         [Authorize]
         public async Task<IActionResult> Put([FromBody] ArtworkModel artworkModel)
         {
-            var edited = await Task.FromResult(_artworkRepository.UpdateArtwork(Mappers.ArtworkModelMapper.MapFull(artworkModel)));
-
-            if (edited)
+            try
             {
-                return NoContent();
-            }
+                var edited = await Task.FromResult(_artworkRepository.UpdateArtwork(Mappers.ArtworkModelMapper.MapFull(artworkModel)));
 
-            return BadRequest();
+                if (edited)
+                {
+                    return NoContent();
+                }
+
+                return BadRequest();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+
+                return BadRequest();
+            }
         }
 
         // DELETE api/artwork/5
@@ -192,14 +247,23 @@ namespace MuseumApp.WebAPI.Controllers
         [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
-            var deleted = await Task.FromResult(_artworkRepository.DeleteArtwork(id));
-
-            if (deleted)
+            try
             {
-                return NoContent();
-            }
+                var deleted = await Task.FromResult(_artworkRepository.DeleteArtwork(id));
 
-            return NotFound();
+                if (deleted)
+                {
+                    return NoContent();
+                }
+
+                return NotFound();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+
+                return NotFound();
+            }
         }
     }
 }
