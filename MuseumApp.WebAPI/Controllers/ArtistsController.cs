@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -25,14 +26,23 @@ namespace MuseumApp.WebAPI.Controllers
         [Authorize]
         public async Task<ActionResult<IEnumerable<ArtistModel>>> Get()
         {
-            var appArtists = await Task.FromResult(_artistRepository.GetArtists());
-
-            if(appArtists.Select(Mappers.ArtistModelMapper.Map) is IEnumerable<ArtistModel> artists)
+            try
             {
-                return Ok(artists);
-            }
+                var appArtists = await Task.FromResult(_artistRepository.GetArtists());
 
-            return NotFound();
+                if (appArtists.Select(Mappers.ArtistModelMapper.Map) is IEnumerable<ArtistModel> artists)
+                {
+                    return Ok(artists);
+                }
+
+                return NotFound();
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.ToString());
+
+                return NotFound();
+            }
         }
 
         // GET api/artists/5
@@ -40,14 +50,23 @@ namespace MuseumApp.WebAPI.Controllers
         [Authorize]
         public async Task<ActionResult<ArtistModel>> Get(int id)
         {
-            var appArtist = await Task.FromResult(_artistRepository.GetArtistByID(id));
-
-            if (Mappers.ArtistModelMapper.MapWithArtworks(appArtist) is ArtistModel artist)
+            try
             {
-                return Ok(artist);
-            }
+                var appArtist = await Task.FromResult(_artistRepository.GetArtistByID(id));
 
-            return NotFound();
+                if (Mappers.ArtistModelMapper.MapWithArtworks(appArtist) is ArtistModel artist)
+                {
+                    return Ok(artist);
+                }
+
+                return NotFound();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+
+                return NotFound();
+            }
         }
 
         // GET: api/artists/abc
@@ -55,14 +74,23 @@ namespace MuseumApp.WebAPI.Controllers
         [Authorize]
         public async Task<ActionResult<IEnumerable<ArtistModel>>> GetABC()
         {
-            var appArtists = await Task.FromResult(_artistRepository.GetArtistsABC());
-
-            if (appArtists.Select(Mappers.ArtistModelMapper.Map) is IEnumerable<ArtistModel> artists)
+            try
             {
-                return Ok(artists);
-            }
+                var appArtists = await Task.FromResult(_artistRepository.GetArtistsABC());
 
-            return NotFound();
+                if (appArtists.Select(Mappers.ArtistModelMapper.Map) is IEnumerable<ArtistModel> artists)
+                {
+                    return Ok(artists);
+                }
+
+                return NotFound();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+
+                return NotFound();
+            }
         }
 
         // POST api/artists
@@ -70,14 +98,23 @@ namespace MuseumApp.WebAPI.Controllers
         [Authorize]
         public async Task<IActionResult> Post([FromBody] ArtistModel artistModel)
         {
-            var success = await Task.FromResult(_artistRepository.CreateArtist(Mappers.ArtistModelMapper.Map(artistModel)));
-
-            if (success)
+            try
             {
-                return Ok();
-            }
+                var success = await Task.FromResult(_artistRepository.CreateArtist(Mappers.ArtistModelMapper.Map(artistModel)));
 
-            return NotFound();
+                if (success)
+                {
+                    return Ok();
+                }
+
+                return NotFound();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+
+                return NotFound();
+            }
         }
 
         // PUT api/artists/5
@@ -85,14 +122,23 @@ namespace MuseumApp.WebAPI.Controllers
         [Authorize]
         public async Task<IActionResult> Put([FromBody] ArtistModel artistModel)
         {
-            var pass = await Task.FromResult(_artistRepository.EditArtist(Mappers.ArtistModelMapper.Map(artistModel)));
-
-            if (pass)
+            try
             {
-                return NoContent();
-            }
+                var pass = await Task.FromResult(_artistRepository.EditArtist(Mappers.ArtistModelMapper.Map(artistModel)));
 
-            return BadRequest();
+                if (pass)
+                {
+                    return NoContent();
+                }
+
+                return BadRequest();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+
+                return BadRequest();
+            }
         }
 
         // DELETE api/artists/5
@@ -100,14 +146,23 @@ namespace MuseumApp.WebAPI.Controllers
         [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
-            var pass = await Task.FromResult(_artistRepository.DeleteArtist(id));
-
-            if (pass)
+            try
             {
-                return NoContent();
-            }
+                var pass = await Task.FromResult(_artistRepository.DeleteArtist(id));
 
-            return NotFound();
+                if (pass)
+                {
+                    return NoContent();
+                }
+
+                return NotFound();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+
+                return NotFound();
+            }
         }
     }
 }
