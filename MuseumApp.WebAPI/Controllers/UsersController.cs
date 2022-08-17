@@ -36,6 +36,7 @@ namespace MuseumApp.WebAPI.Controllers
                 {
                     return Ok(userModels);
                 }
+
                 return NotFound();
             }
             catch (Exception e)
@@ -51,7 +52,6 @@ namespace MuseumApp.WebAPI.Controllers
         [Authorize]
         public async Task<ActionResult<UserModel>> GetAsync(int id)
         {
-
             try
             {
                 var d_user = await Task.FromResult(_userRepository.GetUserByID(id));
@@ -60,6 +60,7 @@ namespace MuseumApp.WebAPI.Controllers
                 {
                     return Ok(user);
                 }
+
                 return NotFound();
             }
             catch (Exception e)
@@ -84,6 +85,7 @@ namespace MuseumApp.WebAPI.Controllers
                 {
                     return Ok(user);
                 }
+
                 return NotFound();
             }
             catch (Exception e)
@@ -107,6 +109,7 @@ namespace MuseumApp.WebAPI.Controllers
                 {
                     return CreatedAtAction(nameof(Get), new { id = user.ID }, user);
                 }
+
                 return BadRequest();
             }
             catch (Exception e)
@@ -137,6 +140,7 @@ namespace MuseumApp.WebAPI.Controllers
                         return BadRequest();
                     }
                 }
+
                 return NotFound();
             }
             catch (Exception e)

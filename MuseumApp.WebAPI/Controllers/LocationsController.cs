@@ -98,7 +98,6 @@ namespace MuseumApp.WebAPI.Controllers
         [Authorize]
         public async Task<IActionResult> Post([FromBody] LocationModel locationModel)
         {
-
             try
             {
                 var domain_location = Mappers.LocationModelMapper.MapFullNoArtworks(locationModel);
@@ -132,6 +131,7 @@ namespace MuseumApp.WebAPI.Controllers
                 {
                     return NoContent();
                 }
+
                 return BadRequest();
             }
             catch (Exception e)
