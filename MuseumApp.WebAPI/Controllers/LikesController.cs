@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -25,13 +26,23 @@ namespace MuseumApp.WebAPI.Controllers
         [Authorize]
         public async Task<ActionResult<IEnumerable<ArtworkModel>>> Get(int id)
         {
-            var result = await Task.FromResult(_likesRepository.GetUsersLikes(id));
-
-            if (result.Select(Mappers.ArtworkModelMapper.Map) is IEnumerable<ArtworkModel> artworkModels)
+            try
             {
-                return Ok(artworkModels);
+                var result = await Task.FromResult(_likesRepository.GetUsersLikes(id));
+
+                if (result.Select(Mappers.ArtworkModelMapper.Map) is IEnumerable<ArtworkModel> artworkModels)
+                {
+                    return Ok(artworkModels);
+                }
+
+                return NotFound();
             }
-            return NotFound();
+            catch(Exception e)
+            {
+                Console.WriteLine(e.ToString());
+
+                return NotFound();
+            }
         }
 
         // POST api/likes/artID/user/userID
@@ -39,12 +50,23 @@ namespace MuseumApp.WebAPI.Controllers
         [Authorize]
         public async Task<IActionResult> Post(int artID, int userID)
         {
-            var added = await Task.FromResult(_likesRepository.LikeArtwork(userID, artID));
-            if(added)
+            try
             {
-                return Ok();
+                var added = await Task.FromResult(_likesRepository.LikeArtwork(userID, artID));
+
+                if (added)
+                {
+                    return Ok();
+                }
+
+                return BadRequest();
             }
-            return BadRequest();
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+
+                return BadRequest();
+            }
         }
 
         // DELETE api/likes/5
@@ -52,12 +74,23 @@ namespace MuseumApp.WebAPI.Controllers
         [Authorize]
         public async Task<IActionResult> Delete(int artID, int userID)
         {
-            var deleted = await Task.FromResult(_likesRepository.UnlikeArtwork(userID, artID));
-            if (deleted)
+            try
             {
-                return Ok();
+                var deleted = await Task.FromResult(_likesRepository.UnlikeArtwork(userID, artID));
+
+                if (deleted)
+                {
+                    return Ok();
+                }
+
+                return BadRequest();
             }
-            return BadRequest();
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+
+                return BadRequest();
+            }
         }
     }
 }

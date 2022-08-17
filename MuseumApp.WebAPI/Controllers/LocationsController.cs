@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -25,14 +26,23 @@ namespace MuseumApp.WebAPI.Controllers
         [Authorize]
         public async Task<ActionResult<IEnumerable<LocationModel>>> Get([FromQuery] string locationName = null)
         {
-            var domain_locations = await Task.FromResult(_locationRepository.GetLocations(locationName));
-
-            if (domain_locations.Select(Mappers.LocationModelMapper.Map) is IEnumerable<LocationModel> locationModels)
+            try
             {
-                return Ok(locationModels);
-            }
+                var domain_locations = await Task.FromResult(_locationRepository.GetLocations(locationName));
 
-            return NotFound();
+                if (domain_locations.Select(Mappers.LocationModelMapper.Map) is IEnumerable<LocationModel> locationModels)
+                {
+                    return Ok(locationModels);
+                }
+
+                return NotFound();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+
+                return NotFound();
+            }
         }
 
         // GET api/locations/5
@@ -40,14 +50,23 @@ namespace MuseumApp.WebAPI.Controllers
         [Authorize]
         public async Task<ActionResult<LocationModel>> Get([FromRoute] int id)
         {
-            var location = await Task.FromResult(_locationRepository.GetLocationById(id));
-
-            if (Mappers.LocationModelMapper.MapFullNoArtworks(location) is LocationModel locationModel)
+            try
             {
-                return Ok(locationModel);
-            }
+                var location = await Task.FromResult(_locationRepository.GetLocationById(id));
 
-            return NotFound();
+                if (Mappers.LocationModelMapper.MapFullNoArtworks(location) is LocationModel locationModel)
+                {
+                    return Ok(locationModel);
+                }
+
+                return NotFound();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+
+                return NotFound();
+            }
         }
 
         // GET: api/locations/abc
@@ -55,14 +74,23 @@ namespace MuseumApp.WebAPI.Controllers
         [Authorize]
         public async Task<ActionResult<IEnumerable<LocationModel>>> GetABC([FromQuery] string locationName = null)
         {
-            var domain_locations = await Task.FromResult(_locationRepository.GetLocationsABC(locationName));
-
-            if (domain_locations.Select(Mappers.LocationModelMapper.Map) is IEnumerable<LocationModel> locationModels)
+            try
             {
-                return Ok(locationModels);
-            }
+                var domain_locations = await Task.FromResult(_locationRepository.GetLocationsABC(locationName));
 
-            return NotFound();
+                if (domain_locations.Select(Mappers.LocationModelMapper.Map) is IEnumerable<LocationModel> locationModels)
+                {
+                    return Ok(locationModels);
+                }
+
+                return NotFound();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+
+                return NotFound();
+            }
         }
 
         // POST api/locations
@@ -70,15 +98,24 @@ namespace MuseumApp.WebAPI.Controllers
         [Authorize]
         public async Task<IActionResult> Post([FromBody] LocationModel locationModel)
         {
-            var domain_location = Mappers.LocationModelMapper.MapFullNoArtworks(locationModel);
-            var added = await Task.FromResult(_locationRepository.AddLocation(domain_location));
-
-            if (added)
+            try
             {
-                return Ok();
-            }
+                var domain_location = Mappers.LocationModelMapper.MapFullNoArtworks(locationModel);
+                var added = await Task.FromResult(_locationRepository.AddLocation(domain_location));
 
-            return BadRequest();
+                if (added)
+                {
+                    return Ok();
+                }
+
+                return BadRequest();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+
+                return BadRequest();
+            }
         }
 
         // PUT api/locations/5
@@ -86,13 +123,23 @@ namespace MuseumApp.WebAPI.Controllers
         [Authorize]
         public async Task<IActionResult> Put([FromBody] LocationModel locationModel)
         {
-            var edited = await Task.FromResult(_locationRepository.EditLocation(Mappers.LocationModelMapper.MapFullNoArtworks(locationModel)));
-
-            if (edited)
+            try
             {
-                return NoContent();
+                var edited = await Task.FromResult(_locationRepository.EditLocation(Mappers.LocationModelMapper.MapFullNoArtworks(locationModel)));
+
+                if (edited)
+                {
+                    return NoContent();
+                }
+
+                return BadRequest();
             }
-            return BadRequest();
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+
+                return BadRequest();
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -25,14 +26,23 @@ namespace MuseumApp.WebAPI.Controllers
         [Authorize]
         public async Task<ActionResult<IEnumerable<LocationTypeModel>>> Get()
         {
-            var domainLTs = await Task.FromResult(_locationTypeRepository.GetLocationTypes());
-
-            if (domainLTs.Select(Mappers.LocationTypeModelMapper.Map) is IEnumerable<LocationTypeModel> locationTypeModels)
+            try
             {
-                return Ok(locationTypeModels);
-            }
+                var domainLTs = await Task.FromResult(_locationTypeRepository.GetLocationTypes());
 
-            return NotFound();
+                if (domainLTs.Select(Mappers.LocationTypeModelMapper.Map) is IEnumerable<LocationTypeModel> locationTypeModels)
+                {
+                    return Ok(locationTypeModels);
+                }
+
+                return NotFound();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+
+                return NotFound();
+            }
         }
 
         // GET: api/locationtype/abc
@@ -40,14 +50,23 @@ namespace MuseumApp.WebAPI.Controllers
         [Authorize]
         public async Task<ActionResult<IEnumerable<LocationTypeModel>>> GetABC()
         {
-            var domainLTs = await Task.FromResult(_locationTypeRepository.GetLocationTypesABC());
-
-            if (domainLTs.Select(Mappers.LocationTypeModelMapper.Map) is IEnumerable<LocationTypeModel> locationTypeModels)
+            try
             {
-                return Ok(locationTypeModels);
-            }
+                var domainLTs = await Task.FromResult(_locationTypeRepository.GetLocationTypesABC());
 
-            return NotFound();
+                if (domainLTs.Select(Mappers.LocationTypeModelMapper.Map) is IEnumerable<LocationTypeModel> locationTypeModels)
+                {
+                    return Ok(locationTypeModels);
+                }
+
+                return NotFound();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+
+                return NotFound();
+            }
         }
 
         // POST api/locationtype
@@ -55,15 +74,25 @@ namespace MuseumApp.WebAPI.Controllers
         [Authorize]
         public async Task<IActionResult> Post([FromBody] LocationTypeModel locationTypeModel)
         {
-            var domainLT = Mappers.LocationTypeModelMapper.Map(locationTypeModel);
-            var added = await Task.FromResult(_locationTypeRepository.AddLocationType(domainLT));
-
-            if (added)
+            try
             {
-                return Ok();
-            }
+                var domainLT = Mappers.LocationTypeModelMapper.Map(locationTypeModel);
 
-            return BadRequest();
+                var added = await Task.FromResult(_locationTypeRepository.AddLocationType(domainLT));
+
+                if (added)
+                {
+                    return Ok();
+                }
+
+                return BadRequest();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+
+                return BadRequest();
+            }
         }
     }
 }

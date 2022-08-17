@@ -6,6 +6,7 @@ using MuseumApp.Domain.Interfaces;
 using MuseumApp.Domain.Models;
 using MuseumApp.WebAPI.Models;
 using Microsoft.AspNetCore.Authorization;
+using System;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -27,13 +28,23 @@ namespace MuseumApp.WebAPI.Controllers
         [Authorize]
         public async Task<ActionResult<IEnumerable<UserModel>>> Get([FromQuery] string name = null)
         {
-            var domainUsers = await Task.FromResult(_userRepository.GetUsers(name));
-
-            if (domainUsers.Select(Mappers.UserModelMapper.Map) is IEnumerable<UserModel> userModels)
+            try
             {
-                return Ok(userModels);
+                var domainUsers = await Task.FromResult(_userRepository.GetUsers(name));
+
+                if (domainUsers.Select(Mappers.UserModelMapper.Map) is IEnumerable<UserModel> userModels)
+                {
+                    return Ok(userModels);
+                }
+
+                return NotFound();
             }
-            return NotFound();
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+
+                return NotFound();
+            }
         }
 
         // GET api/users/5
@@ -41,13 +52,23 @@ namespace MuseumApp.WebAPI.Controllers
         [Authorize]
         public async Task<ActionResult<UserModel>> GetAsync(int id)
         {
-            var d_user = await Task.FromResult(_userRepository.GetUserByID(id));
-
-            if (Mappers.UserModelMapper.Map(d_user) is UserModel user)
+            try
             {
-                return Ok(user);
+                var d_user = await Task.FromResult(_userRepository.GetUserByID(id));
+
+                if (Mappers.UserModelMapper.Map(d_user) is UserModel user)
+                {
+                    return Ok(user);
+                }
+
+                return NotFound();
             }
-            return NotFound();
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+
+                return NotFound();
+            }
         }
 
 
@@ -56,13 +77,23 @@ namespace MuseumApp.WebAPI.Controllers
         [Authorize]
         public async Task<ActionResult<UserModel>> GetByEmailAsync(string email)
         {
-            var d_user = await Task.FromResult(_userRepository.GetUserByEmail(email));
-
-            if (Mappers.UserModelMapper.Map(d_user) is UserModel user)
+            try
             {
-                return Ok(user);
+                var d_user = await Task.FromResult(_userRepository.GetUserByEmail(email));
+
+                if (Mappers.UserModelMapper.Map(d_user) is UserModel user)
+                {
+                    return Ok(user);
+                }
+
+                return NotFound();
             }
-            return NotFound();
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+
+                return NotFound();
+            }
         }
 
         // POST api/users
@@ -70,13 +101,23 @@ namespace MuseumApp.WebAPI.Controllers
         [Authorize]
         public async Task<IActionResult> Post([FromBody] UserModel user)
         {
-            var created = await Task.FromResult(_userRepository.CreateAccount(Mappers.UserModelMapper.Map(user)));
-
-            if(created)
+            try
             {
-                return CreatedAtAction(nameof(Get), new { id = user.ID}, user);
+                var created = await Task.FromResult(_userRepository.CreateAccount(Mappers.UserModelMapper.Map(user)));
+
+                if (created)
+                {
+                    return CreatedAtAction(nameof(Get), new { id = user.ID }, user);
+                }
+
+                return BadRequest();
             }
-            return BadRequest();
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+
+                return BadRequest();
+            }
         }
 
         // PUT api/users/5
@@ -84,20 +125,30 @@ namespace MuseumApp.WebAPI.Controllers
         [Authorize]
         public async Task<IActionResult> Put([FromBody] UserModel user)
         {
-            if (_userRepository.GetUserByID(user.ID) != null)
+            try
             {
-                var updated = await Task.FromResult(_userRepository.EditAccount(Mappers.UserModelMapper.Map(user)));
+                if (_userRepository.GetUserByID(user.ID) != null)
+                {
+                    var updated = await Task.FromResult(_userRepository.EditAccount(Mappers.UserModelMapper.Map(user)));
 
-                if(updated)
-                {
-                    return Ok();
+                    if (updated)
+                    {
+                        return Ok();
+                    }
+                    else
+                    {
+                        return BadRequest();
+                    }
                 }
-                else
-                {
-                    return BadRequest();
-                }
+
+                return NotFound();
             }
-            return NotFound();
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+
+                return NotFound();
+            }
         }
 
         // DELETE api/users/5
@@ -105,21 +156,29 @@ namespace MuseumApp.WebAPI.Controllers
         [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
-            if(_userRepository.GetUserByID(id) != null)
+            try
             {
-                // deleted returns true if the deletion is successful
-                var deleted = await Task.FromResult(_userRepository.DeleteAccount(id));
+                if (_userRepository.GetUserByID(id) != null)
+                {
+                    // deleted returns true if the deletion is successful
+                    var deleted = await Task.FromResult(_userRepository.DeleteAccount(id));
 
-                if (deleted)
-                {
-                    return NoContent();
-                }
-                else
-                {
+                    if (deleted)
+                    {
+                        return NoContent();
+                    }
+
                     return BadRequest();
                 }
+
+                return NotFound();
             }
-            return NotFound();
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+
+                return NotFound();
+            }
         }
     }
 }
