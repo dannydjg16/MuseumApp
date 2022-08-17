@@ -137,8 +137,10 @@ namespace MuseumApp.WebAPI.Controllers
 
                 return NoContent();
             }
-            catch
+            catch(Exception e)
             {
+                Console.WriteLine(e.ToString());
+
                 return NotFound();
             }
         }
@@ -160,8 +162,10 @@ namespace MuseumApp.WebAPI.Controllers
 
                 return NoContent();
             }
-            catch
+            catch(Exception e)
             {
+                Console.WriteLine(e.ToString());
+
                 return NotFound();
             }
         }
@@ -183,8 +187,10 @@ namespace MuseumApp.WebAPI.Controllers
 
                 return NoContent();
             }
-            catch
+            catch(Exception e)
             {
+                Console.WriteLine(e.ToString());
+
                 return NotFound();
             }
         }

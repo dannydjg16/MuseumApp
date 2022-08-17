@@ -34,6 +34,7 @@ namespace MuseumApp.WebAPI.Controllers
                 {
                     return Ok(artworkModels);
                 }
+
                 return NotFound();
             }
             catch(Exception e)
@@ -52,10 +53,12 @@ namespace MuseumApp.WebAPI.Controllers
             try
             {
                 var added = await Task.FromResult(_likesRepository.LikeArtwork(userID, artID));
+
                 if (added)
                 {
                     return Ok();
                 }
+
                 return BadRequest();
             }
             catch (Exception e)
@@ -74,10 +77,12 @@ namespace MuseumApp.WebAPI.Controllers
             try
             {
                 var deleted = await Task.FromResult(_likesRepository.UnlikeArtwork(userID, artID));
+
                 if (deleted)
                 {
                     return Ok();
                 }
+
                 return BadRequest();
             }
             catch (Exception e)
