@@ -20,6 +20,7 @@ namespace MuseumApp.Domain.Models
         public Location Location { get; set; }
         public ArtType Medium { get; set; }
 
+        //Verify that the artwork was created in a valid year.
         public bool VerifyArtCreatedYear()
         {
             if (YearCreated > 2023)
