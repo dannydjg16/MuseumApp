@@ -13,6 +13,7 @@ namespace MuseumApp.WebAPI.Models
         public string StateProvince { get; set; }
         public string City { get; set; }
         public string StreetAddress { get; set; }
+        public int ArtworkCount { get; set; }
 
         public virtual LocationTypeModel Type { get; set; }
         public virtual IEnumerable<ArtworkModel> Artworks { get; set; }
