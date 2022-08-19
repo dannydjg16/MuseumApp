@@ -5,20 +5,20 @@ namespace MuseumApp.Tests.Domain
 {
     public class LocationTests
     {
-        readonly Artwork TestArtworkOne = new Artwork
+        readonly Location TestLocation = new Location
         {
-            ArtistId = 1
+            Artworks = new[] {
+                new Artwork { Id = 1, Title = "Starry Night" },
+                new Artwork { Id = 2, Title = "The Olive Trees" },
+                new Artwork { Id = 3, Title = "Les Demoiselles d'Avignon" }
+            }
         };
 
-        readonly Artwork TestArtworkTwo = new Artwork
+        [Fact]
+        public void CheckArtworkCountIsCorrect()
         {
-            ArtistId = 2
-        };
-
-        readonly Artwork TestArtworkThree = new Artwork
-        {
-            ArtistId = 3
-        };
+            Assert.True(TestLocation.GetArtworkCount() == 3, "The Location should have three artworks");
+        }
 
     }
 }

@@ -24,7 +24,7 @@ namespace MuseumApp.Tests.Domain
         [Fact]
         public void CheckArtworkCountIsCorrect()
         {
-            Assert.True(TestArtist.GetArtworkCount() == 3, "The chapters should have the same title");
+            Assert.True(TestArtist.GetArtworkCount() == 3, "The Artist should have three artworks");
         }
 
         [Theory]
