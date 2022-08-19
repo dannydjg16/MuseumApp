@@ -11,6 +11,16 @@ namespace MuseumApp.Tests.Domain
             Artworks = new[] { new Artwork { Id = 1, Title = "Starry Night" } }
         };
 
+        readonly Artwork TestArtworkTwo = new Artwork
+        {
+            ArtistId = 2
+        };
+
+        readonly Artwork TestArtworkThree = new Artwork
+        {
+            ArtistId = 3
+        };
+
         [Fact]
         public void GetArtistsArtworkByID()
         {
