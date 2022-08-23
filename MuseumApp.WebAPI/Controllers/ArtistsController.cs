@@ -165,6 +165,7 @@ namespace MuseumApp.WebAPI.Controllers
             }
         }
 
+        // Using this to show what headers are allowed on this endpoint I believe
         // OPTIONS api/artists
         [HttpOptions]
         [Authorize]
