@@ -171,7 +171,7 @@ namespace MuseumApp.WebAPI.Controllers
         [Authorize]
         public async Task<IActionResult> Options()
         {
-            var hc = await Task.FromResult(HttpContext.Response.Headers);
+            var hc = await Task.FromResult(HttpContext.Request.Headers);
             return Ok(hc);
         }
     }
