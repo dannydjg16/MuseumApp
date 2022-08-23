@@ -164,5 +164,15 @@ namespace MuseumApp.WebAPI.Controllers
                 return NotFound();
             }
         }
+
+        // Using this to show what headers are allowed on this endpoint I believe
+        // OPTIONS api/artists
+        [HttpOptions]
+        [Authorize]
+        public async Task<IActionResult> Options()
+        {
+            var hc = await Task.FromResult(HttpContext.Response.Headers);
+            return Ok(hc);
+        }
     }
 }
