@@ -164,5 +164,14 @@ namespace MuseumApp.WebAPI.Controllers
                 return NotFound();
             }
         }
+
+        // OPTIONS api/artists
+        [HttpOptions]
+        [Authorize]
+        public async Task<IActionResult> Options()
+        {
+            var hc = await Task.FromResult(HttpContext.Response.Headers);
+            return Ok(hc);
+        }
     }
 }
