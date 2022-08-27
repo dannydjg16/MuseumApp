@@ -45,8 +45,8 @@ namespace MuseumApp.WebAPI.Controllers
             }
         }
 
-        // GET: api/artists
-        [HttpGet("{name}")]
+        // GET: api/artists/name
+        [HttpGet("name/{name}")]
         [Authorize]
         public async Task<ActionResult<IEnumerable<ArtistModel>>> Get(string name)
         {
