@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace MuseumApp.Domain.Models
 {
@@ -19,6 +20,9 @@ namespace MuseumApp.Domain.Models
         public Artist Artist { get; set; }
         public Location Location { get; set; }
         public ArtType Medium { get; set; }
+        public User ArtWorkAdder { get; set; }
+        public IEnumerable<Like> LikesNavigation { get; set; }
+
 
         public bool VerifyArtCreatedYear()
         {
