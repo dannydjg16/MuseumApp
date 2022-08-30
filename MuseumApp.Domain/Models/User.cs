@@ -13,6 +13,8 @@ namespace MuseumApp.Domain.Models
         public string CurrentStateProvince { get; set; }
         public string CurrentCity { get; set; }
 
-        public virtual IEnumerable<Like> Likes { get; set; }
+        public IEnumerable<Like> Likes { get; set; }
+        public IEnumerable<Artist> Artists { get; set; }
+        public IEnumerable<Artwork> Artworks { get; set; }
     }
 }
