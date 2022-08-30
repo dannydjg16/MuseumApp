@@ -45,6 +45,30 @@ namespace MuseumApp.WebAPI.Controllers
             }
         }
 
+        // GET: api/artists/name
+        [HttpGet("name/{name}")]
+        [Authorize]
+        public async Task<ActionResult<IEnumerable<ArtistModel>>> Get(string name)
+        {
+            try
+            {
+                var appArtists = await Task.FromResult(_artistRepository.GetArtists(name));
+
+                if (appArtists.Select(Mappers.ArtistModelMapper.Map) is IEnumerable<ArtistModel> artists)
+                {
+                    return Ok(artists);
+                }
+
+                return NotFound();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+
+                return NotFound();
+            }
+        }
+
         // GET api/artists/5
         [HttpGet("{id}")]
         [Authorize]

@@ -150,16 +150,16 @@ namespace MuseumApp.DB.Repositories
         }
 
         // Get all Artists/ Search by artist name
-        public IEnumerable<Domain.Models.Artist> GetArtists(string artistName = null)
+        public IEnumerable<Domain.Models.Artist> GetArtists(string name = null)
         {
             try
             {
                 List<Artist> dbArtists;
 
                 // If the string has writing, go in to block
-                if (!string.IsNullOrWhiteSpace(artistName))
+                if (!string.IsNullOrWhiteSpace(name))
                 {
-                    dbArtists = _context.Artists.Where(a => a.Name.Contains(artistName)).ToList();
+                    dbArtists = _context.Artists.Where(a => a.Name.Contains(name)).ToList();
                 }
                 else
                 {

@@ -45,8 +45,6 @@ namespace MuseumApp.DB.Repositories
         {
             try
             {
-
-
                 var dbLocation = _context.Locations.SingleOrDefault(l => l.Id == location.Id);
 
                 if (dbLocation == null)
