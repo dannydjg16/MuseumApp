@@ -39,7 +39,6 @@ namespace MuseumApp.DB.Repositories
         {
             try
             {
-
                 var dbArtist = _context.Artists.SingleOrDefault(a => a.Id == artistID);
 
                 if (dbArtist == null)

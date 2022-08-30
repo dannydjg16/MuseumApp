@@ -8,13 +8,23 @@ namespace MuseumApp.Tests.Domain
     {
         readonly Artist TestArtist = new Artist
         {
-            Artworks = new[] { new Artwork { Id = 1, Title = "Starry Night" } }
+            Artworks = new[] {
+                new Artwork { Id = 1, Title = "Starry Night" },
+                new Artwork { Id = 2, Title = "The Olive Trees" },
+                new Artwork { Id = 3, Title = "Les Demoiselles d'Avignon" }
+            }
         };
 
         [Fact]
         public void GetArtistsArtworkByID()
         {
             Assert.True(TestArtist.GetArtworkByID(1).Title == "Starry Night", "The chapters should have the same title");
+        }
+
+        [Fact]
+        public void CheckArtworkCountIsCorrect()
+        {
+            Assert.True(TestArtist.GetArtworkCount() == 3, "The Artist should have three artworks");
         }
 
         [Theory]

@@ -18,7 +18,8 @@ namespace MuseumApp.WebAPI.Mappers
                 Name = artist.Name,
                 PictureURL = artist.PictureURL,
                 ArtistAdderId = artist.ArtistAdderId,
-                Artworks = artist.Artworks.Select(ArtworkModelMapper.Map)
+                Artworks = artist.Artworks.Select(ArtworkModelMapper.Map),
+                ArtworkCount = artist.GetArtworkCount()
             };
         }
 
@@ -51,7 +52,8 @@ namespace MuseumApp.WebAPI.Mappers
                 Name = artist.Name,
                 PictureURL = artist.PictureURL,
                 ArtistAdderId = artist.ArtistAdderId,
-                Artworks = artist.Artworks.Select(ArtworkModelMapper.Map)
+                Artworks = artist.Artworks.Select(ArtworkModelMapper.Map),
+                ArtworkCount = artist.GetArtworkCount()
             };
         }
     }

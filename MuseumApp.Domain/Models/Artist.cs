@@ -34,5 +34,10 @@ namespace MuseumApp.Domain.Models
             }
             return true;
         }
+
+        public int GetArtworkCount()
+        {
+            return Artworks.ToList().Count;
+        }
     }
 }

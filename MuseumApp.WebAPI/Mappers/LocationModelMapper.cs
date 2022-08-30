@@ -15,7 +15,8 @@ namespace MuseumApp.WebAPI.Mappers
                 LocationUrl = location.LocationUrl,
                 Description = location.Description,
                 TypeId = location.TypeId,
-                Artworks = location.Artworks.Select(ArtworkModelMapper.Map)
+                Artworks = location.Artworks.Select(ArtworkModelMapper.Map),
+                ArtworkCount = location.GetArtworkCount()
             };
         }
 
@@ -33,6 +34,7 @@ namespace MuseumApp.WebAPI.Mappers
             };
         }
 
+        // Put in API Model, return Domain Model
         public static Domain.Models.Location MapNoArtworks(LocationModel model)
         {
             return new Domain.Models.Location
@@ -59,10 +61,12 @@ namespace MuseumApp.WebAPI.Mappers
                 Country = location.Country,
                 StateProvince = location.StateProvince,
                 City = location.City,
-                StreetAddress = location.StreetAddress
+                StreetAddress = location.StreetAddress,
+                ArtworkCount = location.GetArtworkCount()
             };
         }
 
+        // Put in API Model, return Domain Model
         public static Domain.Models.Location MapFull(LocationModel model)
         {
             return new Domain.Models.Location
@@ -97,6 +101,7 @@ namespace MuseumApp.WebAPI.Mappers
             };
         }
 
+        // Put in API Model, return Domain Model
         public static Domain.Models.Location MapFullNoArtworks(LocationModel model)
         {
             return new Domain.Models.Location

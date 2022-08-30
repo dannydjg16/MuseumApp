@@ -24,6 +24,7 @@ namespace MuseumApp.Domain.Models
         public IEnumerable<Like> LikesNavigation { get; set; }
 
 
+        //Verify that the artwork was created in a valid year.
         public bool VerifyArtCreatedYear()
         {
             if (YearCreated > 2023)

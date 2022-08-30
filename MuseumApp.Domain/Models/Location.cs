@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace MuseumApp.Domain.Models
 {
@@ -16,5 +17,10 @@ namespace MuseumApp.Domain.Models
 
         public virtual LocationType Type { get; set; }
         public virtual IEnumerable<Artwork> Artworks { get; set; }
+
+        public int GetArtworkCount()
+        {
+            return Artworks.ToList().Count;
+        }
     }
 }
