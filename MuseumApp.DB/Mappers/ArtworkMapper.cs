@@ -1,4 +1,7 @@
-﻿namespace MuseumApp.DB.Mappers
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace MuseumApp.DB.Mappers
 {
     public static class ArtworkMapper
     {
@@ -39,6 +42,8 @@
         }
 
         // Put in Domain Model, Get back DB Model
+        // Can go from having ICollection(On Domain Model) to creating IEnumerable(On DBModel) without explicit cast,
+        //      but cannot go IEnumerable(On DBModel) -> ICollection(On Domain Model) without explicit cast
         public static Artwork MapFull(Domain.Models.Artwork artwork)
         {
             return new Artwork
@@ -56,7 +61,9 @@
                 Artist = ArtistMapper.Map(artwork.Artist),
                 LocationNowNavigation = LocationMapper.Map(artwork.Location),
                 Medium = ArtTypeMapper.Map(artwork.Medium),
-                DateAdded = artwork.DateAdded
+                DateAdded = artwork.DateAdded,
+                ArtWorkAdder = UserMapper.Map(artwork.ArtWorkAdder),
+                LikesNavigation = (ICollection<Like>)artwork.LikesNavigation.Select(LikeMapper.Map)
             };
         }
 
@@ -78,7 +85,9 @@
                 Artist = ArtistMapper.Map(entity.Artist),
                 Location = LocationMapper.Map(entity.LocationNowNavigation),
                 Medium = ArtTypeMapper.Map(entity.Medium),
-                DateAdded = entity.DateAdded
+                DateAdded = entity.DateAdded,
+                ArtWorkAdder = UserMapper.Map(entity.ArtWorkAdder),
+                LikesNavigation = entity.LikesNavigation.Select(LikeMapper.Map)
             };
         }
     }

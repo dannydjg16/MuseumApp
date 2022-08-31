@@ -1,4 +1,6 @@
-﻿namespace MuseumApp.DB.Mappers
+﻿using MuseumApp.Domain.Models;
+
+namespace MuseumApp.DB.Mappers
 {
     public static class LikeMapper
     {
@@ -8,7 +10,9 @@
             return new Like
             {
                 ArtId = like.ArtId,
-                UserId = like.UserId
+                UserId = like.UserId,
+                Art = ArtworkMapper.Map(like.Art),
+                User = UserMapper.Map(like.User)
             };
         }
 
@@ -18,7 +22,9 @@
             return new Domain.Models.Like
             {
                 ArtId = entity.ArtId,
-                UserId = entity.UserId
+                UserId = entity.UserId,
+                Art = ArtworkMapper.Map(entity.Art),
+                User = UserMapper.Map(entity.User)
             };
         }
     }
