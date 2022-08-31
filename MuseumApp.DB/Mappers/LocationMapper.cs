@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using MuseumApp.Domain.Models;
 
 namespace MuseumApp.DB.Mappers
 {
@@ -78,7 +80,9 @@ namespace MuseumApp.DB.Mappers
                 Country = location.Country,
                 StateProvince = location.StateProvince,
                 City = location.City,
-                StreetAddress = location.StreetAddress
+                StreetAddress = location.StreetAddress,
+                Artworks = (ICollection<Artwork>)location.Artworks.Select(ArtworkMapper.Map),
+                Type = LocationTypeMapper.Map(location.Type)
             };
         }
 
@@ -96,7 +100,8 @@ namespace MuseumApp.DB.Mappers
                 StateProvince = entity.StateProvince,
                 City = entity.City,
                 StreetAddress = entity.StreetAddress,
-                Artworks = entity.Artworks.Select(ArtworkMapper.Map)
+                Artworks = entity.Artworks.Select(ArtworkMapper.Map),
+                Type = LocationTypeMapper.Map(entity.Type)
             };
         }
     }
