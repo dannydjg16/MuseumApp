@@ -27,7 +27,8 @@ namespace MuseumApp.DB.Mappers
         }
 
         // Put in Domain Model, Get back DB Model
-        // Can go from having ICollection to creating IEnumerable without explicit cast, but cannot go IEnumerable -> ICollection without explicit cast
+        // Can go from having ICollection(On Domain Model) to creating IEnumerable(On DBModel) without explicit cast,
+        //      but cannot go IEnumerable(On DBModel) -> ICollection(On Domain Model) without explicit cast
         public static LocationType MapFull(Domain.Models.LocationType locationType)
         {
             return new LocationType
