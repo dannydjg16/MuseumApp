@@ -42,6 +42,7 @@ namespace MuseumApp.DB.Mappers
         }
 
         // Put in Domain Model, Get back DB Model
+        // Can go from having ICollection to creating IEnumerable without explicit cast, but cannot go IEnumerable -> ICollection without explicit cast
         public static Artwork MapFull(Domain.Models.Artwork artwork)
         {
             return new Artwork
