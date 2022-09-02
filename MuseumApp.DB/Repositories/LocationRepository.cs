@@ -129,6 +129,32 @@ namespace MuseumApp.DB.Repositories
             }
         }
 
+        // Get Location By ID
+        // For FULL Location
+        public Domain.Models.Location GetFullLocationById(int id)
+        {
+            try
+            {
+                var dbLocation = _context.Locations
+                    .Include(l => l.Artworks)
+                    .ThenInclude(aws => aws.Artist)
+                    .SingleOrDefault(l => l.Id == id);
+
+                if (dbLocation == null)
+                {
+                    return null;
+                }
+
+                return Mappers.LocationMapper.MapFullNoArtworks(dbLocation);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+
+                return new Domain.Models.Location();
+            }
+        }
+
         // Search Locations/Get all locations
         public IEnumerable<Domain.Models.Location> GetLocations(string name = null)
         {
