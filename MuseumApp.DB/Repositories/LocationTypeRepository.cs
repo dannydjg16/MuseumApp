@@ -39,6 +39,11 @@ namespace MuseumApp.DB.Repositories
             }
         }
 
+        public bool DeleteLocationType(Domain.Models.LocationType locationType)
+        {
+            throw new NotImplementedException();
+        }
+
         // Get Location Types
         public IEnumerable<Domain.Models.LocationType> GetLocationTypes()
         {
@@ -87,6 +92,11 @@ namespace MuseumApp.DB.Repositories
 
                 return new List<Domain.Models.LocationType>();
             }
+        }
+
+        public IEnumerable<Domain.Models.LocationType> GetLocationTypesFull()
+        {
+            throw new NotImplementedException();
         }
     }
 }
