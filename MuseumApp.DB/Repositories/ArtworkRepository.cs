@@ -125,6 +125,7 @@ namespace MuseumApp.DB.Repositories
             }
         }
 
+        // Get Artworks ordered by year
         public IEnumerable<Domain.Models.Artwork> GetArtOrderByYear(string title = null)
         {
             try
