@@ -241,5 +241,10 @@ namespace MuseumApp.DB.Repositories
                 return new List<Domain.Models.Location>();
             }
         }
+
+        public IEnumerable<Domain.Models.Location> GetFullLocations(string name = null)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
