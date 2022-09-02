@@ -9,7 +9,9 @@ namespace MuseumApp.Domain.Interfaces
         bool DeleteArtist(int artistID);
         bool EditArtist(Artist artist);
         IEnumerable<Artist> GetArtists(string artistName = null);
+        IEnumerable<Artist> GetFullArtists(string artistName = null);
         IEnumerable<Artist> GetArtistsABC(string artistName = null);
         Artist GetArtistByID(int id);
+        Artist GetFullArtistByID(int id);
     }
 }
