@@ -12,5 +12,6 @@ namespace MuseumApp.Domain.Interfaces
         IEnumerable<User> GetUsers(string name = null);
         User GetUserByID(int id);
         User GetUserByEmail(string email);
+        User GetFullUserByEmail(string email);
     }
 }
