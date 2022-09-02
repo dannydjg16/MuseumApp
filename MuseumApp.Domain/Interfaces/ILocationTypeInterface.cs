@@ -7,6 +7,7 @@ namespace MuseumApp.Domain.Interfaces
     {
         public bool AddLocationType(LocationType locationType);
         public IEnumerable<LocationType> GetLocationTypes();
+        public IEnumerable<LocationType> GetLocationTypesFull();
         public IEnumerable<LocationType> GetLocationTypesABC();
     }
 }
