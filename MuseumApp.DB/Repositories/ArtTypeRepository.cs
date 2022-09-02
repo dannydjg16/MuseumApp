@@ -91,5 +91,10 @@ namespace MuseumApp.DB.Repositories
                 return new List<Domain.Models.ArtType>();
             }
         }
+
+        public IEnumerable<Domain.Models.ArtType> GetFullArtTypes()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
