@@ -130,6 +130,11 @@ namespace MuseumApp.DB.Repositories
             }
         }
 
+        public Domain.Models.User GetFullUserByEmail(string email)
+        {
+            throw new NotImplementedException();
+        }
+
         // Get User By Email
         public Domain.Models.User GetUserByEmail(string email)
         {
