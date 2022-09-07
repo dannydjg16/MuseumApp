@@ -245,7 +245,37 @@ namespace MuseumApp.DB.Repositories
 
         public IEnumerable<Domain.Models.Location> GetFullLocations(string name = null)
         {
-            throw new NotImplementedException();
+            try
+            {
+                List<Location> dbLocations;
+
+                if (!string.IsNullOrWhiteSpace(name))
+                {
+                    dbLocations = _context.Locations
+                        .Include(l => l.Type)
+                        .Include(l => l.Artworks)
+                        .Where(l => l.LocationName.Contains(name)).ToList();
+                }
+                else
+                {
+                    dbLocations = _context.Locations.ToList();
+                }
+
+                if (dbLocations.Any())
+                {
+                    List<Domain.Models.Location> locations = dbLocations.Select(l => Mappers.LocationMapper.Map(l)).ToList();
+
+                    return locations;
+                }
+
+                return new List<Domain.Models.Location>();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+
+                return new List<Domain.Models.Location>();
+            }
         }
     }
 }
