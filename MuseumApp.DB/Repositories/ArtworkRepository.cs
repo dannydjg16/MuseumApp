@@ -101,7 +101,13 @@ namespace MuseumApp.DB.Repositories
 
                 if (!string.IsNullOrWhiteSpace(title))
                 {
-                    dbArtworks = _context.Artworks.Include(a => a.Artist).Where(aw => aw.Title.Contains(title)).ToList();
+                    dbArtworks = _context.Artworks
+                        .Include(a => a.ArtWorkAdder)
+                        .Include(a => a.LocationNowNavigation)
+                        .Include(a => a.LikesNavigation)
+                        .Include(a => a.Medium)
+                        .Include(a => a.Artist)
+                        .Where(aw => aw.Title.Contains(title)).ToList();
                 }
                 else
                 {
