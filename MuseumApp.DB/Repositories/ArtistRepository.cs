@@ -220,7 +220,10 @@ namespace MuseumApp.DB.Repositories
                 // If the string has writing, go in to block
                 if (!string.IsNullOrWhiteSpace(name))
                 {
-                    dbArtists = _context.Artists.Where(a => a.Name.Contains(name)).ToList();
+                    dbArtists = _context.Artists
+                        .Include(artist => artist.ArtistAdder)
+                        .Include(artist => artist.Artworks)
+                        .Where(a => a.Name.Contains(name)).ToList();
                 }
                 else
                 {
