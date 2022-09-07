@@ -49,7 +49,6 @@ namespace MuseumApp.DB.Repositories
         {
             try
             {
-
                 List<LocationType> dbLocationTypes;
 
                 dbLocationTypes = _context.LocationTypes.ToList();
@@ -96,7 +95,22 @@ namespace MuseumApp.DB.Repositories
 
         public IEnumerable<Domain.Models.LocationType> GetLocationTypesFull()
         {
-            throw new NotImplementedException();
+            try
+            {
+                List<LocationType> dbLocationTypes;
+
+                dbLocationTypes = _context.LocationTypes.ToList();
+
+                List<Domain.Models.LocationType> locationTypes = dbLocationTypes.Select(lt => Mappers.LocationTypeMapper.Map(lt)).ToList();
+
+                return locationTypes;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+
+                return new List<Domain.Models.LocationType>();
+            }
         }
     }
 }
