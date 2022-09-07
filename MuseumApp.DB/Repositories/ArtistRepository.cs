@@ -154,7 +154,10 @@ namespace MuseumApp.DB.Repositories
         {
             try
             {
-                var dbArtist = _context.Artists.SingleOrDefault(a => a.Id == id);
+                var dbArtist = _context.Artists
+                    .Include(artist => artist.ArtistAdder)
+                    .Include(artist => artist.Artworks)
+                    .SingleOrDefault(a => a.Id == id);
 
                 if (dbArtist == null)
                 {
