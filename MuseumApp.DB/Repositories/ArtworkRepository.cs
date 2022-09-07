@@ -253,9 +253,11 @@ namespace MuseumApp.DB.Repositories
             try
             {
                 var dbArtwork = _context.Artworks
-                    .Include(aw => aw.Artist)
-                    .Include(aw => aw.LocationNowNavigation)
-                    .Include(aw => aw.Medium)
+                    .Include(a => a.ArtWorkAdder)
+                    .Include(a => a.LocationNowNavigation)
+                    .Include(a => a.LikesNavigation)
+                    .Include(a => a.Medium)
+                    .Include(a => a.Artist)
                     .SingleOrDefault(aw => aw.Id == id);
 
                 if (dbArtwork == null)
