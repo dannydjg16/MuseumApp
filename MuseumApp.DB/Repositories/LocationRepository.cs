@@ -136,6 +136,7 @@ namespace MuseumApp.DB.Repositories
             try
             {
                 var dbLocation = _context.Locations
+                    .Include(l => l.Type)
                     .Include(l => l.Artworks)
                     .ThenInclude(aws => aws.Artist)
                     .SingleOrDefault(l => l.Id == id);
