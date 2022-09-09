@@ -91,6 +91,47 @@ namespace MuseumApp.DB.Repositories
             }
         }
 
+        // Get All Artworks/Search by title for artwork
+        // For FULL Artworks
+        public IEnumerable<Domain.Models.Artwork> GetAllArtworksFull(string title = null)
+        {
+            try
+            {
+                List<Artwork> dbArtworks;
+
+                if (!string.IsNullOrWhiteSpace(title))
+                {
+                    dbArtworks = _context.Artworks
+                        .Include(a => a.ArtWorkAdder)
+                        .Include(a => a.LocationNowNavigation)
+                        .Include(a => a.LikesNavigation)
+                        .Include(a => a.Medium)
+                        .Include(a => a.Artist)
+                        .Where(aw => aw.Title.Contains(title)).ToList();
+                }
+                else
+                {
+                    dbArtworks = _context.Artworks.Include(a => a.Artist).ToList();
+                }
+
+                if (!dbArtworks.Any())
+                {
+                    return new List<Domain.Models.Artwork>();
+                }
+
+                List<Domain.Models.Artwork> artworks = dbArtworks.Select(aw => Mappers.ArtworkMapper.Map(aw)).ToList();
+
+                return artworks;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+
+                return new List<Domain.Models.Artwork>();
+            }
+        }
+
+        // Get Artworks ordered by year
         public IEnumerable<Domain.Models.Artwork> GetArtOrderByYear(string title = null)
         {
             try
@@ -212,9 +253,11 @@ namespace MuseumApp.DB.Repositories
             try
             {
                 var dbArtwork = _context.Artworks
-                    .Include(aw => aw.Artist)
-                    .Include(aw => aw.LocationNowNavigation)
-                    .Include(aw => aw.Medium)
+                    .Include(a => a.ArtWorkAdder)
+                    .Include(a => a.LocationNowNavigation)
+                    .Include(a => a.LikesNavigation)
+                    .Include(a => a.Medium)
+                    .Include(a => a.Artist)
                     .SingleOrDefault(aw => aw.Id == id);
 
                 if (dbArtwork == null)

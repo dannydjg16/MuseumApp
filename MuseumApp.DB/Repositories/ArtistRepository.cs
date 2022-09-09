@@ -148,6 +148,32 @@ namespace MuseumApp.DB.Repositories
             }
         }
 
+        // Get Artist by ID
+        // For FULL Artist 
+        public Domain.Models.Artist GetFullArtistByID(int id)
+        {
+            try
+            {
+                var dbArtist = _context.Artists
+                    .Include(artist => artist.ArtistAdder)
+                    .Include(artist => artist.Artworks)
+                    .SingleOrDefault(a => a.Id == id);
+
+                if (dbArtist == null)
+                {
+                    return null;
+                }
+
+                return ArtistMapper.Map(dbArtist);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+
+                return new Domain.Models.Artist();
+            }
+        }
+
         // Get all Artists/ Search by artist name
         public IEnumerable<Domain.Models.Artist> GetArtists(string name = null)
         {
@@ -159,6 +185,45 @@ namespace MuseumApp.DB.Repositories
                 if (!string.IsNullOrWhiteSpace(name))
                 {
                     dbArtists = _context.Artists.Where(a => a.Name.Contains(name)).ToList();
+                }
+                else
+                {
+                    dbArtists = _context.Artists.Include(artist => artist.Artworks).ToList();
+                }
+
+                // If there are no artists, go into block
+                if (!dbArtists.Any())
+                {
+                    return new List<Domain.Models.Artist>();
+                }
+
+                List<Domain.Models.Artist> domainArtists = dbArtists.Select(a => ArtistMapper.Map(a)).ToList();
+
+                return domainArtists;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+
+                return new List<Domain.Models.Artist>();
+            }
+        }
+
+        // Get all Artists/ Search by artist name
+        // For FULL Artists
+        public IEnumerable<Domain.Models.Artist> GetFullArtists(string name = null)
+        {
+            try
+            {
+                List<Artist> dbArtists;
+
+                // If the string has writing, go in to block
+                if (!string.IsNullOrWhiteSpace(name))
+                {
+                    dbArtists = _context.Artists
+                        .Include(artist => artist.ArtistAdder)
+                        .Include(artist => artist.Artworks)
+                        .Where(a => a.Name.Contains(name)).ToList();
                 }
                 else
                 {

@@ -7,6 +7,7 @@ namespace MuseumApp.Domain.Interfaces
     {
         public bool AddArtType(ArtType artType);
         public IEnumerable<ArtType> GetArtTypes();
+        public IEnumerable<ArtType> GetFullArtTypes();
         public IEnumerable<ArtType> GetArtTypesABC();
     }
 }

@@ -130,6 +130,33 @@ namespace MuseumApp.DB.Repositories
             }
         }
 
+        public Domain.Models.User GetFullUserByEmail(string email)
+        {
+            try
+            {
+                IQueryable<User> fullUsers = _context.Users
+                    .Include(user => user.Likes)
+                    .Include(user => user.Artworks)
+                    .Include(user => user.Artists);
+
+
+                if (fullUsers == null)
+                {
+                    return null;
+                }
+
+                var user = Mappers.UserMapper.Map(fullUsers.SingleOrDefault(u => u.Email == email));
+
+                return user;
+            }
+            catch (Exception e)
+            {
+                Console.Write("Exception: " + e);
+            }
+
+            return null;
+        }
+
         // Get User By Email
         public Domain.Models.User GetUserByEmail(string email)
         {

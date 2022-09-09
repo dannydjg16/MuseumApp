@@ -39,12 +39,16 @@ namespace MuseumApp.DB.Repositories
             }
         }
 
+        public bool DeleteLocationType(Domain.Models.LocationType locationType)
+        {
+            throw new NotImplementedException();
+        }
+
         // Get Location Types
         public IEnumerable<Domain.Models.LocationType> GetLocationTypes()
         {
             try
             {
-
                 List<LocationType> dbLocationTypes;
 
                 dbLocationTypes = _context.LocationTypes.ToList();
@@ -80,6 +84,26 @@ namespace MuseumApp.DB.Repositories
                 }
 
                 return new List<Domain.Models.LocationType>();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+
+                return new List<Domain.Models.LocationType>();
+            }
+        }
+
+        public IEnumerable<Domain.Models.LocationType> GetLocationTypesFull()
+        {
+            try
+            {
+                List<LocationType> dbLocationTypes;
+
+                dbLocationTypes = _context.LocationTypes.ToList();
+
+                List<Domain.Models.LocationType> locationTypes = dbLocationTypes.Select(lt => Mappers.LocationTypeMapper.Map(lt)).ToList();
+
+                return locationTypes;
             }
             catch (Exception e)
             {

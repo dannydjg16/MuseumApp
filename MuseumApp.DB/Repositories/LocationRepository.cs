@@ -129,6 +129,33 @@ namespace MuseumApp.DB.Repositories
             }
         }
 
+        // Get Location By ID
+        // For FULL Location
+        public Domain.Models.Location GetFullLocationById(int id)
+        {
+            try
+            {
+                var dbLocation = _context.Locations
+                    .Include(l => l.Type)
+                    .Include(l => l.Artworks)
+                    .ThenInclude(aws => aws.Artist)
+                    .SingleOrDefault(l => l.Id == id);
+
+                if (dbLocation == null)
+                {
+                    return null;
+                }
+
+                return Mappers.LocationMapper.MapFullNoArtworks(dbLocation);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+
+                return new Domain.Models.Location();
+            }
+        }
+
         // Search Locations/Get all locations
         public IEnumerable<Domain.Models.Location> GetLocations(string name = null)
         {
@@ -202,6 +229,41 @@ namespace MuseumApp.DB.Repositories
                     List<Domain.Models.Location> locations = dbLocations.Select(l => Mappers.LocationMapper.Map(l)).ToList();
 
                     locations = locations.OrderBy(location => location.LocationName).ToList();
+
+                    return locations;
+                }
+
+                return new List<Domain.Models.Location>();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+
+                return new List<Domain.Models.Location>();
+            }
+        }
+
+        public IEnumerable<Domain.Models.Location> GetFullLocations(string name = null)
+        {
+            try
+            {
+                List<Location> dbLocations;
+
+                if (!string.IsNullOrWhiteSpace(name))
+                {
+                    dbLocations = _context.Locations
+                        .Include(l => l.Type)
+                        .Include(l => l.Artworks)
+                        .Where(l => l.LocationName.Contains(name)).ToList();
+                }
+                else
+                {
+                    dbLocations = _context.Locations.ToList();
+                }
+
+                if (dbLocations.Any())
+                {
+                    List<Domain.Models.Location> locations = dbLocations.Select(l => Mappers.LocationMapper.Map(l)).ToList();
 
                     return locations;
                 }
